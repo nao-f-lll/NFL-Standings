@@ -13,7 +13,8 @@ NFL_Standings_Wizard es una aplicación de escritorio diseñada exclusivamente p
 
 ## Empezando:
 
-NFL_Standings_Wizard está exclusivamente disponible para los empleados autorizados de la Federación NFL como una aplicación de escritorio. Para obtener acceso y soporte, por favor, póngase en contacto con el departamento de TI.
+NFL_Standings_Wizard está exclusivamente disponible para los empleados autorizados de la Federación NFL como una aplicación de escritorio. Para obtener acceso y soporte,
+por favor, póngase en contacto con el departamento incargado.
 
 Esta aplicación de escritorio mejora significativamente los procesos de gestión y análisis de datos dentro de la Federación NFL, convirtiéndola en un recurso invaluable para nuestras operaciones internas.
 
