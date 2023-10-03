@@ -1,6 +1,6 @@
 # NFL Standings Wizard
 
-Aplicación de escritorio diseñada exclusivamente para los empleados de la NFL. Esta herramienta simplifica la gestión y visualización de tablas de clasificación de la NFL, listas de jugadores y estadísticas de equipos.
+Aplicación de escritorio que simplifica la gestión y visualización de tablas de clasificación de la NFL, listas de jugadores y estadísticas de equipos.
 
 ## Características Clave:
 
@@ -11,10 +11,7 @@ Aplicación de escritorio diseñada exclusivamente para los empleados de la NFL.
 - **Seguridad:** Asegure que solo los empleados autorizados de la NFL puedan acceder y utilizar la aplicación de escritorio.
 - **Exportación y Compartición:** Exporte datos fácilmente en múltiples formatos para informes internos y colaboración.
 
-## Contribuciones:
 
-Este proyecto se desarrolla exclusivamente para uso interno, y las contribuciones están limitadas a personal autorizado dentro de la NFL.
-
-## Licencia:
+## Licencia 📄
 
 Esta aplicación de escritorio interna está sujeta a las políticas y regulaciones internas de la NFL.
