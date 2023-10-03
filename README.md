@@ -11,13 +11,6 @@ Aplicación de escritorio diseñada exclusivamente para los empleados de la NFL.
 - **Seguridad:** Asegure que solo los empleados autorizados de la NFL puedan acceder y utilizar la aplicación de escritorio.
 - **Exportación y Compartición:** Exporte datos fácilmente en múltiples formatos para informes internos y colaboración.
 
-## Empezando:
-
-NFL Standings Wizard está exclusivamente disponible para los empleados autorizados de la NFL. Para obtener acceso y soporte,
-por favor, póngase en contacto con el departamento de informatica.
-
-Esta aplicación de escritorio mejora significativamente los procesos de gestión y análisis de datos dentro de la NFL.
-
 ## Contribuciones:
 
 Este proyecto se desarrolla exclusivamente para uso interno, y las contribuciones están limitadas a personal autorizado dentro de la NFL.
