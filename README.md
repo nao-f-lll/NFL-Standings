@@ -1,4 +1,4 @@
-# NFL Standings Wizard
+# NFL Standings
 
 Aplicación de escritorio que simplifica la gestión y visualización de tablas de clasificación de la NFL, listas y estadísticas de equipos.
 
