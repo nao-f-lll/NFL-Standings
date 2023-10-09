@@ -8,11 +8,11 @@ public class UserNameAndPass {
 
     public UserNameAndPass() {
 
-        loginInfo.put("lyamaninawfal4@gmail.com", "naoufal");
-        loginInfo.put("ahmed", "ahmed");
-        loginInfo.put("ahmad", "ahmad");
-        loginInfo.put("lucas", "lucas");
-        loginInfo.put("sendoa", "sendoa");
+        loginInfo.put("naoufal", "naoufal");
+        loginInfo.put("adioual@gmail.com", "ahmed");
+        loginInfo.put("ahmadhkary53@gmail.com", "ahmad");
+        loginInfo.put("lucasbarru3@gmail.com", "lucas");
+        loginInfo.put("sendoave@gmail.com", "sendoa");
     }
 
     
