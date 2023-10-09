@@ -36,11 +36,16 @@ public class Login extends Frame  implements ActionListener {
     private JButton loginButton;
     private JButton signUpButton;
     
+    JLabel errorMessageForEmail = new JLabel();
+    JLabel errorMessageForPassword = new JLabel();
+    
+    
       
 	public Login(HashMap<String, String> loginInfo) {
 		
 		this.loginInfo = loginInfo;
 		this.setResizable(false);
+		this.setSize(650,400);
 		
 		//Main Panel
 		mainPanel = new JPanel();
@@ -54,20 +59,22 @@ public class Login extends Frame  implements ActionListener {
 		leftIneerPanel.setBounds(0, 0, 322, 376);
 		mainPanel.add(leftIneerPanel);
 		leftIneerPanel.setLayout(null);
+		leftIneerPanel.setBackground(new Color(255,255,255));
 		
 		
-		nflImage = new ImageIcon(Login.class.getResource("/images/nflWhite.png")).getImage().getScaledInstance(150,200,Image.SCALE_SMOOTH);
+		nflImage = new ImageIcon(Login.class.getResource("/images/nflWhite.png")).getImage().getScaledInstance(280,200,Image.SCALE_SMOOTH);
 		nflIcon = new ImageIcon(nflImage);
 		nflIconLabel = new JLabel("");
 		nflIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nflIconLabel.setIcon(nflIcon);
-		nflIconLabel.setBounds(100, 50, 150, 245);
+		nflIconLabel.setBounds(100, 50, 150, 211);
 		leftIneerPanel.add(nflIconLabel);
+		
 		
 		
 		copyRights = new JLabel("<html> Copyright © 2023 NFL.<br> all rights reserved </html>");
 		leftIneerPanel.add(copyRights);
-		copyRights.setBounds(120,280,120,40);
+		copyRights.setBounds(121,255,120,40);
 	    copyRights.setFont(new Font(null, Font.PLAIN,10));
 
 		// rigth panel
@@ -76,6 +83,8 @@ public class Login extends Frame  implements ActionListener {
 		rightInnerPanel.setBounds(323, 0, 317, 376);
 		mainPanel.add(rightInnerPanel);
 		rightInnerPanel.setLayout(null);
+	
+		
 		
 		loginLabel = new JLabel("LOGIN");
 		loginLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -120,18 +129,25 @@ public class Login extends Frame  implements ActionListener {
 
 		
 		
-		//JLabel errorMessage = new JLabel();
-		//errorMessage.setText("fdggdgfddf");
-		//errorMessage.setBounds(34, 130, 200, 25);
-		//rightInnerPanel.add(errorMessage);
+		
+		errorMessageForEmail.setText("");
+		errorMessageForEmail.setBounds(136, 100, 130, 25);
+		errorMessageForEmail.setForeground(Color.RED);
+		rightInnerPanel.add(errorMessageForEmail);
+		
+		
+		
+		
+		
+		errorMessageForPassword.setForeground(Color.RED);
+		errorMessageForPassword.setBounds(125, 164, 111, 25);
+		rightInnerPanel.add(errorMessageForPassword);
 		
 		
 		emailField.addFocusListener(new FocusListener() {
 		    @Override
 		    public void focusGained(FocusEvent e) {
-		        emailField.setForeground(Color.BLACK);
-		        emailField.setBackground(Color.WHITE);
-		        emailField.setText("");
+		        errorMessageForEmail.setText("");
 		    }
 
 		    @Override
@@ -143,9 +159,7 @@ public class Login extends Frame  implements ActionListener {
 		passwordField.addFocusListener(new FocusListener() {
 		    @Override
 		    public void focusGained(FocusEvent e) {
-		    	passwordField.setForeground(Color.BLACK);
-		    	passwordField.setBackground(Color.WHITE);
-		    	passwordField.setText("");
+		    	errorMessageForPassword.setText("");
 		    }
 
 		    @Override
@@ -163,17 +177,16 @@ public class Login extends Frame  implements ActionListener {
 			String userPassword = String.valueOf(passwordField.getPassword());
 			
 			if (userEmail.isEmpty() && userPassword.isEmpty()) {
-				emailField.setBackground(new Color(150,0,0));
-				emailField.setText("Field is required");
-				passwordField.setBackground(new Color(150,0,0));
+				errorMessageForPassword.setBounds(138, 164, 111, 25);
+				errorMessageForEmail.setText("Field is required");
+				errorMessageForPassword.setText("Field is required");
 				
 			} else if (emailField.getText().equals("")) {
-				emailField.setBackground(new Color(0,150,0));
-				emailField.setText("Field is required");
+				
+				errorMessageForEmail.setText("Field is required");
 				
 			} else if (String.valueOf(passwordField.getPassword()).equals("")) {
-				passwordField.setBackground(new Color(0,150,0));
-				passwordField.setText("Field is required");
+				errorMessageForPassword.setText("Field is required");
 				
 			} else {
 			
@@ -181,11 +194,16 @@ public class Login extends Frame  implements ActionListener {
 					if (loginInfo.get(userEmail).equals(userPassword)) {
 							this.dispose();
 							new Scores();		
-					} 
+					} else {
+						errorMessageForPassword.setText("Incorrect password");
+					}
+				} else {
+					errorMessageForEmail.setText("Email is not found");
 				}
 			}
 		} else if (e.getSource() == signUpButton) {
-			
+			this.dispose();
+			new SignUp(this.loginInfo);
 		}
 	}
 }
