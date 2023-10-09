@@ -1,5 +1,8 @@
 package page;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,6 +22,10 @@ public class Scores extends Frame {
 		setResizable(true);
 
 		setContentPane(contentPane);
+		
+	    Toolkit tool = getToolkit();
+	    Dimension screenSize = tool.getScreenSize();
+	    this.setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
 	}
 
 }

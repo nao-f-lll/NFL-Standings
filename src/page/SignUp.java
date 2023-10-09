@@ -3,11 +3,13 @@ package page;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,6 +21,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
 import model.Frame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,7 +33,6 @@ public class SignUp extends Frame implements ActionListener {
 	
 	private static final long serialVersionUID = -4747175902106077767L;
 
-	private final Image nflImage;
     private final ImageIcon nflIcon;
     
 	private final HashMap<String, String> loginInfo;
@@ -59,9 +63,17 @@ public class SignUp extends Frame implements ActionListener {
 	
 	public SignUp(HashMap<String, String> loginInfo) {
 		
+		this.setLocationRelativeTo(null);
 		this.loginInfo = loginInfo;
 		this.setResizable(false);
 		this.setSize(650,479);
+		
+	    Toolkit tool = getToolkit();
+	    Dimension screenSize = tool.getScreenSize();
+	    this.setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
+
+		
+		
 		
 		//Main Panel
 		mainPanel = new JPanel();
@@ -78,8 +90,8 @@ public class SignUp extends Frame implements ActionListener {
 		leftIneerPanel.setBackground(new Color(255,255,255));
 		
 		
-		nflImage = new ImageIcon(Login.class.getResource("/images/nflWhite.png")).getImage().getScaledInstance(280,200,Image.SCALE_SMOOTH);
-		nflIcon = new ImageIcon(nflImage);
+		//nflImage = new ImageIcon(Login.class.getResource("/images/nflWhite.png")).getImage().getScaledInstance(280,200,Image.SCALE_SMOOTH);
+		nflIcon = new ImageIcon(ResizeIcon("/images/nflWhite.png",280,200));
 		nflIconLabel = new JLabel("");
 		nflIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nflIconLabel.setIcon(nflIcon);
@@ -142,6 +154,7 @@ public class SignUp extends Frame implements ActionListener {
 		loginButton.setBackground(Color.LIGHT_GRAY);
 		rightInnerPanel.add(loginButton);
 		loginButton.addActionListener(this);
+		
 		
 		fullNameLabel = new JLabel("Full Name");
 		fullNameLabel.setBounds(34, 109, 70, 13);
@@ -249,11 +262,14 @@ public class SignUp extends Frame implements ActionListener {
 							new Scores();
 					} else {
 				  
-	
-						JOptionPane.showMessageDialog(this, "Password must be a minimum of 8 characters"
+						
+						String[] buttons = {"OK"};
+						JOptionPane.showOptionDialog(this, "Password must be a minimum of 8 characters"
 													+ " and must include at least one uppercase and one number",
-														"Password Requirement",JOptionPane.WARNING_MESSAGE);
-
+														"Password Requirement",0,JOptionPane.WARNING_MESSAGE, null, buttons, buttons[0]);
+						
+						
+						
 					}
 					
 				} else {
@@ -287,7 +303,7 @@ public class SignUp extends Frame implements ActionListener {
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
     }
-    
+    // need revision
     private boolean isValidFullName(String fullName) {
         String regex = "^[a-zA-Z]+(?: [a-zA-Z]+)*$";
         Pattern pattern = Pattern.compile(regex);

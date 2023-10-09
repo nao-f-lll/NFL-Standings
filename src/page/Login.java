@@ -13,7 +13,7 @@ public class Login extends Frame  implements ActionListener {
 	
 	private static final long serialVersionUID = 6002789331622401022L;
 	
-	private final Image nflImage;
+	//private final Image nflImage;
     private final ImageIcon nflIcon;
     
 	private final HashMap<String, String> loginInfo;
@@ -42,10 +42,15 @@ public class Login extends Frame  implements ActionListener {
     
       
 	public Login(HashMap<String, String> loginInfo) {
-		
+		 
+		this.setLocationRelativeTo(null);
 		this.loginInfo = loginInfo;
 		this.setResizable(false);
 		this.setSize(650,400);
+		
+	    Toolkit tool = getToolkit();
+	    Dimension screenSize = tool.getScreenSize();
+	    this.setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
 		
 		//Main Panel
 		mainPanel = new JPanel();
@@ -62,8 +67,8 @@ public class Login extends Frame  implements ActionListener {
 		leftIneerPanel.setBackground(new Color(255,255,255));
 		
 		
-		nflImage = new ImageIcon(Login.class.getResource("/images/nflWhite.png")).getImage().getScaledInstance(280,200,Image.SCALE_SMOOTH);
-		nflIcon = new ImageIcon(nflImage);
+		//nflImage = new ImageIcon(Login.class.getResource("/images/nflWhite.png")).getImage().getScaledInstance(280,200,Image.SCALE_SMOOTH);
+		nflIcon = new ImageIcon(ResizeIcon("/images/nflWhite.png",280,200));
 		nflIconLabel = new JLabel("");
 		nflIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nflIconLabel.setIcon(nflIcon);
@@ -118,6 +123,9 @@ public class Login extends Frame  implements ActionListener {
         loginButton.setFocusable(false);
         loginButton.addActionListener(this);
         loginButton.setBackground(Color.lightGray);
+    
+    
+        
         rightInnerPanel.add(loginButton);
 	    
         signUpButton = new JButton("Sign Up");
@@ -205,5 +213,9 @@ public class Login extends Frame  implements ActionListener {
 			this.dispose();
 			new SignUp(this.loginInfo);
 		}
+	}
+	// to do
+	private void initComponent() {
+		
 	}
 }

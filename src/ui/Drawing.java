@@ -11,7 +11,7 @@ public class Drawing {
 			public void run() {
 				try {
 					UserNameAndPass credentials = new UserNameAndPass();
-			        Login login = new Login(credentials.getLogingInfo());			    
+			        new Login(credentials.getLogingInfo());			    
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
