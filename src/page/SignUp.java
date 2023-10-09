@@ -131,7 +131,6 @@ public class SignUp extends Frame implements ActionListener {
         signUpButton = new JButton("Sign Up");
         signUpButton.setBounds(34, 304, 100, 25);
         signUpButton.addActionListener(this);
-      
         signUpButton.setFocusable(false); 
         signUpButton.setBackground(Color.lightGray);
 		rightInnerPanel.add(signUpButton);	
@@ -249,7 +248,12 @@ public class SignUp extends Frame implements ActionListener {
 							this.dispose();
 							new Scores();
 					} else {
-						JOptionPane.showMessageDialog(this, "Password must be a minimum of 8 characters and must include at least one uppercase and one number", "Password Requirment",JOptionPane.QUESTION_MESSAGE);
+				  
+	
+						JOptionPane.showMessageDialog(this, "Password must be a minimum of 8 characters"
+													+ " and must include at least one uppercase and one number",
+														"Password Requirement",JOptionPane.WARNING_MESSAGE);
+
 					}
 					
 				} else {
