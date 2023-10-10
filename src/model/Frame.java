@@ -24,4 +24,7 @@ public class Frame extends JFrame {
 		logo = new ImageIcon(Login.class.getResource(ImagePath)).getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH);
 		return logo;
 	}
+	
+	
+	
 }

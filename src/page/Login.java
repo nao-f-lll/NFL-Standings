@@ -7,9 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.HashMap;
 
-public class Login extends Frame  implements ActionListener {
+public class Login extends Frame  implements ActionListener, KeyListener  {
 	
 	private static final long serialVersionUID = 6002789331622401022L;
 	
@@ -36,8 +38,8 @@ public class Login extends Frame  implements ActionListener {
     private JButton loginButton;
     private JButton signUpButton;
     
-    JLabel errorMessageForEmail = new JLabel();
-    JLabel errorMessageForPassword = new JLabel();
+    private JLabel errorMessageForEmail = new JLabel();
+    private JLabel errorMessageForPassword = new JLabel();
     
     
       
@@ -105,6 +107,8 @@ public class Login extends Frame  implements ActionListener {
 		emailField.setBounds(34,130,200,25);
 		rightInnerPanel.add(emailField);
 		
+		emailField.addKeyListener(this);   ////testing
+		
        
 	    passwordLabel = new JLabel("Password");
 	    passwordLabel.setBounds(34,163,70,15);
@@ -112,6 +116,8 @@ public class Login extends Frame  implements ActionListener {
 	    passwordField = new JPasswordField();
 	    passwordField.setBounds(34, 190, 200, 25);
 	    rightInnerPanel.add(passwordField);
+	    
+	    passwordField.addKeyListener(this);
 	    
 	    
 	    creatAccountLabel = new JLabel("Create an account?");
@@ -179,43 +185,83 @@ public class Login extends Frame  implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == loginButton) {	
-			
-			String userEmail = emailField.getText();
-			String userPassword = String.valueOf(passwordField.getPassword());
-			
-			if (userEmail.isEmpty() && userPassword.isEmpty()) {
-				errorMessageForPassword.setBounds(138, 164, 111, 25);
-				errorMessageForEmail.setText("Field is required");
-				errorMessageForPassword.setText("Field is required");
-				
-			} else if (emailField.getText().equals("")) {
-				
-				errorMessageForEmail.setText("Field is required");
-				
-			} else if (String.valueOf(passwordField.getPassword()).equals("")) {
-				errorMessageForPassword.setText("Field is required");
-				
-			} else {
-			
-				if (loginInfo.containsKey(userEmail)) {		
-					if (loginInfo.get(userEmail).equals(userPassword)) {
-							this.dispose();
-							new Scores();		
-					} else {
-						errorMessageForPassword.setText("Incorrect password");
-					}
-				} else {
-					errorMessageForEmail.setText("Email is not found");
-				}
-			}
+		userClickLoginLogic(e);
+	}
+	
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		userKeyboardLoginLogic(e);
+
+    }
+
+	
+	
+	private void userKeyboardLoginLogic(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {  
+        	validateLogin(emailField.getText(),String.valueOf(passwordField.getPassword()));
+		
+        }
+	}
+	
+	private void userClickLoginLogic(ActionEvent e) {
+		
+		if (e.getSource() == loginButton) {		
+			validateLogin(emailField.getText(),String.valueOf(passwordField.getPassword()));
+
 		} else if (e.getSource() == signUpButton) {
 			this.dispose();
 			new SignUp(this.loginInfo);
 		}
 	}
-	// to do
-	private void initComponent() {
+	
+	
+	
+	private void validateLogin(String userEmail, String userPassword) {
+		
+		if (userEmail.isEmpty() && userPassword.isEmpty()) {
+			errorMessageForPassword.setBounds(138, 164, 111, 25);
+			errorMessageForEmail.setText("Field is required");
+			errorMessageForPassword.setText("Field is required");
+			
+		} else if (emailField.getText().equals("")) {
+			
+			errorMessageForEmail.setText("Field is required");
+			
+		} else if (String.valueOf(passwordField.getPassword()).equals("")) {
+			errorMessageForPassword.setText("Field is required");
+			
+		} else {
+		
+			if (loginInfo.containsKey(userEmail)) {		
+				if (loginInfo.get(userEmail).equals(userPassword)) {
+						this.dispose();
+						new SportsDashboard();		
+				} else {
+					errorMessageForPassword.setText("Incorrect password");
+				}
+			} else {
+				errorMessageForEmail.setText("Email is not found");
+			}
+		}
+	}
+	
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	// to do
+	//private void initComponent() {
+		
+	//}
 }

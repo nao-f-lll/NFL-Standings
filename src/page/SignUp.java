@@ -8,27 +8,28 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.HashMap;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+
 
 import model.Frame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SignUp extends Frame implements ActionListener {
+public class SignUp extends Frame implements ActionListener, KeyListener {
 
 	
 	private static final long serialVersionUID = -4747175902106077767L;
@@ -56,9 +57,9 @@ public class SignUp extends Frame implements ActionListener {
     private JTextField fullNameField;
     private JButton loginButton;
 	
-    JLabel errorMessageForEmail = new JLabel();
-    JLabel errorMessageForPassword = new JLabel();
-    JLabel errorMessageForFullName = new JLabel();
+    private JLabel errorMessageForEmail = new JLabel();
+    private JLabel errorMessageForPassword = new JLabel();
+    private JLabel errorMessageForFullName = new JLabel();
 	
 	
 	public SignUp(HashMap<String, String> loginInfo) {
@@ -90,7 +91,6 @@ public class SignUp extends Frame implements ActionListener {
 		leftIneerPanel.setBackground(new Color(255,255,255));
 		
 		
-		//nflImage = new ImageIcon(Login.class.getResource("/images/nflWhite.png")).getImage().getScaledInstance(280,200,Image.SCALE_SMOOTH);
 		nflIcon = new ImageIcon(ResizeIcon("/images/nflWhite.png",280,200));
 		nflIconLabel = new JLabel("");
 		nflIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -126,6 +126,7 @@ public class SignUp extends Frame implements ActionListener {
 		emailField = new JTextField();
 		emailField.setBounds(34, 197, 200, 25);
 		rightInnerPanel.add(emailField);
+		emailField.addKeyListener(this); 
 		
        
 	    passwordLabel = new JLabel("Password");
@@ -134,6 +135,7 @@ public class SignUp extends Frame implements ActionListener {
 	    passwordField = new JPasswordField();
 	    passwordField.setBounds(34, 257, 200, 25);
 	    rightInnerPanel.add(passwordField);
+	    passwordField.addKeyListener(this); 
 	    
 	    
 	    creatAccountLabel = new JLabel("Already have an account?");
@@ -163,20 +165,13 @@ public class SignUp extends Frame implements ActionListener {
 		fullNameField = new JTextField();
 		fullNameField.setBounds(34, 132, 200, 25);
 		rightInnerPanel.add(fullNameField);
+		fullNameField.addKeyListener(this); 
 		
-		
-		
-		
-		
-		//ImageIcon errorIcon = IconImage("");
-			
-		//errorMessageForEmail.setText("Field is required");
 		
 		errorMessageForEmail.setForeground(Color.RED);
 		rightInnerPanel.add(errorMessageForEmail);
 		errorMessageForEmail.setBounds(137, 167, 111, 25);
 		
-		//errorMessageForPassword.setText("Field is required");
 		
 		errorMessageForPassword.setForeground(Color.RED);
 		rightInnerPanel.add(errorMessageForPassword);
@@ -231,64 +226,50 @@ public class SignUp extends Frame implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		userClickLoginLogic(e);
+	}
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		userKeyboardLoginLogic(e);
+		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void userKeyboardLoginLogic(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {  
+        	validateLogin(fullNameField.getText(),emailField.getText(),String.valueOf(passwordField.getPassword()));
+		
+        }
+	}
+	
+	private void userClickLoginLogic(ActionEvent e) {
+		
 		if (e.getSource() == signUpButton) {	
-			
-			String userEmail = emailField.getText();
-			String userPassword = String.valueOf(passwordField.getPassword());
-			String userFullName = fullNameField.getText();
-			
-			if (userEmail.isEmpty() && userPassword.isEmpty() && userFullName.isEmpty()) {
-				errorMessageForEmail.setText("Field is required");
-				errorMessageForPassword.setText("Field is required");
-				errorMessageForFullName.setText("Field is required");
-				
-			} else if (userEmail.isEmpty()) {
-				
-				errorMessageForEmail.setText("Field is required");
-				
-			} else if (userPassword.isEmpty()) {
-				errorMessageForPassword.setText("Field is required");
-				
-			} else if (userFullName.isEmpty()) {
-				errorMessageForFullName.setText("Field is required");
-				
-			}  else if (isValidFullName(userFullName)) {
-						
-				if (isValidEmail(userEmail)) {
-					
-					if (isValidPassword(userPassword)) {
-						 loginInfo.put(userEmail, userPassword);
-							this.dispose();
-							new Scores();
-					} else {
-				  
-						
-						String[] buttons = {"OK"};
-						JOptionPane.showOptionDialog(this, "Password must be a minimum of 8 characters"
-													+ " and must include at least one uppercase and one number",
-														"Password Requirement",0,JOptionPane.WARNING_MESSAGE, null, buttons, buttons[0]);
-						
-						
-						
-					}
-					
-				} else {
-					errorMessageForEmail.setText("Invalid email format");
-				}
-				
-				
-			} else {
-				
-				errorMessageForFullName.setBounds(114, 103, 144, 25);
-				errorMessageForFullName.setText("Full Name must be a text");
-			}
-			
+
+			validateLogin(fullNameField.getText(), emailField.getText(), String.valueOf(passwordField.getPassword()));
 			
 		} else if (e.getSource() == loginButton) {
 			this.dispose();
 			new Login(this.loginInfo);
 		}
 	}
+	
+	
+	
 	
     private boolean isValidEmail(String email) {
         String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
@@ -310,6 +291,67 @@ public class SignUp extends Frame implements ActionListener {
         Matcher matcher = pattern.matcher(fullName);
         return matcher.matches();
     }
+    
+	private void validateLogin(String userFullName, String userEmail, String userPassword) {
+		
+		
+		if (userEmail.isEmpty() && userPassword.isEmpty() && userFullName.isEmpty()) {
+			errorMessageForEmail.setText("Field is required");
+			errorMessageForPassword.setText("Field is required");
+			errorMessageForFullName.setText("Field is required");
+			
+		} else if (userEmail.isEmpty()) {
+			
+			errorMessageForEmail.setText("Field is required");
+			
+		} else if (userPassword.isEmpty()) {
+			errorMessageForPassword.setText("Field is required");
+			
+		} else if (userFullName.isEmpty()) {
+			errorMessageForFullName.setText("Field is required");
+			
+		}  else if (isValidFullName(userFullName)) {
+					
+			if (isValidEmail(userEmail)) {
+				
+				if (isValidPassword(userPassword)) {
+					 loginInfo.put(userEmail, userPassword);
+						this.dispose();
+						new Login(loginInfo);
+				} else {
+					
+
+			        JOptionPane passwordRequirementPane = new JOptionPane("Password must be a minimum of 8 characters"
+							+ " and must include at least one uppercase and one number",JOptionPane.YES_OPTION);
+
+			        passwordRequirementPane.setMessageType(JOptionPane.WARNING_MESSAGE);
+
+			        JPanel buttonPanel = (JPanel)passwordRequirementPane.getComponent(1);
+			        
+			        JButton accepetButton = (JButton)buttonPanel.getComponent(0);
+			        accepetButton.setText("Accepet");
+			        accepetButton.setFocusable(false);
+			        accepetButton.setBackground(Color.LIGHT_GRAY);
+			        
+			        JDialog passwordRequirementdialog = passwordRequirementPane.createDialog(this,"Password Requirement");
+			        passwordRequirementdialog.setVisible(true);
+
+				}
+				
+			} else {
+				errorMessageForEmail.setText("Invalid email format");
+			}
+			
+			
+		} else {
+			
+			errorMessageForFullName.setBounds(114, 103, 144, 25);
+			errorMessageForFullName.setText("Full Name must be a text");
+		}
+	}
+
+
+
     
 
 }
