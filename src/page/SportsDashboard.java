@@ -5,7 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class SportsDashboard extends JFrame implements ActionListener {
+import model.ParentFrame;
+
+
+
+public class SportsDashboard extends ParentFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     
@@ -25,6 +29,31 @@ public class SportsDashboard extends JFrame implements ActionListener {
     private JLabel standingsLabel;
     private JLabel teamsLabel;
     private JLabel updateDataLabel;
+    
+    private JLabel cardinalsIconLabel;
+    private JLabel steelersIconLabel;
+    private JLabel raidersIconLabel;
+    private JLabel chiefsIconLabel;
+    private JLabel cowboysIconLabel;
+    private JLabel bengalsIconLabel;
+    
+    
+    private ImageIcon cardinalsIcon;
+    private ImageIcon steelersIcon;
+    private ImageIcon raidersIcon;
+    private ImageIcon chiefsIcon;
+    private ImageIcon cowboysIcon;
+    private ImageIcon bengalsIcon;
+    
+    
+    
+    private JLabel lblStadium;
+    private JLabel lblAttStadium_3;
+    private JLabel lblAttStadium_4;
+    private JLabel lblCardinals;
+    private JLabel lblAtt;
+    private JLabel lblBush;
+    private JLabel lblArizona;
     
     public SportsDashboard() {
         setTitle("Sports Dashboard");
@@ -48,21 +77,27 @@ public class SportsDashboard extends JFrame implements ActionListener {
         // Add content labels to the panels
         
         scoresLabel = new JLabel("Panel 1 Content");
-        scoresLabel.setBounds(636, 248, 72, 13);
+        scoresLabel.setBounds(409, 534, 162, 13);
         
         standingsLabel = new JLabel("Panel 2 Content");
-        standingsLabel.setBounds(636, 248, 72, 13);
+        standingsLabel.setBounds(636, 248, 162, 13);
         
         teamsLabel = new JLabel("Panel 3 Content");
-        teamsLabel.setBounds(636, 248, 72, 13);
+        teamsLabel.setBounds(636, 248, 162, 13);
         
         updateDataLabel = new JLabel("Panel 4 Content");
-        updateDataLabel.setBounds(636, 248, 72, 13);
+        updateDataLabel.setBounds(636, 248, 162, 13);
+        
+        
+        
+        // need revision
+        
         
         scoresPanel.add(scoresLabel);
         standingsPanel.add(standingsLabel);
         teamsPanel.add(teamsLabel);
         updateDataPanel.add(updateDataLabel);
+       
         
         mainPanel.add(scoresPanel, BorderLayout.CENTER);
         
@@ -108,6 +143,84 @@ public class SportsDashboard extends JFrame implements ActionListener {
        
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(mainPanel, BorderLayout.CENTER);
+        
+        
+        
+        
+        cowboysIcon = new ImageIcon(ResizeIcon("/images/cowboys.png",210,120));
+        cowboysIconLabel = new JLabel("");
+        cowboysIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        cowboysIconLabel.setIcon(cowboysIcon);
+        cowboysIconLabel.setBounds(156, 87, 186, 187);
+        scoresPanel.add(cowboysIconLabel);
+        
+        
+        
+        
+        
+        cardinalsIcon = new ImageIcon(ResizeIcon("/images/cardinals.png",210,120));
+        cardinalsIconLabel = new JLabel("");
+        cardinalsIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        cardinalsIconLabel.setIcon(cardinalsIcon);
+        cardinalsIconLabel.setBounds(581, 101, 216, 173);
+        scoresPanel.add(cardinalsIconLabel);
+        
+        JLabel lblNewLabel = new JLabel("Cowboys");
+        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
+        lblNewLabel.setBounds(376, 165, 100, 45);
+        scoresPanel.add(lblNewLabel);
+        
+        JLabel lblAttStadium = new JLabel("AT&T Stadium");
+        lblAttStadium.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblAttStadium.setBounds(376, 234, 148, 54);
+        scoresPanel.add(lblAttStadium);
+        
+        JLabel lblAttStadium_1 = new JLabel("1960");
+        lblAttStadium_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblAttStadium_1.setBounds(376, 282, 148, 54);
+        scoresPanel.add(lblAttStadium_1);
+        
+        JLabel lblAttStadium_1_1 = new JLabel("Texas");
+        lblAttStadium_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblAttStadium_1_1.setBounds(382, 323, 148, 54);
+        scoresPanel.add(lblAttStadium_1_1);
+        
+        lblStadium = new JLabel("Stadium");
+        lblStadium.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblStadium.setBounds(23, 234, 148, 54);
+        scoresPanel.add(lblStadium);
+        
+        lblAttStadium_3 = new JLabel("Established ");
+        lblAttStadium_3.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblAttStadium_3.setBounds(23, 282, 148, 54);
+        scoresPanel.add(lblAttStadium_3);
+        
+        lblAttStadium_4 = new JLabel("City");
+        lblAttStadium_4.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblAttStadium_4.setBounds(23, 323, 148, 54);
+        scoresPanel.add(lblAttStadium_4);
+        
+        lblCardinals = new JLabel("Cardinals");
+        lblCardinals.setFont(new Font("Tahoma", Font.BOLD, 17));
+        lblCardinals.setBounds(872, 165, 100, 45);
+        scoresPanel.add(lblCardinals);
+        
+        lblAtt = new JLabel("Bush Stadium");
+        lblAtt.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblAtt.setBounds(872, 234, 148, 54);
+        scoresPanel.add(lblAtt);
+        
+        lblBush = new JLabel("1984");
+        lblBush.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblBush.setBounds(872, 282, 148, 54);
+        scoresPanel.add(lblBush);
+        
+        lblArizona = new JLabel("Arizona");
+        lblArizona.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblArizona.setBounds(872, 323, 148, 54);
+        scoresPanel.add(lblArizona);
+        
+
     }
 
     private void setSizeAndCenter() {
@@ -137,12 +250,17 @@ public class SportsDashboard extends JFrame implements ActionListener {
             showPanel(updateDataPanel);
         }
     }
-
+    
+    
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            SportsDashboard dashboard = new SportsDashboard();
-            dashboard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            dashboard.setVisible(true);
-        });
-    }
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+			        new SportsDashboard();			    
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }

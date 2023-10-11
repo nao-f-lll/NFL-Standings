@@ -8,13 +8,13 @@ import javax.swing.JFrame;
 
 import page.Login;
 
-public class Frame extends JFrame {
+public class ParentFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private final ImageIcon nflIconFrame = new ImageIcon(Login.class.getResource("/images/nflDark.png"));
 	private Image logo;
     
-	public Frame () {
+	public ParentFrame () {
 	    this.setIconImage(nflIconFrame.getImage());
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setVisible(true);

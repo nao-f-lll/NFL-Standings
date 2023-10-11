@@ -25,11 +25,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 
-import model.Frame;
+import model.ParentFrame;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SignUp extends Frame implements ActionListener, KeyListener {
+public class SignUp extends ParentFrame implements ActionListener, KeyListener {
 
 	
 	private static final long serialVersionUID = -4747175902106077767L;
@@ -313,11 +313,12 @@ public class SignUp extends Frame implements ActionListener, KeyListener {
 		}  else if (isValidFullName(userFullName)) {
 					
 			if (isValidEmail(userEmail)) {
-				
-				if (isValidPassword(userPassword)) {
-					 loginInfo.put(userEmail, userPassword);
-						this.dispose();
-						new Login(loginInfo);
+				if (!loginInfo.containsKey(userEmail)) {
+							
+					if (isValidPassword(userPassword)) {
+						loginInfo.put(userEmail, userPassword);
+							this.dispose();
+							new Login(loginInfo);
 				} else {
 					
 
@@ -336,6 +337,9 @@ public class SignUp extends Frame implements ActionListener, KeyListener {
 			        JDialog passwordRequirementdialog = passwordRequirementPane.createDialog(this,"Password Requirement");
 			        passwordRequirementdialog.setVisible(true);
 
+				}
+				} else {
+					errorMessageForEmail.setText("Email already exists");
 				}
 				
 			} else {

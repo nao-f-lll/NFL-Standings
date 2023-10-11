@@ -13,8 +13,11 @@ public class UserNameAndPass {
         loginInfo.put("ahmadhkary53@gmail.com", "ahmad");
         loginInfo.put("lucasbarru3@gmail.com", "lucas");
         loginInfo.put("sendoave@gmail.com", "sendoa");
+        loginInfo.put("sendoave@gmail.com", "sendoa");
+       
+        
     }
-
+      
     
     // getters
     public HashMap<String, String> getLogingInfo() { return loginInfo; }
