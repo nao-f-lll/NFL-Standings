@@ -5,7 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class SportsDashboard extends JFrame implements ActionListener {
+import model.ParentFrame;
+
+
+
+public class SportsDashboard extends ParentFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     
@@ -25,6 +29,21 @@ public class SportsDashboard extends JFrame implements ActionListener {
     private JLabel standingsLabel;
     private JLabel teamsLabel;
     private JLabel updateDataLabel;
+    
+    private JLabel cardinalsIconLabel;
+    private JLabel steelersIconLabel;
+    private JLabel raidersIconLabel;
+    private JLabel chiefsIconLabel;
+    private JLabel cowboysIconLabel;
+    private JLabel bengalsIconLabel;
+    
+    
+    private ImageIcon cardinalsIcon;
+    private ImageIcon steelersIcon;
+    private ImageIcon raidersIcon;
+    private ImageIcon chiefsIcon;
+    private ImageIcon cowboysIcon;
+    private ImageIcon bengalsIcon;
     
     public SportsDashboard() {
         setTitle("Sports Dashboard");
@@ -48,22 +67,26 @@ public class SportsDashboard extends JFrame implements ActionListener {
         // Add content labels to the panels
         
         scoresLabel = new JLabel("Panel 1 Content");
-        scoresLabel.setBounds(636, 248, 72, 13);
+        scoresLabel.setBounds(636, 248, 162, 13);
         
         standingsLabel = new JLabel("Panel 2 Content");
-        standingsLabel.setBounds(636, 248, 72, 13);
+        standingsLabel.setBounds(636, 248, 162, 13);
         
         teamsLabel = new JLabel("Panel 3 Content");
-        teamsLabel.setBounds(636, 248, 72, 13);
+        teamsLabel.setBounds(636, 248, 162, 13);
         
         updateDataLabel = new JLabel("Panel 4 Content");
-        updateDataLabel.setBounds(636, 248, 72, 13);
+        updateDataLabel.setBounds(636, 248, 162, 13);
         
+        
+        
+        // need revision
         scoresPanel.add(scoresLabel);
         standingsPanel.add(standingsLabel);
         teamsPanel.add(teamsLabel);
         updateDataPanel.add(updateDataLabel);
         
+        //mainPanel.add(scoresPanel, BorderLayout.CENTER);
         mainPanel.add(scoresPanel, BorderLayout.CENTER);
         
         
@@ -108,6 +131,18 @@ public class SportsDashboard extends JFrame implements ActionListener {
        
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(mainPanel, BorderLayout.CENTER);
+        
+        
+        
+        
+        cowboysIcon = new ImageIcon(ResizeIcon("/images/cowboys.png",280,200));
+        cowboysIconLabel = new JLabel("");
+        cowboysIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        cowboysIconLabel.setIcon(cowboysIcon);
+        cowboysIconLabel.setBounds(100, 50, 150, 211);
+        teamsPanel.add(cowboysIconLabel);
+        
+
     }
 
     private void setSizeAndCenter() {
@@ -137,12 +172,5 @@ public class SportsDashboard extends JFrame implements ActionListener {
             showPanel(updateDataPanel);
         }
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            SportsDashboard dashboard = new SportsDashboard();
-            dashboard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            dashboard.setVisible(true);
-        });
-    }
+    
 }

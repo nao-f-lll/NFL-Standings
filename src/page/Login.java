@@ -1,6 +1,6 @@
 package page;
 
-import model.Frame;
+import model.ParentFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 
-public class Login extends Frame  implements ActionListener, KeyListener  {
+public class Login extends ParentFrame  implements ActionListener, KeyListener  {
 	
 	private static final long serialVersionUID = 6002789331622401022L;
 	
@@ -69,7 +69,6 @@ public class Login extends Frame  implements ActionListener, KeyListener  {
 		leftIneerPanel.setBackground(new Color(255,255,255));
 		
 		
-		//nflImage = new ImageIcon(Login.class.getResource("/images/nflWhite.png")).getImage().getScaledInstance(280,200,Image.SCALE_SMOOTH);
 		nflIcon = new ImageIcon(ResizeIcon("/images/nflWhite.png",280,200));
 		nflIconLabel = new JLabel("");
 		nflIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
