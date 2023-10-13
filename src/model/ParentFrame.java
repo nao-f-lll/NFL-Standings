@@ -20,7 +20,7 @@ public class ParentFrame extends JFrame {
 	    this.setVisible(true);
 	}
 	
-	protected Image ResizeIcon(String ImagePath, int width, int height) {
+	public Image ResizeIcon(String ImagePath, int width, int height) {
 		logo = new ImageIcon(Login.class.getResource(ImagePath)).getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH);
 		return logo;
 	}
