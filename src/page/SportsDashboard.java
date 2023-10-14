@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
+
 import model.CustomBorder;
 import model.ParentFrame;
 import panel.Teams;
@@ -26,13 +28,11 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
     private JButton goToStandingButton;
     private JButton goToTeamsButton;
     private JButton goToUpdateDataButton;
-    
-    private JLabel scoresLabel;
     private JLabel standingsLabel;
     private JLabel teamsLabel;
     private JLabel updateDataLabel;
-      
     
+   
     public SportsDashboard() {
         setTitle("Sports Dashboard");
         setResizable(true);
@@ -41,12 +41,10 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         
-        // Create panels for different sections
-        scoresPanel = new UpdateData();
-        standingsPanel = new JPanel();
-        
-        teamsPanel = new Teams();
-        
+
+        scoresPanel = new JPanel();
+        standingsPanel = new JPanel();      
+        teamsPanel = new Teams();     
         updateDataPanel = new UpdateData();
         
         scoresPanel.setLayout(null);
@@ -54,26 +52,14 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
         teamsPanel.setLayout(null);
         updateDataPanel.setLayout(null);
         
-        // Add content labels to the panels
-        
-        scoresLabel = new JLabel("Panel 1 Content");
-        scoresLabel.setBounds(753, 208, 162, 13);
-        
         standingsLabel = new JLabel("Panel 2 Content");
         standingsLabel.setBounds(636, 248, 162, 13);
         
         teamsLabel = new JLabel("");
         teamsLabel.setBounds(636, 248, 162, 13);
         
-        updateDataLabel = new JLabel("Panel 4 Content");
+        updateDataLabel = new JLabel("");
         updateDataLabel.setBounds(636, 248, 162, 13);
-        
-        
-        
-        // need revision
-        
-        
-        scoresPanel.add(scoresLabel);
         standingsPanel.add(standingsLabel);
         teamsPanel.add(teamsLabel);
         updateDataPanel.add(updateDataLabel);
@@ -84,8 +70,9 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
         
        panelButton = new JPanel();
        panelButton.setBounds(0, 0, 1522, 60);
+       panelButton.setBackground(Color.WHITE);
        scoresPanel.add(panelButton);
-                
+ 
                
        goToScoresButton = new JButton("Scores");
        goToScoresButton.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -130,7 +117,11 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
        
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(mainPanel, BorderLayout.CENTER);
-
+      
+       
+    
+        
+     
 
     }
 

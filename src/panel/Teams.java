@@ -232,12 +232,12 @@ public class Teams extends JPanel  {
            
            chiefsCityLabel = new JLabel("Kansas City");
            chiefsCityLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-           chiefsCityLabel.setBounds(740, 619, 148, 54);
+           chiefsCityLabel.setBounds(740, 615, 148, 54);
            this.add(chiefsCityLabel);
            
            
            
-           
+       
            
            
            bengalsIcon = new ImageIcon(ResizeIconStatic("/images/bengals.png",120,80));
@@ -261,12 +261,12 @@ public class Teams extends JPanel  {
            
            bengalsFundiationLabel = new JLabel("1920");
            bengalsFundiationLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-           bengalsFundiationLabel.setBounds(1181, 571, 148, 54);
+           bengalsFundiationLabel.setBounds(1183, 571, 148, 54);
            this.add(bengalsFundiationLabel);
            
            bengalsCityLabel = new JLabel("Cincinnati");
            bengalsCityLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-           bengalsCityLabel.setBounds(1183, 614, 148, 54);
+           bengalsCityLabel.setBounds(1183, 615, 148, 54);
            this.add(bengalsCityLabel);  
     	
     }
