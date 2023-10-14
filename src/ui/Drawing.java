@@ -1,7 +1,8 @@
 package ui;
 
 import java.awt.EventQueue;
-import credentials.UserNameAndPass;
+
+import credentials.LoginCredentials;
 import page.Login;
 
 public class Drawing {
@@ -10,7 +11,7 @@ public class Drawing {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UserNameAndPass credentials = new UserNameAndPass();
+					LoginCredentials credentials = new LoginCredentials();
 			        new Login(credentials.getLogingInfo());			    
 				} catch (Exception e) {
 					e.printStackTrace();

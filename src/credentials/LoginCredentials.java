@@ -2,11 +2,11 @@ package credentials;
 
 import java.util.HashMap;
 
-public class UserNameAndPass {
+public class LoginCredentials {
 
     HashMap<String, String> loginInfo = new HashMap<String, String>();
 
-    public UserNameAndPass() {
+    public LoginCredentials() {
         loginInfo.put("naoufal", "naoufal");
         loginInfo.put("adioual@gmail.com", "ahmed");
         loginInfo.put("ahmadhkary53@gmail.com", "ahmad");

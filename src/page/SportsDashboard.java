@@ -4,9 +4,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
+import model.CustomBorder;
 import model.ParentFrame;
-import panel.TeamsPanel;
+import panel.Teams;
+import panel.UpdateData;
 
 
 
@@ -18,7 +19,7 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
     private JPanel panelButton;
     private JPanel scoresPanel;
     private JPanel standingsPanel;
-    private JPanel teamsPanel;
+    private JPanel teamsPanel; 
     private JPanel updateDataPanel;
     
     private JButton goToScoresButton;
@@ -31,15 +32,6 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
     private JLabel teamsLabel;
     private JLabel updateDataLabel;
       
-
-
-    private JLabel steelersIconLabel;
-    private ImageIcon steelersIcon;
-    private JLabel steelersNameLabel;
-    private JLabel steelersStadiumLabel;
-    private JLabel steelersCityLabel;
-    private JLabel steelersFundiationLabel;
-    
     
     public SportsDashboard() {
         setTitle("Sports Dashboard");
@@ -50,12 +42,12 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
         
         // Create panels for different sections
-        scoresPanel = new TeamsPanel();
+        scoresPanel = new UpdateData();
         standingsPanel = new JPanel();
         
-        teamsPanel = new TeamsPanel();
+        teamsPanel = new Teams();
         
-        updateDataPanel = new JPanel();
+        updateDataPanel = new UpdateData();
         
         scoresPanel.setLayout(null);
         standingsPanel.setLayout(null);
@@ -65,7 +57,7 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
         // Add content labels to the panels
         
         scoresLabel = new JLabel("Panel 1 Content");
-        scoresLabel.setBounds(409, 534, 162, 13);
+        scoresLabel.setBounds(753, 208, 162, 13);
         
         standingsLabel = new JLabel("Panel 2 Content");
         standingsLabel.setBounds(636, 248, 162, 13);
@@ -93,28 +85,35 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
        panelButton = new JPanel();
        panelButton.setBounds(0, 0, 1522, 60);
        scoresPanel.add(panelButton);
-       panelButton.setBackground(Color.LIGHT_GRAY);
                 
                
        goToScoresButton = new JButton("Scores");
-       goToScoresButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
-       goToScoresButton.setBounds(10, 10, 124, 33);
+       goToScoresButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       goToScoresButton.setBounds(10, 10, 134, 33);
        goToScoresButton.setFocusable(false);
+       goToScoresButton.setBackground(Color.WHITE);
+       goToScoresButton.setBorder(new CustomBorder(20));
                 
        goToStandingButton = new JButton("Standings");
-       goToStandingButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
-       goToStandingButton.setBounds(205, 10, 143, 33);
+       goToStandingButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       goToStandingButton.setBounds(205, 10, 183, 33);
        goToStandingButton.setFocusable(false);
+       goToStandingButton.setBackground(Color.WHITE);
+       goToStandingButton.setBorder(null);
        
        goToTeamsButton = new JButton("Teams");
-       goToTeamsButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
-       goToTeamsButton.setBounds(427, 10, 111, 33);
+       goToTeamsButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       goToTeamsButton.setBounds(427, 10, 141, 33);
        goToTeamsButton.setFocusable(false);
+       goToTeamsButton.setBackground(Color.WHITE);
+       goToTeamsButton.setBorder(null);
        
        goToUpdateDataButton = new JButton("Update Data");
-       goToUpdateDataButton.setFont(new Font("Tahoma", Font.PLAIN, 25));
-       goToUpdateDataButton.setBounds(1150, 10, 208, 33);
+       goToUpdateDataButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       goToUpdateDataButton.setBounds(1112, 10, 246, 33);
        goToUpdateDataButton.setFocusable(false);
+       goToUpdateDataButton.setBackground(Color.WHITE);
+       goToUpdateDataButton.setBorder(null);
                 
        goToScoresButton.addActionListener(this);
        goToStandingButton.addActionListener(this);
@@ -131,52 +130,8 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
        
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(mainPanel, BorderLayout.CENTER);
-        
-        
-        
-   
-    
-       
-       
 
-        
-        
-        
- 
 
-      
-        /*
-       
-        cardinalsIcon = new ImageIcon(ResizeIcon("/images/cardinals.png",120,80));
-        cardinalsIconLabel = new JLabel("");
-        cardinalsIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        cardinalsIconLabel.setIcon(cardinalsIcon);
-        cardinalsIconLabel.setBounds(503, 85, 210, 125);
-        scoresPanel.add(cardinalsIconLabel);
-        
-        
-        cardinalsNameLabel = new JLabel("Cardinals");
-        cardinalsNameLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
-        cardinalsNameLabel.setBounds(725, 134, 100, 45);
-        scoresPanel.add(cardinalsNameLabel);
-        
-        
-        cardinalsStadiumLabel = new JLabel("Bush Stadium");
-        cardinalsStadiumLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        cardinalsStadiumLabel.setBounds(733, 234, 148, 54);
-        scoresPanel.add(cardinalsStadiumLabel);
-        
-        cardinalFundiationLabel = new JLabel("1984");
-        cardinalFundiationLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        cardinalFundiationLabel.setBounds(733, 282, 148, 54);
-        scoresPanel.add(cardinalFundiationLabel);
-        
-        cardinalsCityLabel = new JLabel("Arizona");
-        cardinalsCityLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        cardinalsCityLabel.setBounds(733, 323, 148, 54);
-        scoresPanel.add(cardinalsCityLabel);
-        
-*/
     }
 
     private void setSizeAndCenter() {
@@ -198,12 +153,28 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == goToScoresButton) {
             showPanel(scoresPanel);
+            goToScoresButton.setBorder(new CustomBorder(20));
+            goToStandingButton.setBorder(null);
+            goToTeamsButton.setBorder(null);
+            goToUpdateDataButton.setBorder(null);
         } else if (e.getSource() == goToStandingButton) {
             showPanel(standingsPanel);
+            goToStandingButton.setBorder(new CustomBorder(20));
+            goToScoresButton.setBorder(null);
+            goToTeamsButton.setBorder(null);
+            goToUpdateDataButton.setBorder(null);
         } else if (e.getSource() == goToTeamsButton) {
             showPanel(teamsPanel);
+            goToTeamsButton.setBorder(new CustomBorder(20));
+            goToScoresButton.setBorder(null);
+            goToStandingButton.setBorder(null);
+            goToUpdateDataButton.setBorder(null);
         } else if (e.getSource() == goToUpdateDataButton) {
             showPanel(updateDataPanel);
+            goToUpdateDataButton.setBorder(new CustomBorder(20));
+            goToScoresButton.setBorder(null);
+            goToStandingButton.setBorder(null);
+            goToTeamsButton.setBorder(null);
         }
     }
     
