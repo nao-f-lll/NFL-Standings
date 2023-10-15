@@ -17,7 +17,8 @@ Mantén bases de datos detalladas de los equipos de la NFL, todo ello dentro de 
 ### Instalar un Archivo JAR
 
   1. Descargar el Archivo JAR:
-Puedes descargar el archivo JAR desde [standings.jar](https://github.com/nao-f-lll/NFL-Standings/releases/download/beta/standings_x64.jar).
+Puedes descargar el archivo JAR desde <a href="https://github.com/nao-f-lll/NFL-Standings/releases/download/beta/standings_x64.jar" target="_blank" rel="noopener noreferrer">standings.jar</a>
+
 
   2. Abrir una Terminal o Símbolo del Sistema:
 Dirígete al directorio donde descargaste el archivo JAR utilizando tu terminal o símbolo del sistema.
@@ -31,7 +32,7 @@ java -jar standings.jar
 ### Instalar Usando Docker
 
 1. Descargar la Imagen de Docker:
-Para ejecutar la aplicación con Docker, debes descargar la imagen de Docker [Repositorio de Docker](https://hub.docker.com/r/naooff/nfl-standings). desde el termenal
+Para ejecutar la aplicación con Docker, debes descargar la imagen de Docker  <a href="https://hub.docker.com/r/naooff/nfl-standings" target="_blank" rel="noopener noreferrer">Repositorio de Docker</a>. desde el termenal
 
 ```bash
 docker pull naooff/nfl-standings:[version]
