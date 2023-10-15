@@ -4,25 +4,47 @@ El Gestor de Clasificación de la NFL es una aplicación de escritorio diseñada
 
 ## Características Clave
 
-### 1. Creador de Clasificaciones
+### Creador de Clasificaciones
 
 Genera y personaliza fácilmente tablas de clasificación de la NFL para diferentes temporadas. La aplicación ofrece una interfaz fácil de usar para crear y gestionar clasificaciones.
 
-### 2. Gestión de Equipos
+###  Gestión de Equipos
 
 Mantén bases de datos detalladas de los equipos de la NFL, todo ello dentro de un entorno de escritorio. Haz un seguimiento del rendimiento de los equipos y de los datos de manera eficiente.
 
-### 4. Seguridad
-
-Asegura que solo los empleados autorizados de la NFL puedan acceder y utilizar la aplicación de escritorio.
-
 ## Instalación
 
-Para ejecutar el Gestor de Clasificación de la NFL, puedes utilizar Docker. Simplemente descarga la imagen de Docker desde nuestro repositorio y sigue las instrucciones de instalación en el [Repositorio de Docker](https://hub.docker.com/r/naooff/nfl-standings).
+### Instalar un Archivo JAR
 
+  1. Descargar el Archivo JAR:
+Puedes descargar el archivo JAR desde [standings.jar](https://github.com/nao-f-lll/NFL-Standings/releases/download/beta/standings_x64.jar).
+
+  2. Abrir una Terminal o Símbolo del Sistema:
+Dirígete al directorio donde descargaste el archivo JAR utilizando tu terminal o símbolo del sistema.
+
+  4. Ejecutar el Archivo JAR:
+Para ejecutar el archivo JAR, utiliza el comando
+```bash
+java -jar standings.jar
+```
+
+### Instalar Usando Docker
+
+1. Descargar la Imagen de Docker:
+Para ejecutar la aplicación con Docker, debes descargar la imagen de Docker [Repositorio de Docker](https://hub.docker.com/r/naooff/nfl-standings). desde el termenal
+
+```bash
+docker pull naooff/nfl-standings:[version]
+```
+2. Ejecutar el Contenedor Docker:
+   Puedes ejecutar el contenedor Docker utilizando el comando
+   
+```bash
+sudo docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -d naooff/nfl-standings:[version]
+```
 ## Contribuciones
 
-Las contribuciones a este repositorio están limitadas a empleados internos de la NFL. Si eres un empleado y deseas contribuir, por favor, crea un "fork" del repositorio, realiza tus cambios y envía una solicitud de extracción.
+Las contribuciones a este repositorio están limitadas a empleados internos de la NFL.
 
 ## Licencia
 
