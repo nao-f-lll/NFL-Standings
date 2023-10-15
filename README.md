@@ -18,7 +18,7 @@ Asegura que solo los empleados autorizados de la NFL puedan acceder y utilizar l
 
 ## Instalación
 
-Para ejecutar el Gestor de Clasificación de la NFL, puedes utilizar Docker. Simplemente descarga la imagen de Docker desde nuestro repositorio y sigue las instrucciones de instalación en el [Repositorio de Docker](enlace-al-repositorio-de-docker).
+Para ejecutar el Gestor de Clasificación de la NFL, puedes utilizar Docker. Simplemente descarga la imagen de Docker desde nuestro repositorio y sigue las instrucciones de instalación en el [Repositorio de Docker](https://hub.docker.com/r/naooff/nfl-standings).
 
 ## Contribuciones
 
