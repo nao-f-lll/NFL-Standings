@@ -1,4 +1,4 @@
-package page;
+package ui.page;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,12 +11,12 @@ import javax.swing.*;
 
 import model.CustomBorder;
 import model.ParentFrame;
-import panel.TeamsPanel;
-import panel.UpdateDataPanel;
+import ui.page.panel.TeamsPanel;
+import ui.page.panel.UpdateDataPanel;
 
 
 
-public class SportsDashboard extends ParentFrame implements ActionListener {
+public class SportsDashboardPage extends ParentFrame implements ActionListener {
 
     private static final long serialVersionUID = 1L;
     
@@ -36,7 +36,7 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
     private JLabel updateDataLabel;
     
    
-    public SportsDashboard() {
+    public SportsDashboardPage() {
         setTitle("Sports Dashboard");
         setResizable(true);
         setSizeAndCenter();
@@ -173,7 +173,7 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-			        new SportsDashboard();			    
+			        new SportsDashboardPage();			    
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

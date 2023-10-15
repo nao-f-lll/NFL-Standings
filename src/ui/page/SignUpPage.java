@@ -1,4 +1,4 @@
-package page;
+package ui.page;
 
 
 import java.awt.BorderLayout;
@@ -26,10 +26,11 @@ import javax.swing.SwingConstants;
 
 
 import model.ParentFrame;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SignUp extends ParentFrame implements ActionListener, KeyListener {
+public class SignUpPage extends ParentFrame implements ActionListener, KeyListener {
 
 	
 	private static final long serialVersionUID = -4747175902106077767L;
@@ -62,7 +63,7 @@ public class SignUp extends ParentFrame implements ActionListener, KeyListener {
     private JLabel errorMessageForFullName = new JLabel();
 	
 	
-	public SignUp(HashMap<String, String> loginInfo) {
+	public SignUpPage(HashMap<String, String> loginInfo) {
 		
 		this.setLocationRelativeTo(null);
 		this.loginInfo = loginInfo;
@@ -264,7 +265,7 @@ public class SignUp extends ParentFrame implements ActionListener, KeyListener {
 			
 		} else if (e.getSource() == loginButton) {
 			this.dispose();
-			new Login(this.loginInfo);
+			new LoginPage(this.loginInfo);
 		}
 	}
 	
@@ -318,7 +319,7 @@ public class SignUp extends ParentFrame implements ActionListener, KeyListener {
 					if (isValidPassword(userPassword)) {
 						loginInfo.put(userEmail, userPassword);
 							this.dispose();
-							new Login(loginInfo);
+							new LoginPage(loginInfo);
 				} else {
 					
 

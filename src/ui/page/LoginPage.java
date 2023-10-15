@@ -1,7 +1,10 @@
-package page;
+package ui.page;
 
 import model.ParentFrame;
 import javax.swing.*;
+
+import credentials.util.LoginValidationUtil;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,9 +14,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 
-public class Login extends ParentFrame  implements ActionListener, KeyListener  {
+
+public class LoginPage extends ParentFrame  implements ActionListener, KeyListener  {
 	
 	private static final long serialVersionUID = 6002789331622401022L;
+
+	private final int ALL_FIELDS_ARE_EMPTY = 1;
+	private final int EMAIL_FIELD_IS_EMPTY = 2;
+	private final int PASSWORD_FIELD_IS_EMPTY = 3; 
+	private final int EMAIL_NOT_FOUND = 4;  
+	private final int INCORRECT_PASSWORD = 5;
 	
     private ImageIcon nflIcon;
     
@@ -40,9 +50,10 @@ public class Login extends ParentFrame  implements ActionListener, KeyListener  
     private JLabel errorMessageForEmail = new JLabel();
     private JLabel errorMessageForPassword = new JLabel();
     
+    private int validationNumber;
     
       
-	public Login(HashMap<String, String> loginInfo) {	
+	public LoginPage(HashMap<String, String> loginInfo) {	
 		
 		initializeFrame(loginInfo);	
 		initializeGraphics();	
@@ -53,7 +64,7 @@ public class Login extends ParentFrame  implements ActionListener, KeyListener  
 	
 	private void initializeFrame(HashMap<String, String> loginInfo) {
 		this.setTitle("Login");	
-		this.setLocationRelativeTo(null);
+		this.setLocationRelativeTo(null);	
 		this.loginInfo = loginInfo;
 		this.setResizable(false);
 		this.setSize(650,400);
@@ -90,7 +101,7 @@ public class Login extends ParentFrame  implements ActionListener, KeyListener  
 			mainPanel.add(leftIneerPanel);
 			initialNflIcon();
 			initialCopyRights();
-}
+	 }
 	 
 	 private void initialNflIcon() {
 			nflIcon = new ImageIcon(ResizeIcon("/images/nflWhite.png",280,200));
@@ -203,7 +214,6 @@ public class Login extends ParentFrame  implements ActionListener, KeyListener  
 			initializeErrorMessages();
 	 }
 	 
-
 	 
 	private void initializeErrorMessages() {
 		
@@ -241,8 +251,8 @@ public class Login extends ParentFrame  implements ActionListener, KeyListener  
 	
 	private void userKeyboardLoginLogic(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {  
-        	validateLogin(emailField.getText(),String.valueOf(passwordField.getPassword()));
-		
+        	validationNumber = LoginValidationUtil.validateLogin(loginInfo, emailField.getText(),String.valueOf(passwordField.getPassword()));
+        	handleValidationNumber(validationNumber);
         }
 	}
 	
@@ -250,49 +260,37 @@ public class Login extends ParentFrame  implements ActionListener, KeyListener  
 	private void userClickLoginLogic(ActionEvent e) {
 		
 		if (e.getSource() == loginButton) {		
-			validateLogin(emailField.getText(),String.valueOf(passwordField.getPassword()));
+	     	validationNumber = LoginValidationUtil.validateLogin(loginInfo, emailField.getText(),String.valueOf(passwordField.getPassword()));
+        	handleValidationNumber(validationNumber);
 
 		} else if (e.getSource() == signUpButton) {
 			this.dispose();
-			new SignUp(this.loginInfo);
+			new SignUpPage(this.loginInfo);
 		}
 	}
 	
-	
-	
-	private void validateLogin(String userEmail, String userPassword) {
-			
-		if (userEmail.isEmpty() && userPassword.isEmpty()) {
-			
+	public void handleValidationNumber(int validationNumber) {
+		switch (validationNumber) {
+		case ALL_FIELDS_ARE_EMPTY:
 			errorMessageForPassword.setBounds(138, 164, 111, 25);
 			errorMessageForEmail.setText("Field is required");
 			errorMessageForPassword.setText("Field is required");
-			
-		} else if (emailField.getText().equals("")) {
-			
-				errorMessageForEmail.setText("Field is required");
-			
-		} else if (String.valueOf(passwordField.getPassword()).equals("")) {
-			
-				errorMessageForPassword.setText("Field is required");
-			
-		} else {
-		
-			if (loginInfo.containsKey(userEmail)) {		
-				if (loginInfo.get(userEmail).equals(userPassword)) {
-					
-					this.dispose();
-					new SportsDashboard();		
-					
-				} else {
-						errorMessageForPassword.setText("Incorrect password");
-				}
-			} else {
-					errorMessageForEmail.setText("Email is not found");
-			}
+			break;
+		case EMAIL_FIELD_IS_EMPTY:
+			errorMessageForEmail.setText("Field is required");
+			break;
+		case PASSWORD_FIELD_IS_EMPTY:
+			errorMessageForPassword.setText("Field is required");
+			break;
+		case EMAIL_NOT_FOUND:
+			errorMessageForEmail.setText("Email is not found");
+			break;
+		case INCORRECT_PASSWORD:
+			errorMessageForPassword.setText("Incorrect password");
+			break;
+		default :
+			this.dispose();
+			new SportsDashboardPage();
 		}
-			
-	
-	}
-		
+	}	
 }

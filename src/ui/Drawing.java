@@ -3,7 +3,7 @@ package ui;
 import java.awt.EventQueue;
 
 import credentials.LoginCredentials;
-import page.Login;
+import ui.page.LoginPage;
 
 public class Drawing {
 
@@ -12,7 +12,7 @@ public class Drawing {
 			public void run() {
 				try {
 					LoginCredentials credentials = new LoginCredentials();
-			        new Login(credentials.getLogingInfo());			    
+			        new LoginPage(credentials.getLogingInfo());			    
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

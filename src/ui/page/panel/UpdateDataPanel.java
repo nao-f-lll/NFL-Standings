@@ -1,4 +1,4 @@
-package panel;
+package ui.page.panel;
 
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;

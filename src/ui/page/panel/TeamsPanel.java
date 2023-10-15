@@ -1,4 +1,4 @@
-package panel;
+package ui.page.panel;
 
 import java.awt.Font;
 
