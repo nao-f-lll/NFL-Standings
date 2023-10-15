@@ -1,4 +1,4 @@
-package model;
+package com.standings.model;
 
 import java.awt.Color;
 import java.awt.Component;

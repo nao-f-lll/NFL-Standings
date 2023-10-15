@@ -1,4 +1,4 @@
-package ui.page;
+package com.standings.ui.page;
 
 
 import java.awt.BorderLayout;
@@ -24,8 +24,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-
-import model.ParentFrame;
+import com.standings.model.ParentFrame;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

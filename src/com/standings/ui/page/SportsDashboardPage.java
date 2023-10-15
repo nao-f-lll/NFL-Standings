@@ -1,4 +1,4 @@
-package ui.page;
+package com.standings.ui.page;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,11 +8,10 @@ import java.util.Map;
 
 import javax.swing.*;
 
-
-import model.CustomBorder;
-import model.ParentFrame;
-import ui.page.panel.TeamsPanel;
-import ui.page.panel.UpdateDataPanel;
+import com.standings.model.CustomBorder;
+import com.standings.model.ParentFrame;
+import com.standings.ui.page.panel.TeamsPanel;
+import com.standings.ui.page.panel.UpdateDataPanel;
 
 
 
@@ -168,7 +167,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         }
     }
 
-    
+  /*  
     public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -180,4 +179,5 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
 			}
 		});
 	}
+	*/
 }

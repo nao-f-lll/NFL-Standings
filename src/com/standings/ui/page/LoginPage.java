@@ -1,9 +1,9 @@
-package ui.page;
+package com.standings.ui.page;
 
-import model.ParentFrame;
 import javax.swing.*;
 
-import credentials.util.LoginValidationUtil;
+import com.standings.credentials.util.LoginValidationUtil;
+import com.standings.model.ParentFrame;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

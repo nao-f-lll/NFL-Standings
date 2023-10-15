@@ -1,4 +1,4 @@
-package credentials;
+package com.standings.credentials;
 
 import java.util.HashMap;
 

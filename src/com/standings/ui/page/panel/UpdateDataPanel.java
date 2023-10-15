@@ -1,4 +1,4 @@
-package ui.page.panel;
+package com.standings.ui.page.panel;
 
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;

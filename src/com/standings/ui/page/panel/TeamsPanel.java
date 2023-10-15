@@ -1,4 +1,4 @@
-package ui.page.panel;
+package com.standings.ui.page.panel;
 
 import java.awt.Font;
 
@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import static model.ParentFrame.*;
+import static com.standings.model.ParentFrame.*;
 
 public class TeamsPanel extends JPanel  {
 	

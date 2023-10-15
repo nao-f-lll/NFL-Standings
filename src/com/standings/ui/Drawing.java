@@ -1,9 +1,9 @@
-package ui;
+package com.standings.ui;
 
 import java.awt.EventQueue;
 
-import credentials.LoginCredentials;
-import ui.page.LoginPage;
+import com.standings.credentials.LoginCredentials;
+import com.standings.ui.page.LoginPage;
 
 public class Drawing {
 
