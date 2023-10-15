@@ -32,7 +32,7 @@ java -jar standings.jar
 ### Instalar Usando Docker
 
 1. Descargar la Imagen de Docker:
-Para ejecutar la aplicación con Docker, debes descargar la imagen de Docker  <a href="https://hub.docker.com/r/naooff/nfl-standings" target="_blank" rel="noopener noreferrer">Repositorio de Docker</a>. desde el termenal
+Para ejecutar la aplicación con Docker, debes descargar la imagen de [Docker](https://hub.docker.com/r/naooff/nfl-standings) desde el termenal
 
 ```bash
 docker pull naooff/nfl-standings:[version]
