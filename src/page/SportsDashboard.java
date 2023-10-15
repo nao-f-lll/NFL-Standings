@@ -3,13 +3,16 @@ package page;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.*;
 
 
 import model.CustomBorder;
 import model.ParentFrame;
-import panel.Teams;
-import panel.UpdateData;
+import panel.TeamsPanel;
+import panel.UpdateDataPanel;
 
 
 
@@ -44,8 +47,8 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
 
         scoresPanel = new JPanel();
         standingsPanel = new JPanel();      
-        teamsPanel = new Teams();     
-        updateDataPanel = new UpdateData();
+        teamsPanel = new TeamsPanel();     
+        updateDataPanel = new UpdateDataPanel();
         
         scoresPanel.setLayout(null);
         standingsPanel.setLayout(null);
@@ -142,33 +145,29 @@ public class SportsDashboard extends ParentFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == goToScoresButton) {
-            showPanel(scoresPanel);
-            goToScoresButton.setBorder(new CustomBorder(20));
-            goToStandingButton.setBorder(null);
-            goToTeamsButton.setBorder(null);
-            goToUpdateDataButton.setBorder(null);
-        } else if (e.getSource() == goToStandingButton) {
-            showPanel(standingsPanel);
-            goToStandingButton.setBorder(new CustomBorder(20));
-            goToScoresButton.setBorder(null);
-            goToTeamsButton.setBorder(null);
-            goToUpdateDataButton.setBorder(null);
-        } else if (e.getSource() == goToTeamsButton) {
-            showPanel(teamsPanel);
-            goToTeamsButton.setBorder(new CustomBorder(20));
-            goToScoresButton.setBorder(null);
-            goToStandingButton.setBorder(null);
-            goToUpdateDataButton.setBorder(null);
-        } else if (e.getSource() == goToUpdateDataButton) {
-            showPanel(updateDataPanel);
-            goToUpdateDataButton.setBorder(new CustomBorder(20));
-            goToScoresButton.setBorder(null);
-            goToStandingButton.setBorder(null);
-            goToTeamsButton.setBorder(null);
+        // Define a map to associate buttons with panels
+        Map<JButton, JPanel> buttonPanelMap = new HashMap<>();
+        buttonPanelMap.put(goToScoresButton, scoresPanel);
+        buttonPanelMap.put(goToStandingButton, standingsPanel);
+        buttonPanelMap.put(goToTeamsButton, teamsPanel);
+        buttonPanelMap.put(goToUpdateDataButton, updateDataPanel);
+
+        // Reset all button borders to null
+        for (JButton button : buttonPanelMap.keySet()) {
+            button.setBorder(null);
+        }
+
+        // Check which button was clicked
+        JButton clickedButton = (JButton) e.getSource();
+        JPanel panelToShow = buttonPanelMap.get(clickedButton);
+
+        if (panelToShow != null) {
+            // Set the custom border for the clicked button and show the associated panel
+            clickedButton.setBorder(new CustomBorder(20));
+            showPanel(panelToShow);
         }
     }
-    
+
     
     public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

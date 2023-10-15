@@ -9,7 +9,7 @@ import javax.swing.SwingConstants;
 
 import static model.ParentFrame.*;
 
-public class Teams extends JPanel  {
+public class TeamsPanel extends JPanel  {
 	
 	
     private static final long serialVersionUID = -538081400942327500L;
@@ -68,7 +68,7 @@ public class Teams extends JPanel  {
     private JLabel bengalsFundiationLabel;
     
     
-    public Teams() {
+    public TeamsPanel() {
     	
     	nflLeagueLabel = new JLabel("NFL ");
         nflLeagueLabel.setFont(new Font("Tahoma", Font.BOLD, 16));

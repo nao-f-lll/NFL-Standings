@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class UpdateData extends JPanel{
+public class UpdateDataPanel extends JPanel{
 
 	private static final long serialVersionUID = -3261993617585437616L;
 	
@@ -30,7 +30,7 @@ public class UpdateData extends JPanel{
     private JButton updateButton;
     private JButton cancelButton;
     
-    public UpdateData() {
+    public UpdateDataPanel() {
  
     	 
     	comboWeekModel = new DefaultComboBoxModel<>();	
