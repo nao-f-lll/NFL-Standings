@@ -34,6 +34,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
     private JLabel teamsLabel;
     private JLabel updateDataLabel;
     
+    
    
     public SportsDashboardPage() {
         setTitle("Sports Dashboard");
@@ -99,11 +100,11 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
        
        goToUpdateDataButton = new JButton("Update Data");
        goToUpdateDataButton.setFont(new Font("Tahoma", Font.BOLD, 25));
-       goToUpdateDataButton.setBounds(1112, 10, 246, 33);
+       goToUpdateDataButton.setBounds(1251, 10, 246, 33);
        goToUpdateDataButton.setFocusable(false);
        goToUpdateDataButton.setBackground(Color.WHITE);
        goToUpdateDataButton.setBorder(null);
-                
+               
        goToScoresButton.addActionListener(this);
        goToStandingButton.addActionListener(this);
        goToTeamsButton.addActionListener(this);
@@ -120,8 +121,9 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(mainPanel, BorderLayout.CENTER);
       
-       
-    
+           
+        
+  
         
      
 
@@ -166,18 +168,4 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
             showPanel(panelToShow);
         }
     }
-
-  /*  
-    public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-			        new SportsDashboardPage();			    
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 }
