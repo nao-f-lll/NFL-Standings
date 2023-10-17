@@ -1,21 +1,31 @@
 package com.standings.ui.page.panel;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import com.standings.model.ParentFrame;
 import com.standings.ui.page.SportsDashboardPage;
+import com.standings.util.StandingsDataUtil;
 
-public class UpdateDataPanel extends JPanel{
+public class UpdateDataPanel extends JPanel  implements ActionListener {
 
 	private static final long serialVersionUID = -3261993617585437616L;
 	
@@ -41,7 +51,24 @@ public class UpdateDataPanel extends JPanel{
     private JPanel instructionPanel;
     private JLabel instructionsLabel;
     private ImageIcon nflIcon;
-    private JLabel copyRights;
+    private JLabel termsOfUse;
+
+	private int validationNumber;
+    
+    
+    private final int SOME_OR_ALL_FIELDS_ARE_EMPTY = 1;
+    private final int WRONG_TEAM_NAME = 2;
+
+
+    private final int ALL_POINTS_ARE_INVALID = 3;
+    private final int LOCAL_POINTS_ARE_INVALID = 4;
+    private final int VISITOR_POINTS_ARE_INVALID = 5;
+
+    
+    private JLabel errorMessageForLocalPointsField;
+    private JLabel errorMessageForVisitorPointsField;
+	
+    
     
     public UpdateDataPanel() {
  
@@ -100,23 +127,27 @@ public class UpdateDataPanel extends JPanel{
         submitButton.setBounds(778, 535, 130, 45);
         submitButton.setFocusable(false);
         submitButton.setBackground(Color.lightGray);
+        submitButton.addActionListener(this);
         this.add(submitButton);
         
         updateButton = new JButton("Update");
         updateButton.setBounds(1001, 535, 130, 45);
         updateButton.setFocusable(false);
         updateButton.setBackground(Color.lightGray);
+        updateButton.addActionListener(this);
         this.add(updateButton);
         
         cancelButton = new JButton("Cancel");
         cancelButton.setBounds(1222, 535, 130, 45);
         cancelButton.setFocusable(false);
         cancelButton.setBackground(Color.lightGray);
+        cancelButton.addActionListener(this);
         this.add(cancelButton);
+        
         
         instructionPanel = new JPanel();
         instructionPanel.setBackground(new Color(255, 255, 255));
-        instructionPanel.setBounds(0, 71, 627, 756);
+        instructionPanel.setBounds(0, 60, 627, 756);
         this.add(instructionPanel);
         instructionPanel.setLayout(null);
         
@@ -167,15 +198,135 @@ public class UpdateDataPanel extends JPanel{
 		instructionPanel.add(nflIconLabel);
         
         
-		copyRights = new JLabel("<html> Copyright © 2023 NFL.<br> all rights reserved </html>");
-		copyRights.setBounds(225,630,231,40);
-	    copyRights.setFont(new Font("Dialog", Font.PLAIN, 13));
-	    instructionPanel.add(copyRights);
-        
-        
-        
+		termsOfUse = new JLabel("<html><p style='text-indent: 10px; white-space: nowrap;'><a href=\"https://nao-f-lll.github.io/NFL-Web-Site/terminos.html\">Terms of use</a></p></html>");
+		termsOfUse.setBounds(235, 630, 250, 40);
+		termsOfUse.setFont(new Font("Dialog", Font.PLAIN, 13));
+		instructionPanel.add(termsOfUse);
 
-
+		
+		termsOfUse.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (Desktop.isDesktopSupported()) {
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://nao-f-lll.github.io/NFL-Web-Site/terminos.html"));
+                    } catch (IOException | URISyntaxException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+		
+		
+		
+		
+		errorMessageForLocalPointsField = new JLabel();
+		errorMessageForLocalPointsField.setText("");
+		errorMessageForLocalPointsField.setBounds(1310, 390, 130, 25);
+		errorMessageForLocalPointsField.setForeground(Color.RED);
+		this.add(errorMessageForLocalPointsField);
+	
+		
+		errorMessageForVisitorPointsField = new JLabel();
+		errorMessageForVisitorPointsField.setText("");
+		errorMessageForVisitorPointsField.setBounds(1310, 255, 130, 40);
+		errorMessageForVisitorPointsField.setForeground(Color.RED);
+		this.add(errorMessageForVisitorPointsField);
     }
+       
+    
+ 	
+    
+    @Override
+	public void actionPerformed(ActionEvent e) {
+		userClickLoginLogic(e);
+	}
+    
+	private void userClickLoginLogic(ActionEvent e) {
+		
+		if (e.getSource() == submitButton) {
+			
+			if (StandingsDataUtil.validateStandingsDataForEmpties(localClubField.getText(), visitorClubField.getText(), localClubPointsField.getText(),visitorClubPointsField.getText())) {
+				handleValidationNumber(SOME_OR_ALL_FIELDS_ARE_EMPTY);
+			} else if (StandingsDataUtil.validateStandingsDataForWrongTeamName(localClubField.getText(), visitorClubField.getText())) {
+				handleValidationNumber(WRONG_TEAM_NAME); 
+			} else {
+				validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(),visitorClubPointsField.getText());
+				handleValidationNumber(validationNumber); 
+			}
+			
+
+		} else if (e.getSource() == updateButton) {
+			
+			if (StandingsDataUtil.validateStandingsDataForEmpties(localClubField.getText(), visitorClubField.getText(), localClubPointsField.getText(),visitorClubPointsField.getText())) {
+				handleValidationNumber(SOME_OR_ALL_FIELDS_ARE_EMPTY);
+			} else if (StandingsDataUtil.validateStandingsDataForWrongTeamName(localClubField.getText(), visitorClubField.getText())) {
+				handleValidationNumber(WRONG_TEAM_NAME); 
+			}
+			
+			/// logic to add
+
+			
+		} else if (e.getSource() == cancelButton) {
+			localClubField.setText("");
+			visitorClubField.setText("");
+			localClubPointsField.setText("");
+			visitorClubPointsField.setText("");
+			
+			comboWeekModel = new DefaultComboBoxModel<>();
+	        for (int i = 1; i < 11; i++) {
+	            comboWeekModel.addElement("Week " + i);
+	        }
+	        weekComboBox.setModel(comboWeekModel);
+		}
+	}
+	
+	
+	
+	public void handleValidationNumber(int validationNumber) {
+		
+		switch (validationNumber) {
+		case SOME_OR_ALL_FIELDS_ARE_EMPTY:
+			userDialog("Some fields are empty, fields must be filled", "Fields Requirement");        
+			break;
+		case WRONG_TEAM_NAME:
+			userDialog("You have inserted the wrong team name, see the Teams panel for reference ", " Wrong Team name");
+			break;
+		case ALL_POINTS_ARE_INVALID:
+			errorMessageForVisitorPointsField.setText("Incorrect set of points");
+			errorMessageForLocalPointsField.setText("Incorrect set of points");
+			break;
+		case LOCAL_POINTS_ARE_INVALID:
+			errorMessageForLocalPointsField.setText("Incorrect set of points");
+			break;
+		case VISITOR_POINTS_ARE_INVALID:
+			errorMessageForVisitorPointsField.setText("Incorrect set of points");
+			break;
+		default :
+			//this.dispose();
+			//new SportsDashboardPage();
+		}
+	}	
+	
+	
+	
+	private void userDialog(String dialogText, String dialogTitle) {
+		
+		 JOptionPane fieldRequirementPane = new JOptionPane(dialogText,JOptionPane.YES_OPTION);
+
+		 fieldRequirementPane.setMessageType(JOptionPane.WARNING_MESSAGE);
+
+	        JPanel buttonPanel = (JPanel)fieldRequirementPane.getComponent(1);
+	        
+	        JButton accepetButton = (JButton)buttonPanel.getComponent(0);
+	        accepetButton.setText("Accepet");
+	        accepetButton.setFocusable(false);
+	        accepetButton.setBackground(Color.LIGHT_GRAY);
+	        
+	        JDialog passwordRequirementdialog = fieldRequirementPane.createDialog(this, dialogTitle);
+	        passwordRequirementdialog.setVisible(true);
+	}
+	
+ 
  
 }

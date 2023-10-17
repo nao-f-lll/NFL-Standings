@@ -168,4 +168,15 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
             showPanel(panelToShow);
         }
     }
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+			        new SportsDashboardPage();			    
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }

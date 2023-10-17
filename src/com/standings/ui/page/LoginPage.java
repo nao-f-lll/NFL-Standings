@@ -2,8 +2,8 @@ package com.standings.ui.page;
 
 import javax.swing.*;
 
-import com.standings.credentials.util.LoginValidationUtil;
 import com.standings.model.ParentFrame;
+import com.standings.util.LoginValidationUtil;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -47,8 +47,8 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
     private JButton loginButton;
     private JButton signUpButton;
     
-    private JLabel errorMessageForEmail = new JLabel();
-    private JLabel errorMessageForPassword = new JLabel();
+    private JLabel errorMessageForEmail;
+    private JLabel errorMessageForPassword;
     
     private int validationNumber;
     
@@ -216,12 +216,13 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	 
 	 
 	private void initializeErrorMessages() {
-		
+		errorMessageForEmail = new JLabel();
 		errorMessageForEmail.setText("");
 		errorMessageForEmail.setBounds(136, 100, 130, 25);
 		errorMessageForEmail.setForeground(Color.RED);
-		rightInnerPanel.add(errorMessageForEmail);	
+		rightInnerPanel.add(errorMessageForEmail);
 		
+		errorMessageForPassword = new JLabel();
 		errorMessageForPassword.setForeground(Color.RED);
 		errorMessageForPassword.setBounds(125, 164, 111, 25);
 		rightInnerPanel.add(errorMessageForPassword);
