@@ -7,9 +7,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import com.standings.model.CustomBorder;
 import com.standings.model.ParentFrame;
+import com.standings.ui.page.panel.StandingsPanel;
 import com.standings.ui.page.panel.TeamsPanel;
 import com.standings.ui.page.panel.UpdateDataPanel;
 
@@ -45,7 +48,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
         
 
-        scoresPanel = new JPanel();
+        scoresPanel = new StandingsPanel();
         standingsPanel = new JPanel();      
         teamsPanel = new TeamsPanel();     
         updateDataPanel = new UpdateDataPanel();
@@ -121,11 +124,56 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(mainPanel, BorderLayout.CENTER);
       
-           
+         ///  
         
-  
+   
+        DefaultTableModel model = new DefaultTableModel();
         
-     
+        
+        String[] columnNames = {"Team",
+                				"Match Played",
+                				"Wins",
+                				"Losses",
+                				"Ties",
+                				"PF",
+                				"PA"};
+        
+   
+        Object[][] data = {
+        	    {"cardinals", 0, 0, 0, 0, 0, 0},
+        	    {"Raiders", 0, 0, 0, 0, 0, 0},
+        	    {"Chiefs", 0, 0, 0, 0, 0, 0},
+        	    {"Cowboys", 0, 0, 0, 0, 0, 0},
+        	    {"Bengals", 0, 0, 0, 0, 0, 0},
+        	    {"Steelers", 0, 0, 0, 0, 0, 0},
+        	};
+        
+        model.setColumnIdentifiers(columnNames);
+        model.setDataVector(data, columnNames);
+        
+        JTable table = new JTable(model);
+        table.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        table.setEnabled(false);
+        table.setBounds(10,105,1502,535);
+        table.setShowGrid(true);
+        table.setShowHorizontalLines(true);
+        table.setShowVerticalLines(true);
+        table.setGridColor(Color.BLACK);
+        scoresPanel.add(table);
+        
+        TableColumnModel columnModel = table.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(120); // Team
+        columnModel.getColumn(1).setPreferredWidth(100); // Match Played
+        columnModel.getColumn(2).setPreferredWidth(70);  // Wins
+        columnModel.getColumn(3).setPreferredWidth(70);  // Losses
+        columnModel.getColumn(4).setPreferredWidth(70);  // Ties
+        columnModel.getColumn(5).setPreferredWidth(70);  // PF
+        columnModel.getColumn(6).setPreferredWidth(70);  // PA
+        
+        table.setRowHeight(30); // Set row height (adjust as needed)
+        
+        scoresPanel.add(table.getTableHeader(), BorderLayout.NORTH);
+  ///
 
     }
 

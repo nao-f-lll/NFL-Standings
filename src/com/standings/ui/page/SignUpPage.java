@@ -300,15 +300,18 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 			errorMessageForPassword.setText("Field is required");
 			errorMessageForFullName.setText("Field is required");
 			
-		} else if (userEmail.isEmpty()) {
+		} else if (userEmail.isEmpty() && userFullName.isEmpty()) {
 			
 			errorMessageForEmail.setText("Field is required");
-			
-		} else if (userPassword.isEmpty()) {
-			errorMessageForPassword.setText("Field is required");
-			
-		} else if (userFullName.isEmpty()) {
 			errorMessageForFullName.setText("Field is required");
+			
+		} else if (userPassword.isEmpty() && userEmail.isEmpty()) {
+			errorMessageForPassword.setText("Field is required");
+			errorMessageForEmail.setText("Field is required");
+			
+		} else if (userFullName.isEmpty() && userPassword.isEmpty()) {
+			errorMessageForFullName.setText("Field is required");
+			errorMessageForPassword.setText("Field is required");
 			
 		}  else if (isValidFullName(userFullName)) {
 					
@@ -347,7 +350,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 			}
 			
 			
-		} else {
+		} else   {
 			
 			errorMessageForFullName.setBounds(114, 103, 144, 25);
 			errorMessageForFullName.setText("Full Name must be a text");

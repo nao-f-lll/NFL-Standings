@@ -2,23 +2,56 @@ package com.standings.model;
 
 
 public class Team {
-    private FootballTeamName footballTeam;
-    private String teamName;  // You can add other attributes as needed
+    private FootballTeamName teamName;
+    private int points;
+    private int wins;
+    private int losses;
+    private int ties;
     
-    public Team(FootballTeamName footballTeam, String teamName) {
-        this.footballTeam = footballTeam;
-        this.teamName = teamName;
-    }
     
-    public FootballTeamName getFootballTeam() {
-        return footballTeam;
+    
+    public Team(FootballTeamName footballTeam) {
+        this.teamName = footballTeam;
+         
     }
     
     public String getTeamName() {
-        return teamName;
+        return teamName.toString();
     }
     
-    // You can add other methods and attributes as needed
+    
+    public int getPoints() {
+        return points;
+    }
+    
+    public int getWins() {
+    	return wins;
+    }
+    
+    public int getTies() {
+    	return ties;
+    }
+    
+    public int getLosses() {
+    	return losses;
+    }
+   
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public void incrementWins() {
+        wins++;
+    }
+
+    public void incrementLosses() {
+        losses++;
+    }
+
+    public void incrementTies() {
+        ties++;
+    }
+ 
 }
 
 

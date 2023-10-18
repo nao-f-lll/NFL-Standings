@@ -5,6 +5,8 @@ import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -58,6 +60,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     
     private final int SOME_OR_ALL_FIELDS_ARE_EMPTY = 1;
     private final int WRONG_TEAM_NAME = 2;
+    private final int THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED = 6;
 
 
     private final int ALL_POINTS_ARE_INVALID = 3;
@@ -108,6 +111,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         localClubPointsLabel.setBounds(1250, 215, 71, 37);
         this.add(localClubPointsLabel);
         
+        
         visitorClubPointsLabel = new JLabel("Points");
         visitorClubPointsLabel.setBounds(1250, 352, 84, 31);
         this.add(visitorClubPointsLabel);
@@ -117,11 +121,13 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         localClubPointsField.setBounds(1250, 264, 35, 34);
         this.add(localClubPointsField);
         localClubPointsField.setColumns(10);
+    	fieldFocusListener(localClubPointsField,null);
         
         visitorClubPointsField = new JTextField();
         visitorClubPointsField.setColumns(10);
         visitorClubPointsField.setBounds(1250, 392, 35, 34);
         this.add(visitorClubPointsField);
+        fieldFocusListener(null,visitorClubPointsField);
         
         submitButton = new JButton("Submit");
         submitButton.setBounds(778, 535, 130, 45);
@@ -222,14 +228,15 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		
 		errorMessageForLocalPointsField = new JLabel();
 		errorMessageForLocalPointsField.setText("");
-		errorMessageForLocalPointsField.setBounds(1310, 390, 130, 25);
+		errorMessageForLocalPointsField.setBounds(1310, 265, 130, 25);
 		errorMessageForLocalPointsField.setForeground(Color.RED);
 		this.add(errorMessageForLocalPointsField);
+	
 	
 		
 		errorMessageForVisitorPointsField = new JLabel();
 		errorMessageForVisitorPointsField.setText("");
-		errorMessageForVisitorPointsField.setBounds(1310, 255, 130, 40);
+		errorMessageForVisitorPointsField.setBounds(1310, 390, 130, 40);  
 		errorMessageForVisitorPointsField.setForeground(Color.RED);
 		this.add(errorMessageForVisitorPointsField);
     }
@@ -250,10 +257,15 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				handleValidationNumber(SOME_OR_ALL_FIELDS_ARE_EMPTY);
 			} else if (StandingsDataUtil.validateStandingsDataForWrongTeamName(localClubField.getText(), visitorClubField.getText())) {
 				handleValidationNumber(WRONG_TEAM_NAME); 
-			} else {
+			} else if (StandingsDataUtil.validateStandingsDataForSameTeamNAme(localClubField.getText(), visitorClubField.getText())) {
+				handleValidationNumber(THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED); 
+			} else  {
 				validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(),visitorClubPointsField.getText());
 				handleValidationNumber(validationNumber); 
 			}
+			
+			
+			
 			
 
 		} else if (e.getSource() == updateButton) {
@@ -262,6 +274,11 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				handleValidationNumber(SOME_OR_ALL_FIELDS_ARE_EMPTY);
 			} else if (StandingsDataUtil.validateStandingsDataForWrongTeamName(localClubField.getText(), visitorClubField.getText())) {
 				handleValidationNumber(WRONG_TEAM_NAME); 
+			} else if (StandingsDataUtil.validateStandingsDataForSameTeamNAme(localClubField.getText(), visitorClubField.getText())) {
+				handleValidationNumber(THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED); 
+			} else  {
+				validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(),visitorClubPointsField.getText());
+				handleValidationNumber(validationNumber); 
 			}
 			
 			/// logic to add
@@ -291,6 +308,9 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			break;
 		case WRONG_TEAM_NAME:
 			userDialog("You have inserted the wrong team name, see the Teams panel for reference ", " Wrong Team name");
+			break;		
+		case THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED:
+			userDialog("You have inserted the same name for both teams, see the Teams panel for reference ", " Same name for both Teams");
 			break;
 		case ALL_POINTS_ARE_INVALID:
 			errorMessageForVisitorPointsField.setText("Incorrect set of points");
@@ -308,6 +328,35 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		}
 	}	
 	
+	
+	
+	 public void fieldFocusListener(JTextField localPoints, JTextField visitorPoints) {
+		 if (localPoints != null) {
+			 localPoints.addFocusListener(new FocusListener() {
+				    @Override
+				    public void focusGained(FocusEvent e) {
+				    	errorMessageForLocalPointsField.setText("");
+				    }
+
+				    @Override
+				    public void focusLost(FocusEvent e) {
+				     
+				    }
+				});
+		 } else if (visitorPoints != null) {
+			 	visitorPoints.addFocusListener(new FocusListener() {
+				    @Override
+				    public void focusGained(FocusEvent e) {
+				    	errorMessageForVisitorPointsField.setText("");
+				    }
+
+				    @Override
+				    public void focusLost(FocusEvent e) {
+				       
+				    }
+				});
+		 }
+	}
 	
 	
 	private void userDialog(String dialogText, String dialogTitle) {

@@ -58,13 +58,25 @@ public class StandingsDataUtil {
     }
     
     
+    public static boolean validateStandingsDataForSameTeamNAme(String localClubField, String visitorClubField) {
+        
+    	return   isTheSmaeName(localClubField, visitorClubField);
+
+    }
+    
+    private static boolean isTheSmaeName(String localTeamName, String visitorTeamName) {
+    	return localTeamName.equals(visitorTeamName);
+    }
+    
+
+    
     
     public static int validateStandingsDataForPoints(String localClubPointsField, String visitorClubPointsField) {
-        if (areValidPoints(localClubPointsField) && areValidPoints(visitorClubPointsField)) {
+        if (!areValidPoints(localClubPointsField) && !areValidPoints(visitorClubPointsField)) {
             return ALL_POINTS_ARE_INVALID;
-        } else if (areValidPoints(localClubPointsField)) {
+        } else if (!areValidPoints(localClubPointsField)) {
             return LOCAL_POINTS_ARE_INVALID;
-        } else if (areValidPoints(visitorClubPointsField)) {
+        } else if (!areValidPoints(visitorClubPointsField)) {
             return VISITOR_POINTS_ARE_INVALID;
         }
 
@@ -72,7 +84,7 @@ public class StandingsDataUtil {
     }
 
     private static boolean areValidPoints(String points) {
-        String regex = "\\b(100|\\d{1,3})\\b";
+        String regex = "\\b(100|\\d{1,2})\\b";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(points);
         return matcher.find();
