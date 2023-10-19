@@ -8,8 +8,7 @@ import java.util.Map;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
-
+import javax.swing.table.JTableHeader;
 import com.standings.model.CustomBorder;
 import com.standings.model.ParentFrame;
 import com.standings.ui.page.panel.StandingsPanel;
@@ -48,11 +47,10 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
         
 
-        scoresPanel = new StandingsPanel();
-        standingsPanel = new JPanel();      
+        scoresPanel = new JPanel();
+        standingsPanel = new StandingsPanel();      
         teamsPanel = new TeamsPanel();     
         updateDataPanel = new UpdateDataPanel();
-        
         scoresPanel.setLayout(null);
         standingsPanel.setLayout(null);
         teamsPanel.setLayout(null);
@@ -72,6 +70,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
        
         
         mainPanel.add(scoresPanel, BorderLayout.CENTER);
+       
         
         
        panelButton = new JPanel();
@@ -119,62 +118,63 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
        panelButton.add(goToStandingButton);
        panelButton.add(goToTeamsButton);
        panelButton.add(goToUpdateDataButton);
-        
+          
+          
+           ///  
+
+             JTable table = new JTable();
+             table.setFont(new Font("Tahoma", Font.PLAIN, 20));
+             //table.setBounds(1, 25, 1520, 475);
+             table.setBackground(new Color(255, 255, 255));
+             
+             table.setModel(new DefaultTableModel(
+             	new Object[][] {
+             		{null, null, null, null, null, null, null},
+             		{null, null, null, null, null, null, null},
+             		{null, null, null, null, null, null, null},
+             		{null, null, null, null, null, null, null},
+             		{null, null, null, null, null, null, null},
+             		{null, null, null, null, null, null, null},
+             	},
+             	new String[] {
+             		"Team", "Match Played", "Wins", "Losses", "Ties", "PF", "PA"
+             	}
+             ));
+             
+             for (int i = 0; i < 7; i++) {
+            	 table.getColumnModel().getColumn(i).setPreferredWidth(200);
+             }
+             
+             
+             JScrollPane sp = new JScrollPane(table);
+             sp.setBounds(10, 70, 1502, 703);
+
+             
+
+             JTableHeader tableHeader = table.getTableHeader();
+             Dimension headerSize = tableHeader.getPreferredSize();
+             headerSize.height = 100; 
+             tableHeader.setPreferredSize(headerSize);
+             
+             table.getTableHeader().setFont(new Font(null, 20, 20));
+             table.getTableHeader().setBackground(Color.LIGHT_GRAY);
+             
+             
+             table.setRowHeight(100);
        
-        getContentPane().setLayout(new BorderLayout());
-        getContentPane().add(mainPanel, BorderLayout.CENTER);
-      
-         ///  
-        
-   
-        DefaultTableModel model = new DefaultTableModel();
-        
-        
-        String[] columnNames = {"Team",
-                				"Match Played",
-                				"Wins",
-                				"Losses",
-                				"Ties",
-                				"PF",
-                				"PA"};
-        
-   
-        Object[][] data = {
-        	    {"cardinals", 0, 0, 0, 0, 0, 0},
-        	    {"Raiders", 0, 0, 0, 0, 0, 0},
-        	    {"Chiefs", 0, 0, 0, 0, 0, 0},
-        	    {"Cowboys", 0, 0, 0, 0, 0, 0},
-        	    {"Bengals", 0, 0, 0, 0, 0, 0},
-        	    {"Steelers", 0, 0, 0, 0, 0, 0},
-        	};
-        
-        model.setColumnIdentifiers(columnNames);
-        model.setDataVector(data, columnNames);
-        
-        JTable table = new JTable(model);
-        table.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        table.setEnabled(false);
-        table.setBounds(10,105,1502,535);
-        table.setShowGrid(true);
-        table.setShowHorizontalLines(true);
-        table.setShowVerticalLines(true);
-        table.setGridColor(Color.BLACK);
-        scoresPanel.add(table);
-        
-        TableColumnModel columnModel = table.getColumnModel();
-        columnModel.getColumn(0).setPreferredWidth(120); // Team
-        columnModel.getColumn(1).setPreferredWidth(100); // Match Played
-        columnModel.getColumn(2).setPreferredWidth(70);  // Wins
-        columnModel.getColumn(3).setPreferredWidth(70);  // Losses
-        columnModel.getColumn(4).setPreferredWidth(70);  // Ties
-        columnModel.getColumn(5).setPreferredWidth(70);  // PF
-        columnModel.getColumn(6).setPreferredWidth(70);  // PA
-        
-        table.setRowHeight(30); // Set row height (adjust as needed)
-        
-        scoresPanel.add(table.getTableHeader(), BorderLayout.NORTH);
+             table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+             scoresPanel.add(sp, BorderLayout.CENTER);
+       
+  
+	        
+	   
+
   ///
 
+             
+             getContentPane().setLayout(new BorderLayout());
+             getContentPane().add(mainPanel, BorderLayout.CENTER);
+     	        
     }
 
     private void setSizeAndCenter() {
@@ -194,7 +194,6 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Define a map to associate buttons with panels
         Map<JButton, JPanel> buttonPanelMap = new HashMap<>();
         buttonPanelMap.put(goToScoresButton, scoresPanel);
         buttonPanelMap.put(goToStandingButton, standingsPanel);
@@ -211,7 +210,6 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         JPanel panelToShow = buttonPanelMap.get(clickedButton);
 
         if (panelToShow != null) {
-            // Set the custom border for the clicked button and show the associated panel
             clickedButton.setBorder(new CustomBorder(20));
             showPanel(panelToShow);
         }

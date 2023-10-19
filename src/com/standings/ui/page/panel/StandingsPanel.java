@@ -1,10 +1,22 @@
 package com.standings.ui.page.panel;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class StandingsPanel extends JPanel  {
+   
 
 
-	private static final long serialVersionUID = -3300074928451875155L;
-	
+	    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+		public StandingsPanel() {
+	    	
+
+
+
+	}
 }
+
+	

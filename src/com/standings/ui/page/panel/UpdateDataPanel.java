@@ -204,7 +204,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		instructionPanel.add(nflIconLabel);
         
         
-		termsOfUse = new JLabel("<html><p style='text-indent: 10px; white-space: nowrap;'><a href=\"https://nao-f-lll.github.io/NFL-Web-Site/terminos.html\">Terms of use</a></p></html>");
+		termsOfUse = new JLabel("<html><p style='text-indent: 10px; white-space: nowrap;'><a href=\"https://nao-f-lll.github.io/paginas/terminos.html\">Terms of use</a></p></html>");
 		termsOfUse.setBounds(235, 630, 250, 40);
 		termsOfUse.setFont(new Font("Dialog", Font.PLAIN, 13));
 		instructionPanel.add(termsOfUse);
@@ -215,7 +215,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
             public void mouseClicked(MouseEvent e) {
                 if (Desktop.isDesktopSupported()) {
                     try {
-                        Desktop.getDesktop().browse(new URI("https://nao-f-lll.github.io/NFL-Web-Site/terminos.html"));
+                        Desktop.getDesktop().browse(new URI("https://nao-f-lll.github.io/paginas/terminos.html"));
                     } catch (IOException | URISyntaxException ex) {
                         ex.printStackTrace();
                     }
