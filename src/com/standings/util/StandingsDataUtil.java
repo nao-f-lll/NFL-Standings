@@ -60,11 +60,11 @@ public class StandingsDataUtil {
     
     public static boolean validateStandingsDataForSameTeamNAme(String localClubField, String visitorClubField) {
         
-    	return   isTheSmaeName(localClubField, visitorClubField);
+    	return   isTheSameName(localClubField, visitorClubField);
 
     }
     
-    private static boolean isTheSmaeName(String localTeamName, String visitorTeamName) {
+    private static boolean isTheSameName(String localTeamName, String visitorTeamName) {
     	return localTeamName.equals(visitorTeamName);
     }
     

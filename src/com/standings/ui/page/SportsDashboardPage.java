@@ -3,17 +3,23 @@ package com.standings.ui.page;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import com.standings.model.CustomBorder;
+import com.standings.model.FootballTeamName;
+import com.standings.model.Game;
 import com.standings.model.ParentFrame;
+import com.standings.model.Team;
 import com.standings.ui.page.panel.StandingsPanel;
 import com.standings.ui.page.panel.TeamsPanel;
 import com.standings.ui.page.panel.UpdateDataPanel;
+import com.standings.util.StandingsCalculation;
 
 
 
@@ -124,27 +130,56 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
 
              JTable table = new JTable();
              table.setFont(new Font("Tahoma", Font.PLAIN, 20));
-             //table.setBounds(1, 25, 1520, 475);
              table.setBackground(new Color(255, 255, 255));
              
-             table.setModel(new DefaultTableModel(
-             	new Object[][] {
-             		{null, null, null, null, null, null, null},
-             		{null, null, null, null, null, null, null},
-             		{null, null, null, null, null, null, null},
-             		{null, null, null, null, null, null, null},
-             		{null, null, null, null, null, null, null},
-             		{null, null, null, null, null, null, null},
-             	},
-             	new String[] {
-             		"Team", "Match Played", "Wins", "Losses", "Ties", "PF", "PA"
-             	}
-             ));
+             ArrayList<Team> teams = new ArrayList<>();
+             List<Game> games = new ArrayList<>();
              
-             for (int i = 0; i < 7; i++) {
-            	 table.getColumnModel().getColumn(i).setPreferredWidth(200);
+ 			FootballTeamName[] nflTeams = FootballTeamName.values();
+			 
+ 			for (FootballTeamName nflTeam : nflTeams) {
+ 				Team team = new Team(nflTeam.name());
+ 			    teams.add(team);
+ 	    	}
+             
+             
+          	Object[][] rows = new Object[][] {
+          							{null, null, null, null, null, null},
+          							{null, null, null, null, null, null},
+          							{null, null, null, null, null, null},
+          							{null, null, null, null, null, null},
+          							{null, null, null, null, null, null},
+          							{null, null, null, null, null, null},
+          							};
+             
+          	String[] columns =	new String[] {
+          				             		"Team", "Match Played", "Wins", "Losses", "Ties", "Points"
+          				             	};
+             
+
+            
+            
+            
+            new StandingsCalculation(teams, games);
+            
+          	int teamIndex = 0;
+            
+            for (int i = 0; i < rows.length; i++) {
+            	for (int j = 0; j < rows[i].length; j++) {        		
+           		rows[i][j++] = teams.get(teamIndex).getName();
+           		rows[i][j++] = teams.get(teamIndex).getGamesPlayed();
+           		rows[i][j++] = teams.get(teamIndex).getWins();
+           		rows[i][j++] = teams.get(teamIndex).getLosses();
+           		rows[i][j++] = teams.get(teamIndex).getTies();
+           		rows[i][j++] = teams.get(teamIndex).getPoints();
+            	}  	 
+            	teamIndex++;
              }
-             
+            
+            
+            table.setModel(new DefaultTableModel(rows, columns));
+            
+            
              
              JScrollPane sp = new JScrollPane(table);
              sp.setBounds(10, 70, 1502, 703);

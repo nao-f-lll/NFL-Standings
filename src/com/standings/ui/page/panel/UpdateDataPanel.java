@@ -162,7 +162,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         
         
         titleInstructionsLabel = new JLabel("Instruction for Inserting/Updating Match Data");
-        titleInstructionsLabel.setIcon(new ImageIcon(SportsDashboardPage.class.getResource("/images/instructionBlue.png")));
+        //titleInstructionsLabel.setIcon(new ImageIcon(SportsDashboardPage.class.getResource("/images/instructionBlue.png")));
         titleInstructionsLabel.setForeground(new Color(0, 0, 0));
         titleInstructionsLabel.setBounds(49, 10, 536, 105);
         instructionPanel.add(titleInstructionsLabel);

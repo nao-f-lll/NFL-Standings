@@ -2,16 +2,18 @@ package com.standings.model;
 
 public class Game {
 	
-	    private String localTeam;
-	    private String visitorTeam;
-	    private int localScore;
-	    private int visitorScore;
+	 private final String localTeam;
+	    private final String visitorTeam;
+	    private final int localScore;
+	    private final int visitorScore;
 
 	    public Game(String localTeam, String visitorTeam, int localScore, int visitorScore) {
+	    	
 	        this.localTeam = localTeam;
 	        this.visitorTeam = visitorTeam;
 	        this.localScore = localScore;
 	        this.visitorScore = visitorScore;
+	        
 	    }
 
 	    public String getLocalTeam() {
@@ -28,5 +30,10 @@ public class Game {
 
 	    public int getVisitorScore() {
 	        return visitorScore;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return localTeam + " " + localScore + " - " + visitorScore + " " + visitorTeam;
 	    }
 }
