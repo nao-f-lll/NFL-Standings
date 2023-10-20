@@ -1,7 +1,6 @@
 package com.standings.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
@@ -22,17 +21,13 @@ public class StandingsCalculation {
 			for (int i = 0; i <  nflTeams.length; i++) {
 				 teamsNames[i] = nflTeams[i].toString();
  	    	}
-			
 
-		        for (int i = 0; i < teamsNames.length; i++) {
-		            String teamName = teamsNames[i];
-		            Team team = new Team(teamName);
-		            teams.add(team);
-		        }
-		        
-            games = generateMatchesData(teamsNames);
+		     
+			games.addAll(generateMatchesData(teamsNames));
+			       
             updateStandings(teams, games);
-            //sortStandings(teams);
+            
+            sortStandings(teams);
 		
 		}
 		

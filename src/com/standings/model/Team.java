@@ -1,5 +1,6 @@
 package com.standings.model;
 
+import javax.swing.ImageIcon;
 
 public class Team {
 	 	private final String name;
@@ -8,18 +9,24 @@ public class Team {
 	    private int wins;
 	    private int losses;
 	    private int ties;
+	    private ImageIcon logo;
 
-	    public Team(String name) {
+	    public Team(String name, ImageIcon logo) {
 	        this.name = name;
 	        this.points = 0;
 	        this.gamesPlayed = 0;
 	        this.wins = 0;
 	        this.losses = 0;
 	        this.ties = 0;
+	        this.logo = logo;
 	    }
 
 	    public String getName() {
 	        return name;
+	    }
+	    
+	    public ImageIcon getLogo() {
+	        return logo;
 	    }
 
 	    public int getPoints() {
@@ -63,10 +70,10 @@ public class Team {
 	    	gamesPlayed++;
 	    }
 
-	    @Override
-	    public String toString() {
-	        return name + ": " + wins + " Wins, " + ties + " Ties, " + losses + " Losses, " + points + " Points";
-	    }
+	 //   @Override
+	 //   public String toString() {
+	 //       return name + ": " + wins + " Wins, " + ties + " Ties, " + losses + " Losses, " + points + " Points";
+	  //  }
 	    
  
 }

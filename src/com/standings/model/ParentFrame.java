@@ -1,6 +1,5 @@
 package com.standings.model;
 
-
 import java.awt.Image;
 
 import javax.swing.ImageIcon;

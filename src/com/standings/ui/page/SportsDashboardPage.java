@@ -5,21 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import com.standings.model.CustomBorder;
-import com.standings.model.FootballTeamName;
-import com.standings.model.Game;
 import com.standings.model.ParentFrame;
 import com.standings.model.Team;
+import com.standings.model.Game;
 import com.standings.ui.page.panel.StandingsPanel;
 import com.standings.ui.page.panel.TeamsPanel;
 import com.standings.ui.page.panel.UpdateDataPanel;
-import com.standings.util.StandingsCalculation;
 
 
 
@@ -42,6 +38,9 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
     private JLabel teamsLabel;
     private JLabel updateDataLabel;
     
+	private ArrayList<Team> teams;
+	private List<Game> games;
+    
     
    
     public SportsDashboardPage() {
@@ -49,14 +48,18 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         setResizable(true);
         setSizeAndCenter();
 
+        
+        teams = new ArrayList<>();
+        games = new ArrayList<>();
+        
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         
 
         scoresPanel = new JPanel();
-        standingsPanel = new StandingsPanel();      
+        standingsPanel = new StandingsPanel(teams, games);   
         teamsPanel = new TeamsPanel();     
-        updateDataPanel = new UpdateDataPanel();
+        updateDataPanel = new UpdateDataPanel(teams, games);
         scoresPanel.setLayout(null);
         standingsPanel.setLayout(null);
         teamsPanel.setLayout(null);
@@ -125,87 +128,6 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
        panelButton.add(goToTeamsButton);
        panelButton.add(goToUpdateDataButton);
           
-          
-           ///  
-
-             JTable table = new JTable();
-             table.setFont(new Font("Tahoma", Font.PLAIN, 20));
-             table.setBackground(new Color(255, 255, 255));
-             
-             ArrayList<Team> teams = new ArrayList<>();
-             List<Game> games = new ArrayList<>();
-             
- 			FootballTeamName[] nflTeams = FootballTeamName.values();
-			 
- 			for (FootballTeamName nflTeam : nflTeams) {
- 				Team team = new Team(nflTeam.name());
- 			    teams.add(team);
- 	    	}
-             
-             
-          	Object[][] rows = new Object[][] {
-          							{null, null, null, null, null, null},
-          							{null, null, null, null, null, null},
-          							{null, null, null, null, null, null},
-          							{null, null, null, null, null, null},
-          							{null, null, null, null, null, null},
-          							{null, null, null, null, null, null},
-          							};
-             
-          	String[] columns =	new String[] {
-          				             		"Team", "Match Played", "Wins", "Losses", "Ties", "Points"
-          				             	};
-             
-
-            
-            
-            
-            new StandingsCalculation(teams, games);
-            
-          	int teamIndex = 0;
-            
-            for (int i = 0; i < rows.length; i++) {
-            	for (int j = 0; j < rows[i].length; j++) {        		
-           		rows[i][j++] = teams.get(teamIndex).getName();
-           		rows[i][j++] = teams.get(teamIndex).getGamesPlayed();
-           		rows[i][j++] = teams.get(teamIndex).getWins();
-           		rows[i][j++] = teams.get(teamIndex).getLosses();
-           		rows[i][j++] = teams.get(teamIndex).getTies();
-           		rows[i][j++] = teams.get(teamIndex).getPoints();
-            	}  	 
-            	teamIndex++;
-             }
-            
-            
-            table.setModel(new DefaultTableModel(rows, columns));
-            
-            
-             
-             JScrollPane sp = new JScrollPane(table);
-             sp.setBounds(10, 70, 1502, 703);
-
-             
-
-             JTableHeader tableHeader = table.getTableHeader();
-             Dimension headerSize = tableHeader.getPreferredSize();
-             headerSize.height = 100; 
-             tableHeader.setPreferredSize(headerSize);
-             
-             table.getTableHeader().setFont(new Font(null, 20, 20));
-             table.getTableHeader().setBackground(Color.LIGHT_GRAY);
-             
-             
-             table.setRowHeight(100);
-       
-             table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-             scoresPanel.add(sp, BorderLayout.CENTER);
-       
-  
-	        
-	   
-
-  ///
-
              
              getContentPane().setLayout(new BorderLayout());
              getContentPane().add(mainPanel, BorderLayout.CENTER);

@@ -12,6 +12,9 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,8 +26,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.standings.model.Game;
 import com.standings.model.ParentFrame;
+import com.standings.model.Team;
 import com.standings.ui.page.SportsDashboardPage;
+import com.standings.util.AddGameUtil;
+import com.standings.util.StandingsCalculation;
 import com.standings.util.StandingsDataUtil;
 
 public class UpdateDataPanel extends JPanel  implements ActionListener {
@@ -70,11 +77,14 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     
     private JLabel errorMessageForLocalPointsField;
     private JLabel errorMessageForVisitorPointsField;
-	
+	private List<Game> games;
+	private ArrayList<Team> teams;
     
     
-    public UpdateDataPanel() {
+    public UpdateDataPanel( ArrayList<Team> teams, List<Game> games) {
  
+    	this.games = games;
+    	this.teams = teams;
     	 
     	comboWeekModel = new DefaultComboBoxModel<>();	
     	for (int i = 1; i < 11; i++) {
@@ -162,7 +172,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         
         
         titleInstructionsLabel = new JLabel("Instruction for Inserting/Updating Match Data");
-        //titleInstructionsLabel.setIcon(new ImageIcon(SportsDashboardPage.class.getResource("/images/instructionBlue.png")));
+        titleInstructionsLabel.setIcon(new ImageIcon(SportsDashboardPage.class.getResource("/images/instructionBlue.png")));
         titleInstructionsLabel.setForeground(new Color(0, 0, 0));
         titleInstructionsLabel.setBounds(49, 10, 536, 105);
         instructionPanel.add(titleInstructionsLabel);
@@ -222,17 +232,13 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
                 }
             }
         });
-		
-		
-		
-		
+								
 		errorMessageForLocalPointsField = new JLabel();
 		errorMessageForLocalPointsField.setText("");
 		errorMessageForLocalPointsField.setBounds(1310, 265, 130, 25);
 		errorMessageForLocalPointsField.setForeground(Color.RED);
 		this.add(errorMessageForLocalPointsField);
-	
-	
+		
 		
 		errorMessageForVisitorPointsField = new JLabel();
 		errorMessageForVisitorPointsField.setText("");
@@ -253,20 +259,24 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		
 		if (e.getSource() == submitButton) {
 			
+			validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(),visitorClubPointsField.getText());
+
+			
 			if (StandingsDataUtil.validateStandingsDataForEmpties(localClubField.getText(), visitorClubField.getText(), localClubPointsField.getText(),visitorClubPointsField.getText())) {
 				handleValidationNumber(SOME_OR_ALL_FIELDS_ARE_EMPTY);
 			} else if (StandingsDataUtil.validateStandingsDataForWrongTeamName(localClubField.getText(), visitorClubField.getText())) {
 				handleValidationNumber(WRONG_TEAM_NAME); 
 			} else if (StandingsDataUtil.validateStandingsDataForSameTeamNAme(localClubField.getText(), visitorClubField.getText())) {
 				handleValidationNumber(THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED); 
-			} else  {
-				validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(),visitorClubPointsField.getText());
+			} else if(validationNumber == ALL_POINTS_ARE_INVALID || validationNumber == LOCAL_POINTS_ARE_INVALID || validationNumber == VISITOR_POINTS_ARE_INVALID) {
 				handleValidationNumber(validationNumber); 
+			} else {
+				new AddGameUtil(this.games,localClubField.getText(),visitorClubField.getText(),localClubPointsField.getText(),visitorClubPointsField.getText());
+				new StandingsCalculation(this.teams, this.games);
 			}
 			
-			
-			
-			
+			// add logic
+							
 
 		} else if (e.getSource() == updateButton) {
 			
