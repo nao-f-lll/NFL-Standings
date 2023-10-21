@@ -23,4 +23,4 @@ WORKDIR /app
 COPY target/ /app/
 
 # Run the Java GUI application
-CMD ["java", "-cp", "/app/", "ui.Drawing"]
+CMD ["java", "-cp", "/app/", "com.standings.ui.Drawing"]
