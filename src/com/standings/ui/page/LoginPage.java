@@ -55,14 +55,14 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
       
 	public LoginPage(HashMap<String, String> loginInfo) {	
 		
-		initializeFrame(loginInfo);	
-		initializeGraphics();	
+		initializeFrameGraphics(loginInfo);	
+		initializePanelGraphics();	
 	}
 	
 	
 	
 	
-	private void initializeFrame(HashMap<String, String> loginInfo) {
+	private void initializeFrameGraphics(HashMap<String, String> loginInfo) {
 		this.setTitle("Login");	
 		this.setLocationRelativeTo(null);	
 		this.loginInfo = loginInfo;
@@ -80,7 +80,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	
 
 	
-	 private void initializeGraphics() {
+	 private void initializePanelGraphics() {
 		 initialMainPanel();
 		 initialLeftPanel();
 		 initialRightPanel();
@@ -131,7 +131,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		 initialzeButtons();
 	 }
 	 
-	 public void initializeLabeles() {
+	 private void initializeLabeles() {
 			loginLabel = new JLabel("LOGIN");
 			loginLabel.setVerticalAlignment(SwingConstants.TOP);
 	        loginLabel.setBounds(66,27,111,42);
@@ -143,7 +143,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		    rightInnerPanel.add(creatAccountLabel);
 	 }
 	 
-	 public void initializeEmail() {
+	 private void initializeEmail() {
 	        emailLabel = new JLabel("Email");
 		    emailLabel.setBounds(34,100,50,25);
 		    rightInnerPanel.add(emailLabel);
@@ -156,7 +156,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	 }
 	 
 	 
-	 public void initializePassword() {
+	 private void initializePassword() {
 		    passwordLabel = new JLabel("Password");
 		    passwordLabel.setBounds(34,163,70,15);
 		    rightInnerPanel.add(passwordLabel);    
@@ -196,7 +196,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		 }
 	}
 	 
-	 public void initialzeButtons() {
+	 private void initialzeButtons() {
 		    loginButton = new JButton("Login");
 			loginButton.setBounds(34, 227, 100, 25);
 	        loginButton.setFocusable(false);
@@ -250,6 +250,10 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		
 	}
 	
+	
+	//MODIFIES: change validationNumber to hold the number of the specific credentials case if enter key is clicked.
+	//EFFECTS:  Call handleValidationNumber passing to it validationNumber.
+	
 	private void userKeyboardLoginLogic(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {  
         	validationNumber = LoginValidationUtil.validateLogin(loginInfo, emailField.getText(),String.valueOf(passwordField.getPassword()));
@@ -257,6 +261,10 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
         }
 	}
 	
+	
+	
+	//MODIFIES: change validationNumber to hold the number of the specific credentials case if first case is true
+	//EFFECTS:  Call handleValidationNumber passing to it validationNumber or open SignUpPage frame.
 	
 	private void userClickLoginLogic(ActionEvent e) {
 		
@@ -270,10 +278,15 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		}
 	}
 	
-	public void handleValidationNumber(int validationNumber) {
+
+	//MODIFIES: Change errorMessageForPassword bounds to handle different text.
+	//EFFECTS:  if the login credentials are valid let the user to login by opening a new frame;
+	//          otherwise prompt the error message.
+	
+	private void handleValidationNumber(int validationNumber) {
 		switch (validationNumber) {
 		case ALL_FIELDS_ARE_EMPTY:
-			errorMessageForPassword.setBounds(138, 164, 111, 25);
+			//errorMessageForPassword.setBounds(138, 164, 111, 25);      need test
 			errorMessageForEmail.setText("Field is required");
 			errorMessageForPassword.setText("Field is required");
 			break;
@@ -287,6 +300,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 			errorMessageForEmail.setText("Email is not found");
 			break;
 		case INCORRECT_PASSWORD:
+			//errorMessageForPassword.setBounds(138, 164, 111, 25);      need test
 			errorMessageForPassword.setText("Incorrect password");
 			break;
 		default :

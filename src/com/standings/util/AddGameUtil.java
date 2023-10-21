@@ -14,4 +14,5 @@ public class AddGameUtil {
         game = new Game(localClubField, visitorClubField,Integer.parseInt(localClubPointsField),Integer.parseInt(visitorClubPointsField));           
         games.add(game);
 	}
+	
 }

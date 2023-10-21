@@ -26,9 +26,9 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
     private JPanel mainPanel;
     private JPanel panelButton;
     private JPanel scoresPanel;
-    private JPanel standingsPanel;
-    private JPanel teamsPanel; 
-    private JPanel updateDataPanel;
+    private StandingsPanel standingsPanel;
+    private TeamsPanel teamsPanel; 
+    private UpdateDataPanel updateDataPanel;
     
     private JButton goToScoresButton;
     private JButton goToStandingButton;
@@ -42,13 +42,11 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
 	private List<Game> games;
     
     
-   
     public SportsDashboardPage() {
         setTitle("Sports Dashboard");
-        setResizable(true);
+        setResizable(false);
         setSizeAndCenter();
 
-        
         teams = new ArrayList<>();
         games = new ArrayList<>();
         
@@ -59,7 +57,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         scoresPanel = new JPanel();
         standingsPanel = new StandingsPanel(teams, games);   
         teamsPanel = new TeamsPanel();     
-        updateDataPanel = new UpdateDataPanel(teams, games);
+        updateDataPanel = new UpdateDataPanel(teams, games,standingsPanel);
         scoresPanel.setLayout(null);
         standingsPanel.setLayout(null);
         teamsPanel.setLayout(null);
@@ -157,12 +155,10 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         buttonPanelMap.put(goToTeamsButton, teamsPanel);
         buttonPanelMap.put(goToUpdateDataButton, updateDataPanel);
 
-        // Reset all button borders to null
         for (JButton button : buttonPanelMap.keySet()) {
             button.setBorder(null);
         }
 
-        // Check which button was clicked
         JButton clickedButton = (JButton) e.getSource();
         JPanel panelToShow = buttonPanelMap.get(clickedButton);
 

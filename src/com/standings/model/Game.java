@@ -32,8 +32,4 @@ public class Game {
 	        return visitorScore;
 	    }
 
-	    @Override
-	    public String toString() {
-	        return localTeam + " " + localScore + " - " + visitorScore + " " + visitorTeam;
-	    }
 }

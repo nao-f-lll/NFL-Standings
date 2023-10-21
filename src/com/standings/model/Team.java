@@ -70,10 +70,6 @@ public class Team {
 	    	gamesPlayed++;
 	    }
 
-	 //   @Override
-	 //   public String toString() {
-	 //       return name + ": " + wins + " Wins, " + ties + " Ties, " + losses + " Losses, " + points + " Points";
-	  //  }
 	    
  
 }

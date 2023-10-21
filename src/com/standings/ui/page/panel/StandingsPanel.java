@@ -41,6 +41,7 @@ public class StandingsPanel extends JPanel  {
             
             this.teams = teams;
             this.games = games;
+        
             
 			nflTeams = FootballTeamName.values();
 			 
@@ -80,53 +81,9 @@ public class StandingsPanel extends JPanel  {
            
           
            new StandingsCalculation(this.teams, this.games);
+           renderUpdatedStandings();
                  
-           
-          int teamIndex = 0;
-           
-           for (int i = 0; i < rows.length; i++) {
-           	 
-               Object[] teamInfo = new Object[2];
-               teamInfo[0] = this.teams.get(teamIndex).getLogo();
-               teamInfo[1] = this.teams.get(teamIndex).getName();
-               
-               rows[i][0] = teamInfo;
-          		rows[i][1] = this.teams.get(teamIndex).getGamesPlayed();
-          		rows[i][2] = this.teams.get(teamIndex).getWins();
-          		rows[i][3] = this.teams.get(teamIndex).getLosses();
-          		rows[i][4] = this.teams.get(teamIndex).getTies();
-          		rows[i][5] = this.teams.get(teamIndex).getPoints();
-            	 
-           	teamIndex++;
-            }
          
-           table.setModel(new DefaultTableModel(rows, columns));
-           
-         
-           table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
-         
-			private static final long serialVersionUID = -2661844236545326544L;
-
-			@Override
-               public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                   if (value instanceof Object[]) {
-                       Object[] teamInfo = (Object[]) value;
-                       if (teamInfo.length == 2) {
-                           ImageIcon logo = (ImageIcon) teamInfo[0];
-                           String name = (String) teamInfo[1];
-
-                           JLabel label = new JLabel(name, logo, JLabel.LEFT);
-                           label.setOpaque(true);
-                           label.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
-                           label.setFont(new Font(null, 20,20));
-                           return label;
-                       }
-                   }
-                   return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-               }
-           });
-           
-                  
          JScrollPane sp = new JScrollPane(table);
          sp.setEnabled(false);
          sp.setBounds(10, 70, 1502, 703);
@@ -154,4 +111,47 @@ public class StandingsPanel extends JPanel  {
             this.add(sp, BorderLayout.CENTER);
 
 	}
+		public void renderUpdatedStandings() {		
+			
+			int teamIndex = 0;
+			for (int i = 0; i < rows.length; i++) {
+	           	Object[] teamInfo = new Object[2];
+	            teamInfo[0] = this.teams.get(teamIndex).getLogo();
+	            teamInfo[1] = this.teams.get(teamIndex).getName();
+	               
+	            rows[i][0] = teamInfo;
+	            rows[i][1] = this.teams.get(teamIndex).getGamesPlayed();
+	          	rows[i][2] = this.teams.get(teamIndex).getWins();
+	          	rows[i][3] = this.teams.get(teamIndex).getLosses();
+	          	rows[i][4] = this.teams.get(teamIndex).getTies();
+	          	rows[i][5] = this.teams.get(teamIndex).getPoints();	            	 
+	           	teamIndex++;
+	        }
+			
+	          table.setModel(new DefaultTableModel(rows, columns));
+
+			
+		     table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
+		         
+					private static final long serialVersionUID = -2661844236545326544L;
+
+					@Override
+		               public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+		                   if (value instanceof Object[]) {
+		                       Object[] teamInfo = (Object[]) value;
+		                       if (teamInfo.length == 2) {
+		                           ImageIcon logo = (ImageIcon) teamInfo[0];
+		                           String name = (String) teamInfo[1];
+
+		                           JLabel label = new JLabel(name, logo, JLabel.LEFT);
+		                           label.setOpaque(true);
+		                           label.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
+		                           label.setFont(new Font(null, 20,20));
+		                           return label;
+		                       }
+		                   }
+		                   return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		               }
+		           });
+		}
 }

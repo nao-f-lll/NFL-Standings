@@ -10,25 +10,28 @@ import com.standings.model.Game;
 import com.standings.model.Team;
 
 public class StandingsCalculation {
-	
-	
-		public StandingsCalculation(ArrayList<Team> teams,  List<Game> games) {
-		
-			
-			FootballTeamName[] nflTeams = FootballTeamName.values();
-			String[] teamsNames = new String[6];
-			 
-			for (int i = 0; i <  nflTeams.length; i++) {
-				 teamsNames[i] = nflTeams[i].toString();
- 	    	}
 
+		public StandingsCalculation(ArrayList<Team> teams,  List<Game> games) {
+	
+			
+				FootballTeamName[] nflTeams = FootballTeamName.values();
+				String[] teamsNames = new String[6];
+				 
+				for (int i = 0; i <  nflTeams.length; i++) {
+					 teamsNames[i] = nflTeams[i].toString();
+	 	    	}
 		     
-			games.addAll(generateMatchesData(teamsNames));
-			       
-            updateStandings(teams, games);
-            
-            sortStandings(teams);
+				 
+				
+				doAllWork(teamsNames, teams, games);
 		
+		}
+		
+		public void doAllWork(String[] teamsNames, ArrayList<Team> teams,  List<Game> games) {
+			
+			games.addAll(generateMatchesData(teamsNames)); 
+			updateStandings(teams, games);           
+			sortStandings(teams);
 		}
 		
 		 public static void sortStandings(List<Team> teams) {
@@ -52,8 +55,15 @@ public class StandingsCalculation {
 	                }
 	            });
 	        }
-	      
-	    private static void updateStandings(List<Team> teams, List<Game> games) {
+		 
+		 
+		 
+		 public static void updateStandings(Team team, Game game) {
+			 updateStandingsBasedOnMatch(team, game);
+		 }
+	    
+		 
+	    public static void updateStandings(List<Team> teams, List<Game> games) {
 	     	
 	    	for (Game game : games) {	
 	    		 for (Team team : teams) {
@@ -103,4 +113,5 @@ public class StandingsCalculation {
 	        }
 	        return games;
 	    }
+	    
 }

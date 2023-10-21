@@ -79,13 +79,15 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     private JLabel errorMessageForVisitorPointsField;
 	private List<Game> games;
 	private ArrayList<Team> teams;
+	private StandingsPanel standingsPanel;
     
     
-    public UpdateDataPanel( ArrayList<Team> teams, List<Game> games) {
+    public UpdateDataPanel( ArrayList<Team> teams, List<Game> games, StandingsPanel standingsPanel) {
  
     	this.games = games;
     	this.teams = teams;
-    	 
+    	this.standingsPanel = standingsPanel;
+    	
     	comboWeekModel = new DefaultComboBoxModel<>();	
     	for (int i = 1; i < 11; i++) {
     		comboWeekModel.addElement("Week " + i);
@@ -271,12 +273,20 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			} else if(validationNumber == ALL_POINTS_ARE_INVALID || validationNumber == LOCAL_POINTS_ARE_INVALID || validationNumber == VISITOR_POINTS_ARE_INVALID) {
 				handleValidationNumber(validationNumber); 
 			} else {
-				new AddGameUtil(this.games,localClubField.getText(),visitorClubField.getText(),localClubPointsField.getText(),visitorClubPointsField.getText());
-				new StandingsCalculation(this.teams, this.games);
+				
+				new AddGameUtil(this.games,localClubField.getText(),visitorClubField.getText(),localClubPointsField.getText(),visitorClubPointsField.getText());		
+				for (Team team : this.teams) {
+					if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
+						int sizeOfListOfGames = games.size() - 1;
+						StandingsCalculation.updateStandings(team, games.get(sizeOfListOfGames));  
+						
+					}
+				}
+				
+				StandingsCalculation.sortStandings(this.teams);
+				standingsPanel.renderUpdatedStandings();		
+				resetFieldsAndWeek();
 			}
-			
-			// add logic
-							
 
 		} else if (e.getSource() == updateButton) {
 			
@@ -292,19 +302,13 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			}
 			
 			/// logic to add
-
+			resetFieldsAndWeek();
 			
 		} else if (e.getSource() == cancelButton) {
-			localClubField.setText("");
-			visitorClubField.setText("");
-			localClubPointsField.setText("");
-			visitorClubPointsField.setText("");
 			
-			comboWeekModel = new DefaultComboBoxModel<>();
-	        for (int i = 1; i < 11; i++) {
-	            comboWeekModel.addElement("Week " + i);
-	        }
-	        weekComboBox.setModel(comboWeekModel);
+			resetFieldsAndWeek();
+			
+
 		}
 	}
 	
@@ -333,8 +337,6 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			errorMessageForVisitorPointsField.setText("Incorrect set of points");
 			break;
 		default :
-			//this.dispose();
-			//new SportsDashboardPage();
 		}
 	}	
 	
@@ -384,6 +386,20 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	        
 	        JDialog passwordRequirementdialog = fieldRequirementPane.createDialog(this, dialogTitle);
 	        passwordRequirementdialog.setVisible(true);
+	}
+	
+	private void resetFieldsAndWeek() {
+		
+		localClubField.setText("");
+		visitorClubField.setText("");
+		localClubPointsField.setText("");
+		visitorClubPointsField.setText("");
+		
+		comboWeekModel = new DefaultComboBoxModel<>();
+        for (int i = 1; i < 11; i++) {
+            comboWeekModel.addElement("Week " + i);
+        }
+        weekComboBox.setModel(comboWeekModel);
 	}
 	
  

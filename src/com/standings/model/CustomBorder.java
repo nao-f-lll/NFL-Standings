@@ -25,12 +25,12 @@ public class CustomBorder extends AbstractBorder {
 
          Graphics2D g2d = (Graphics2D) g;
          g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-         g2d.setColor(Color.BLACK); // Set the border color
+         g2d.setColor(Color.BLACK); 
 
-         // Create a rounded rectangle shape
+       
          RoundRectangle2D roundedRect = new RoundRectangle2D.Float(x, y, width - 1, height - 1, cornerRadius, cornerRadius);
 
-         // Draw the rounded rectangle
+       
          g2d.draw(roundedRect);
      }
 
