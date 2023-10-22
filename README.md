@@ -16,11 +16,11 @@ El Gestor de Clasificación de la NFL es una aplicación de escritorio diseñada
 
 ## Características Clave
 
-### Creador de Clasificaciones
+* ### Creador de Clasificaciones
 
 Genera y personaliza fácilmente tablas de clasificación de la NFL para diferentes temporadas. La aplicación ofrece una interfaz fácil de usar para crear y gestionar clasificaciones.
 
-###  Gestión de Equipos
+* ###  Gestión de Equipos
 
 Mantén bases de datos detalladas de los equipos de la NFL, todo ello dentro de un entorno de escritorio. Haz un seguimiento del rendimiento de los equipos y de los datos de manera eficiente.
 
