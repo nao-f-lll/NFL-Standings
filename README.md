@@ -1,6 +1,6 @@
 | Stable                                                                                                       |  Preview Release                                         |
 |------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
-| [![latest preview build](image)]() |  [![Stable](image)]() |
+| [![latest preview build](image)](https://github.com/nao-f-lll/NFL-Standings/releases/tag/v0.3-beta) |  [![Stable](image)]() |
 
 
 # NFL Standings
