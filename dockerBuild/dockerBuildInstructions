@@ -1,4 +1,0 @@
-# compile java classes
-javac -d target src/**/*.java
-# set the enviarment variable
-sudo docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -d standings:0.3

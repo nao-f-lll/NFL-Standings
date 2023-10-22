@@ -1,3 +1,9 @@
+| Windows                                                                                                       |  Linux                           | Docker | Stable Release| Preview Release |
+|------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|-------|-----| ----------|
+| [![Static Badge](https://img.shields.io/badge/Stable-Download-0078D4?logo=Windows)](https://github.com/nao-f-lll/NFL-Standings/releases/download/v0.1-beta/standings_0.1_x64_windows_.exe) |  [![Static Badge](https://img.shields.io/badge/Stable-Download-FCC624?logo=Linux)](https://github.com/nao-f-lll/NFL-Standings/releases/download/v0.3-beta/Standings_0.3_x64_linux_portable.tar) |    [![Static Badge](https://img.shields.io/badge/Docker-Download-2496ED?logo=Docker)](https://hub.docker.com/r/naooff/nfl-standings) |      [![Static Badge](https://img.shields.io/badge/Stable-Release-21B352?logo=sellfy)]( )           |            [![Static Badge](https://img.shields.io/badge/Preview-Release-DA552F?logo=producthunt)](https://github.com/nao-f-lll/NFL-Standings/releases/tag/v0.3-beta)                          |
+
+
+
 # NFL Standings
 
 El Gestor de Clasificación de la NFL es una aplicación de escritorio diseñada para simplificar la gestión y visualización de la clasificación de la NFL y listas de equipos.  Ofrece una variedad de características clave para ayudarte a agilizar la gestión de datos de la NFL.
@@ -27,13 +33,13 @@ Dirígete al directorio donde descargaste el archivo JAR utilizando tu terminal 
   4. Ejecutar el Archivo JAR:
 Para ejecutar el archivo JAR, utiliza el comando
 ```bash
-java -jar standings.jar
+java -jar standings_[version]_x64.jar
 ```
 
 ### Instalar Usando Docker
 
 1. Descargar la Imagen de Docker:
-Para ejecutar la aplicación con Docker, debes descargar la imagen de [Docker](https://hub.docker.com/r/naooff/nfl-standings) desde el termenal
+Para ejecutar la aplicación con Docker, debes descargar la imagen de [Docker](https://hub.docker.com/r/naooff/nfl-standings) desde el terminal
 
 ```bash
 docker pull naooff/nfl-standings:[version]
