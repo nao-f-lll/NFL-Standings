@@ -1,6 +1,6 @@
-| Stable                                                                                                       |  Preview Release                            | Docker |
+| Windows                                                                                                       |  Linux                           | Docker |
 |------------------------------------------------------------------------------------------------------------|-------------------------------------------------------| ------|
-| [![latest preview build](image)](https://github.com/nao-f-lll/NFL-Standings/releases/tag/v0.3-beta) |  [![Stable](image)]() |    [![Static Badge](https://img.shields.io/badge/Docker-Download-2496ED?logo=Docker)](https://hub.docker.com/r/naooff/nfl-standings)
+| [![Static Badge](https://img.shields.io/badge/Stable-Download-0078D4?logo=Windows)](https://github.com/nao-f-lll/NFL-Standings/releases/tag/v0.3-beta) |  [![Stable](image)]() |    [![Static Badge](https://img.shields.io/badge/Docker-Download-2496ED?logo=Docker)](https://hub.docker.com/r/naooff/nfl-standings)
 
 
 
