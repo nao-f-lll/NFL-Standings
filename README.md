@@ -27,7 +27,7 @@ Dirígete al directorio donde descargaste el archivo JAR utilizando tu terminal 
   4. Ejecutar el Archivo JAR:
 Para ejecutar el archivo JAR, utiliza el comando
 ```bash
-java -jar standings.jar
+java -jar standings_[version]_x64.jar
 ```
 
 ### Instalar Usando Docker
