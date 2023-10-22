@@ -20,10 +20,10 @@ public class CustomBorder extends AbstractBorder {
      }
 
      @Override
-     public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-         super.paintBorder(c, g, x, y, width, height);
+     public void paintBorder(Component component, Graphics graphics, int x, int y, int width, int height) {
+         super.paintBorder(component, graphics, x, y, width, height);
 
-         Graphics2D g2d = (Graphics2D) g;
+         Graphics2D g2d = (Graphics2D) graphics;
          g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
          g2d.setColor(Color.BLACK); 
 

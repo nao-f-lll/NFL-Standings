@@ -15,6 +15,11 @@ public class StandingsDataUtil {
 	private static final int LOCAL_POINTS_ARE_INVALID = 4;
 	private static final int VISITOR_POINTS_ARE_INVALID = 5;
 
+	
+	
+	
+	//EFFECTS : returns true if any field is empty; otherwise false.
+	
     public static boolean validateStandingsDataForEmpties(String localClubField, String visitorClubField, String localClubPointsField, String visitorClubPointsField) {
        
     	return  checkFordEmptyFields(localClubField, visitorClubField, localClubPointsField, visitorClubPointsField);
@@ -22,6 +27,9 @@ public class StandingsDataUtil {
     }
     
        
+  //REQUIRES: fields musen't be a null value.
+  //EFFECTS : returns true if any field is empty; otherwise false.
+    
     public static boolean checkFordEmptyFields(String localClubField, String visitorClubField, String localClubPointsField, String visitorClubPointsField) {
     	 
     	boolean localClubEmpty = localClubField.isEmpty();
@@ -37,6 +45,9 @@ public class StandingsDataUtil {
     }
     
     
+   
+    //EFFECTS : returns true if one of the teams has a wrong name; otherwise false.
+    
     public static boolean validateStandingsDataForWrongTeamName(String localClubField, String visitorClubField) {
         
     	return  isNotValidTeamName(localClubField) || isNotValidTeamName(visitorClubField);
@@ -44,6 +55,8 @@ public class StandingsDataUtil {
     }
     
     
+    //REQUIRES: field musen't be a null value.
+    //EFFECTS : returns true if the given team has a wrong name; otherwise false.
     
     private static boolean isNotValidTeamName(String teamName) {
     	
@@ -57,6 +70,7 @@ public class StandingsDataUtil {
     	    return true;    
     }
     
+    //EFFECTS : returns true if both teams has the same name; otherwise false.
     
     public static boolean validateStandingsDataForSameTeamNAme(String localClubField, String visitorClubField) {
         
@@ -64,12 +78,17 @@ public class StandingsDataUtil {
 
     }
     
+    //REQUIRES: fields musen't be a null value.
+    //EFFECTS : returns true if both teams has the same name; otherwise false.
+    
     private static boolean isTheSameName(String localTeamName, String visitorTeamName) {
     	return localTeamName.equals(visitorTeamName);
     }
     
 
+   
     
+    //EFFECTS : returns the number of the case based on if both fields has wrong data or just one of them.
     
     public static int validateStandingsDataForPoints(String localClubPointsField, String visitorClubPointsField) {
         if (!areValidPoints(localClubPointsField) && !areValidPoints(visitorClubPointsField)) {
@@ -83,6 +102,9 @@ public class StandingsDataUtil {
         return 0;
     }
 
+    //EFFECTS : returns true if the string match the required format,
+    //         (e.g has only two digits from 0 to 99); otherwise false.
+    
     private static boolean areValidPoints(String points) {
         String regex = "\\b(100|\\d{1,2})\\b";
         Pattern pattern = Pattern.compile(regex);

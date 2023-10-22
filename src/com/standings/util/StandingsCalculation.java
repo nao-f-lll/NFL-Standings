@@ -11,28 +11,42 @@ import com.standings.model.Team;
 
 public class StandingsCalculation {
 
-		public StandingsCalculation(ArrayList<Team> teams,  List<Game> games) {
+	private FootballTeamName[] nflTeams;
+	private String[] teamsNames;
 	
-			
-				FootballTeamName[] nflTeams = FootballTeamName.values();
-				String[] teamsNames = new String[6];
-				 
-				for (int i = 0; i <  nflTeams.length; i++) {
-					 teamsNames[i] = nflTeams[i].toString();
-	 	    	}
-		     
-				 
-				
-				doAllWork(teamsNames, teams, games);
-		
+		public StandingsCalculation(ArrayList<Team> teams,  List<Game> games) {
+		 
+			asignteamNames();
+			initializeTheCalculation(teamsNames, teams, games);
 		}
 		
-		public void doAllWork(String[] teamsNames, ArrayList<Team> teams,  List<Game> games) {
+		
+		  //MODIFIES : this
+		  //EFFECTS  : extract the teams names from FootballTeamName and puts them in an array.
+		
+		private void asignteamNames () {
+			nflTeams = FootballTeamName.values();
+			teamsNames = new String[6];
+			 
+			for (int i = 0; i <  nflTeams.length; i++) {
+				 teamsNames[i] = nflTeams[i].toString();
+ 	    	}
+		}
+		
+		  //MODIFIES : teams, games
+		  //EFFECTS  : generate and update the standings table data.
+		
+		private static void initializeTheCalculation(String[] teamsNames, ArrayList<Team> teams,  List<Game> games) {
 			
 			games.addAll(generateMatchesData(teamsNames)); 
 			updateStandings(teams, games);           
 			sortStandings(teams);
 		}
+		
+		  //REQUIRES : list musen't be empty.
+		  //MODIFIES : Team
+		  //EFFECTS  : sort the teams based on theirs fields in this order,
+		  //          (e.g wins, ties, losses, points)
 		
 		 public static void sortStandings(List<Team> teams) {
 
@@ -58,10 +72,16 @@ public class StandingsCalculation {
 		 
 		 
 		 
+		  //MODIFIES : Team
+		  //EFFECTS  : update the fields of a team based on the given game.
+		 
 		 public static void updateStandings(Team team, Game game) {
 			 updateStandingsBasedOnMatch(team, game);
 		 }
 	    
+		  //REQUIRES : list of teams and list of games musn't be null.
+		  //MODIFIES : Team
+		  //EFFECTS  : update the fields of a teams based on the given games.
 		 
 	    public static void updateStandings(List<Team> teams, List<Game> games) {
 	     	
@@ -71,7 +91,10 @@ public class StandingsCalculation {
 	    	        }    		  		
 	    	}		    
 	    }
-	        
+	    
+		  //MODIFIES : Team
+		  //EFFECTS  : if a team is present in a game, update it's fields based on the game data.
+		         
 	    private static void updateStandingsBasedOnMatch(Team team, Game game) {
 	    	
 	        if (team.getName().equals(game.getLocalTeam())) {
@@ -97,6 +120,9 @@ public class StandingsCalculation {
 	            team.incrementGamesPlayed();
 	        }
 	    }
+	    
+		  //MODIFIES : games
+		  //EFFECTS  : returns the games list filled with random matches data.		 
 	    
 	    private static List<Game> generateMatchesData(String[] teams) {
 	        List<Game> games = new ArrayList<>();

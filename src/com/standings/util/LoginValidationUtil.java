@@ -14,6 +14,10 @@ public class LoginValidationUtil {
 	public static final int ALL_CHECKS_PASSED = 6;
 	
 	
+    
+	//REQUIRES: userEmail and userPassword musen't be a null value.
+	//EFFECTS : returns the approppite number case based on the given case.
+	
     public static int validateLogin(HashMap<String, String> loginInfo,  String userEmail, String userPassword) {
     	 if (userEmail.isEmpty() && userPassword.isEmpty()) {
              return ALL_FIELDS_ARE_EMPTY;

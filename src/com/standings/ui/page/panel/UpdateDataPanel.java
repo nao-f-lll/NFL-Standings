@@ -273,7 +273,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			} else if(validationNumber == ALL_POINTS_ARE_INVALID || validationNumber == LOCAL_POINTS_ARE_INVALID || validationNumber == VISITOR_POINTS_ARE_INVALID) {
 				handleValidationNumber(validationNumber); 
 			} else {
-				
+				//////
 				new AddGameUtil(this.games,localClubField.getText(),visitorClubField.getText(),localClubPointsField.getText(),visitorClubPointsField.getText());		
 				for (Team team : this.teams) {
 					if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
@@ -286,9 +286,15 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				StandingsCalculation.sortStandings(this.teams);
 				standingsPanel.renderUpdatedStandings();		
 				resetFieldsAndWeek();
+				
+				////
 			}
 
+			
 		} else if (e.getSource() == updateButton) {
+			
+			validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(),visitorClubPointsField.getText());
+
 			
 			if (StandingsDataUtil.validateStandingsDataForEmpties(localClubField.getText(), visitorClubField.getText(), localClubPointsField.getText(),visitorClubPointsField.getText())) {
 				handleValidationNumber(SOME_OR_ALL_FIELDS_ARE_EMPTY);
@@ -296,23 +302,36 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				handleValidationNumber(WRONG_TEAM_NAME); 
 			} else if (StandingsDataUtil.validateStandingsDataForSameTeamNAme(localClubField.getText(), visitorClubField.getText())) {
 				handleValidationNumber(THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED); 
-			} else  {
-				validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(),visitorClubPointsField.getText());
+			} else if (validationNumber == ALL_POINTS_ARE_INVALID || validationNumber == LOCAL_POINTS_ARE_INVALID || validationNumber == VISITOR_POINTS_ARE_INVALID)  {
 				handleValidationNumber(validationNumber); 
+			} else {
+				
+				for (int i = 0; i < games.size(); i++) {
+					
+					if (games.get(i).getLocalTeam().equals(localClubField.getText()) && games.get(i).getVisitorTeam().equals(visitorClubField.getText())) {
+						games.get(i).setLocalScore(Integer.parseInt(localClubPointsField.getText()));
+						games.get(i).setVisitorScore(Integer.parseInt(visitorClubPointsField.getText()));
+						
+						for (Team team : this.teams) {
+							if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
+								StandingsCalculation.updateStandings(team, games.get(i));  
+								
+							}
+						}
+					} 
+				}
+				
+				StandingsCalculation.sortStandings(this.teams);
+				standingsPanel.renderUpdatedStandings();			
+				resetFieldsAndWeek();
 			}
-			
-			/// logic to add
-			resetFieldsAndWeek();
+	
 			
 		} else if (e.getSource() == cancelButton) {
 			
 			resetFieldsAndWeek();
-			
-
 		}
 	}
-	
-	
 	
 	public void handleValidationNumber(int validationNumber) {
 		
@@ -401,7 +420,5 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         }
         weekComboBox.setModel(comboWeekModel);
 	}
-	
- 
- 
+
 }

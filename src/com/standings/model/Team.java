@@ -20,55 +20,35 @@ public class Team {
 	        this.ties = 0;
 	        this.logo = logo;
 	    }
-
-	    public String getName() {
-	        return name;
-	    }
 	    
-	    public ImageIcon getLogo() {
-	        return logo;
-	    }
-
-	    public int getPoints() {
-	        return points;
-	    }
+	    // getters
 	    
-	    public int getGamesPlayed() {
-	        return gamesPlayed;
-	    }
+	    public String getName() { return name; }
 	    
-	    public int getWins() {
-	    	return wins;
-	    }
+	    public ImageIcon getLogo() { return logo; }
+
+	    public int getPoints() { return points; }
 	    
-	    public int getTies() {
-	    	return ties;
-	    }
+	    public int getGamesPlayed() { return gamesPlayed; }
 	    
-	    public int getLosses() {
-	    	return losses;
-	    }
-
-
-	    public void setPoints(int points) {
-	        this.points = points;
-	    }
-
-	    public void incrementWins() {
-	        wins++;
-	    }
-
-	    public void incrementLosses() {
-	        losses++;
-	    }
-
-	    public void incrementTies() {
-	        ties++;
-	    }
+	    public int getWins() { return wins; }
 	    
-	    public void incrementGamesPlayed() {
-	    	gamesPlayed++;
-	    }
+	    public int getTies() { return ties; }
+	    
+	    public int getLosses() { return losses; }
+
+
+	 // setters
+	    
+	    public void setPoints(int points) { this.points = points; }
+
+	    public void incrementWins() { wins++; }
+
+	    public void incrementLosses() { losses++; }
+
+	    public void incrementTies() { ties++; }
+	    
+	    public void incrementGamesPlayed() { gamesPlayed++; }
 
 	    
  

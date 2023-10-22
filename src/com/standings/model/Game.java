@@ -4,8 +4,8 @@ public class Game {
 	
 	 private final String localTeam;
 	    private final String visitorTeam;
-	    private final int localScore;
-	    private final int visitorScore;
+	    private int localScore;
+	    private int visitorScore;
 
 	    public Game(String localTeam, String visitorTeam, int localScore, int visitorScore) {
 	    	
@@ -16,20 +16,20 @@ public class Game {
 	        
 	    }
 
-	    public String getLocalTeam() {
-	        return localTeam;
-	    }
+	    // getters
+	    
+	    public String getLocalTeam() { return localTeam; }
 
-	    public String getVisitorTeam() {
-	        return visitorTeam;
-	    }
+	    public String getVisitorTeam() { return visitorTeam; }
 
-	    public int getLocalScore() {
-	        return localScore;
-	    }
+	    public int getLocalScore() { return localScore; }
 
-	    public int getVisitorScore() {
-	        return visitorScore;
-	    }
+	    public int getVisitorScore() { return visitorScore; }
+	    
+	    // setters
+
+	    public void setLocalScore(int localScore)     {  this.localScore = localScore; }
+
+	    public void setVisitorScore(int visitorScore) {  this.visitorScore = visitorScore;}
 
 }
