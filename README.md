@@ -1,7 +1,43 @@
 
-| Windows                                                                                                       |  Linux                           | Docker | Stable Release| Preview Release |
-|------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|-------|-----| ----------|
-| [![Static Badge](https://img.shields.io/badge/Stable-Download-0078D4?logo=Windows)](https://github.com/nao-f-lll/NFL-Standings/releases/download/v0.1-beta/standings_0.1_x64_windows_.exe) |  [![Static Badge](https://img.shields.io/badge/Stable-Download-FCC624?logo=Linux)](https://github.com/nao-f-lll/NFL-Standings/releases/download/v0.3-beta/Standings_0.3_x64_linux_portable.tar) |    [![Static Badge](https://img.shields.io/badge/Docker-Download-2496ED?logo=Docker)](https://hub.docker.com/r/naooff/nfl-standings) |      [![Static Badge](https://img.shields.io/badge/Stable-Release-21B352?logo=sellfy)]( )           |            [![Static Badge](https://img.shields.io/badge/Preview-Release-DA552F?logo=producthunt)](https://github.com/nao-f-lll/NFL-Standings/releases/tag/v0.3-beta)                          |
+<p align="center">
+  <table>
+    <tr>
+      <th>Windows</th>
+      <th>Linux</th>
+      <th>Docker</th>
+      <th>Stable Release</th>
+      <th>Preview Release</th>
+    </tr>
+    <tr>
+      <td>
+        <a href="https://github.com/nao-f-lll/NFL-Standings/releases/download/v0.1-beta/standings_0.1_x64_windows_.exe">
+          <img src="https://img.shields.io/badge/Stable-Download-0078D4?logo=Windows">
+        </a>
+      </td>
+      <td>
+        <a href="https://github.com/nao-f-lll/NFL-Standings/releases/download/v0.3-beta/Standings_0.3_x64_linux_portable.tar">
+          <img src="https://img.shields.io/badge/Stable-Download-FCC624?logo=Linux">
+        </a>
+      </td>
+      <td>
+        <a href="https://hub.docker.com/r/naooff/nfl-standings">
+          <img src="https://img.shields.io/badge/Docker-Download-2496ED?logo=Docker">
+        </a>
+      </td>
+      <td>
+        <a href="#">
+          <img src="https://img.shields.io/badge/Stable-Release-21B352?logo=sellfy">
+        </a>
+      </td>
+      <td>
+        <a href="https://github.com/nao-f-lll/NFL-Standings/releases/tag/v0.3-beta">
+          <img src="https://img.shields.io/badge/Preview-Release-DA552F?logo=producthunt">
+        </a>
+      </td>
+    </tr>
+  </table>
+</p>
+
 
 
 <p align="center">
