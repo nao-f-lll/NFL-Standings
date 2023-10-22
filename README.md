@@ -1,17 +1,18 @@
+
+<h1 align="center">  NFL Standings </h1>
+<p align="center">
+  <img src=".github/readme-images/app-icon.png" alt="app icon" width="200">
+</p>
+
  | Windows                                                                                                       |  Linux                           | Docker | Stable Release| Preview Release |
 |------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|-------|-----| ----------|
 | [![Static Badge](https://img.shields.io/badge/Stable-Download-0078D4?logo=Windows)](https://github.com/nao-f-lll/NFL-Standings/releases/download/v0.1-beta/standings_0.1_x64_windows_.exe) |  [![Static Badge](https://img.shields.io/badge/Stable-Download-FCC624?logo=Linux)](https://github.com/nao-f-lll/NFL-Standings/releases/download/v0.3-beta/Standings_0.3_x64_linux_portable.tar) |    [![Static Badge](https://img.shields.io/badge/Docker-Download-2496ED?logo=Docker)](https://hub.docker.com/r/naooff/nfl-standings) |      [![Static Badge](https://img.shields.io/badge/Stable-Release-21B352?logo=sellfy)]( )           |            [![Static Badge](https://img.shields.io/badge/Preview-Release-DA552F?logo=producthunt)](https://github.com/nao-f-lll/NFL-Standings/releases/tag/v0.3-beta)       
 
 
-<p align="center">
-  <img src=".github/readme-images/app-icon.png" alt="app icon" width="200">
+<p>
+El Gestor de Clasificación de la NFL es una aplicación de escritorio diseñada para simplificar la gestión y visualización de la clasificación de la NFL y listas de equipos.  
 </p>
 
-
-
-#  NFL Standings
-
-El Gestor de Clasificación de la NFL es una aplicación de escritorio diseñada para simplificar la gestión y visualización de la clasificación de la NFL y listas de equipos.  Ofrece una variedad de características clave para ayudarte a agilizar la gestión de datos de la NFL.
 
 ## Características Clave
 
