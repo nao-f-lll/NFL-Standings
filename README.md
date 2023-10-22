@@ -1,3 +1,8 @@
+| Stable                                                                                                       |  Preview Release                                         |
+|------------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
+| [![latest preview build](image)]() |  [![Stable](image)]() |
+
+
 # NFL Standings
 
 El Gestor de Clasificación de la NFL es una aplicación de escritorio diseñada para simplificar la gestión y visualización de la clasificación de la NFL y listas de equipos.  Ofrece una variedad de características clave para ayudarte a agilizar la gestión de datos de la NFL.
