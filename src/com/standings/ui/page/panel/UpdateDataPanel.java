@@ -15,6 +15,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,7 +26,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import com.standings.model.Game;
 import com.standings.model.ParentFrame;
 import com.standings.model.Team;
@@ -77,6 +77,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     
     private JLabel errorMessageForLocalPointsField;
     private JLabel errorMessageForVisitorPointsField;
+    /// need revise
 	private List<Game> games;
 	private ArrayList<Team> teams;
 	private StandingsPanel standingsPanel;
@@ -324,6 +325,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				StandingsCalculation.sortStandings(this.teams);
 				standingsPanel.renderUpdatedStandings();			
 				resetFieldsAndWeek();
+				/// add fedback to the user
 			}
 	
 			
@@ -346,14 +348,18 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			userDialog("You have inserted the same name for both teams, see the Teams panel for reference ", " Same name for both Teams");
 			break;
 		case ALL_POINTS_ARE_INVALID:
-			errorMessageForVisitorPointsField.setText("Incorrect set of points");
-			errorMessageForLocalPointsField.setText("Incorrect set of points");
+			localClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
+			visitorClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
+			userDialog("Incorrect set of points, points must be a number in this range (0 to 99)","error");
+			
 			break;
-		case LOCAL_POINTS_ARE_INVALID:
-			errorMessageForLocalPointsField.setText("Incorrect set of points");
+		case LOCAL_POINTS_ARE_INVALID:	
+			localClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
+			userDialog("Incorrect set of points, points must be a number in this range (0 to 99)","Fields Requirement");
 			break;
 		case VISITOR_POINTS_ARE_INVALID:
-			errorMessageForVisitorPointsField.setText("Incorrect set of points");
+			visitorClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
+			userDialog("Incorrect set of points, points must be a number in this range (0 to 99)","Fields Requirement");
 			break;
 		default :
 		}
@@ -366,7 +372,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			 localPoints.addFocusListener(new FocusListener() {
 				    @Override
 				    public void focusGained(FocusEvent e) {
-				    	errorMessageForLocalPointsField.setText("");
+				    	localClubPointsField.setBorder(BorderFactory.createLineBorder(Color.black));
+				    	visitorClubPointsField.setBorder(BorderFactory.createLineBorder(Color.black));
 				    }
 
 				    @Override
@@ -378,7 +385,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			 	visitorPoints.addFocusListener(new FocusListener() {
 				    @Override
 				    public void focusGained(FocusEvent e) {
-				    	errorMessageForVisitorPointsField.setText("");
+				    	visitorClubPointsField.setBorder(BorderFactory.createLineBorder(Color.black));
+				    	localClubPointsField.setBorder(BorderFactory.createLineBorder(Color.black));
 				    }
 
 				    @Override
@@ -399,7 +407,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	        JPanel buttonPanel = (JPanel)fieldRequirementPane.getComponent(1);
 	        
 	        JButton accepetButton = (JButton)buttonPanel.getComponent(0);
-	        accepetButton.setText("Accepet");
+	        accepetButton.setText("Accept");
 	        accepetButton.setFocusable(false);
 	        accepetButton.setBackground(Color.LIGHT_GRAY);
 	        

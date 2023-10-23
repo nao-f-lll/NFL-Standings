@@ -1,7 +1,6 @@
 package com.standings.ui.page.panel;
 
 import java.awt.Font;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -60,6 +59,8 @@ public class TeamsPanel extends JPanel  {
     private JLabel bengalsCityLabel;
     private JLabel bengalsFundiationLabel;
     
+
+    
     public TeamsPanel() {
     	
     	initializeNflLeagueLabel();
@@ -69,16 +70,18 @@ public class TeamsPanel extends JPanel  {
     }
     
     private void initializeNflLeagueLabel() {
-    	nflLeagueLabel = new JLabel("NFL ");
+    	nflLeagueLabel = new JLabel("NFL Category");
         nflLeagueLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-        nflLeagueLabel.setBounds(23, 282, 148, 54);
+        nflLeagueLabel.setBounds(23, 55, 148, 54);
+        //nflLeagueLabel.setBackground(Color.WHITE);
         this.add(nflLeagueLabel);
     }
     
     private void initializeAfcLeagueLabel() {
-        afcLeagueLabel = new JLabel("AFC");
-        afcLeagueLabel.setFont(new Font("Dialog", Font.BOLD, 16));
-        afcLeagueLabel.setBounds(23, 582, 148, 54);
+        afcLeagueLabel = new JLabel("AFC Category");
+        afcLeagueLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+        afcLeagueLabel.setBounds(23, 370, 148, 54);
+       // nflLeagueLabel.setBackground(Color.WHITE);
         this.add(afcLeagueLabel);
 	}
     
@@ -107,7 +110,7 @@ public class TeamsPanel extends JPanel  {
         
         cowboysStadiumLabel = new JLabel("AT&T Stadium");
         cowboysStadiumLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        cowboysStadiumLabel.setBounds(305, 234, 148, 54);
+        cowboysStadiumLabel.setBounds(305, 234, 300, 54);
         this.add(cowboysStadiumLabel);
         
         cowboysFundiationLabel = new JLabel("1960");
@@ -115,11 +118,13 @@ public class TeamsPanel extends JPanel  {
         cowboysFundiationLabel.setBounds(305, 282, 148, 54);
         this.add(cowboysFundiationLabel);
         
+        
         cowboysCityLabel = new JLabel("Texas");
         cowboysCityLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
         cowboysCityLabel.setBounds(305, 323, 148, 54);
         this.add(cowboysCityLabel);
-  
+        
+
     }
     
     private void initializeCardinals() {

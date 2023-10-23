@@ -286,7 +286,13 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+		char keyChar = e.getKeyChar();
+		if (keyChar != KeyEvent.VK_ENTER) {
+			errorMessageForPassword.setText("");
+			errorMessageForEmail.setText("");
+			errorMessageForFullName.setText("");
+           
+        }
 	}
 
 
@@ -420,7 +426,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
         JPanel buttonPanel = (JPanel)passwordRequirementPane.getComponent(1);
         
         JButton accepetButton = (JButton)buttonPanel.getComponent(0);
-        accepetButton.setText("Accepet");
+        accepetButton.setText("Accept");
         accepetButton.setFocusable(false);
         accepetButton.setBackground(Color.LIGHT_GRAY);
         

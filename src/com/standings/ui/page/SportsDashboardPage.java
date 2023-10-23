@@ -41,6 +41,9 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
 	private ArrayList<Team> teams;
 	private List<Game> games;
     
+	
+	
+
     
     public SportsDashboardPage() {
         setTitle("Sports Dashboard");
@@ -125,7 +128,10 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
        panelButton.add(goToStandingButton);
        panelButton.add(goToTeamsButton);
        panelButton.add(goToUpdateDataButton);
-          
+       
+       
+ 
+       
              
              getContentPane().setLayout(new BorderLayout());
              getContentPane().add(mainPanel, BorderLayout.CENTER);
@@ -133,9 +139,11 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
     }
 
     private void setSizeAndCenter() {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
-        setSize(screenSize.width, screenSize.height);
+        //Toolkit toolkit = Toolkit.getDefaultToolkit();
+        //Dimension screenSize = toolkit.getScreenSize();
+        //setSize(screenSize.width, screenSize.height);
+        setSize(1538, 850);
+        //setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
         setLocationRelativeTo(null);
     }
 

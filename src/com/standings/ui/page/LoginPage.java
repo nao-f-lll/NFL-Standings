@@ -76,6 +76,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	    Toolkit tool = getToolkit();
 	    Dimension screenSize = tool.getScreenSize();
 	    this.setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
+	   
     }
 	
 
@@ -113,7 +114,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	 }
 	 
 	 private void initialCopyRights() {
-			copyRights = new JLabel("<html> Copyright © 2023 NFL.<br> all rights reserved </html>");
+			copyRights = new JLabel("<html> Copyright © 2023 NFL.<br> All rights reserved </html>");
 			copyRights.setBounds(121,255,120,40);
 		    copyRights.setFont(new Font(null, Font.PLAIN,10));
 		    leftIneerPanel.add(copyRights);
@@ -224,7 +225,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		
 		errorMessageForPassword = new JLabel();
 		errorMessageForPassword.setForeground(Color.RED);
-		errorMessageForPassword.setBounds(125, 164, 111, 25);
+		errorMessageForPassword.setBounds(136, 164, 111, 25);
 		rightInnerPanel.add(errorMessageForPassword);
 	}
 		 
@@ -242,7 +243,12 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+		char keyChar = e.getKeyChar();
+		if (keyChar != KeyEvent.VK_ENTER) {
+			errorMessageForPassword.setText("");
+			  errorMessageForEmail.setText("");
+           
+        }
 	}
 
 	@Override
