@@ -3,7 +3,7 @@
 <p align="center">
  <!-- <img src=".github/readme-images/app-icon.png" alt="app icon" width="200"> -->
 
-   <img src="https://github.com/nao-f-lll/nao-f-lll.github.io/blob/main/imagenes/logos/nofondonegro.png?raw=true" alt="app icon" width="200">
+   <img src="https://github.com/nao-f-lll/nao-f-lll.github.io/blob/main/imagenes/logos/nofondo.png?raw=true" alt="app icon" width="200">
 </p>
 
 
