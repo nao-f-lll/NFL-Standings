@@ -63,7 +63,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	
 	
 	private void initializeFrameGraphics(HashMap<String, String> loginInfo) {
-		this.setTitle("Login");	
+		this.setTitle("Iniciar sesión");	
 		this.setLocationRelativeTo(null);	
 		this.loginInfo = loginInfo;
 		this.setResizable(false);
@@ -133,13 +133,13 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	 }
 	 
 	 private void initializeLabeles() {
-			loginLabel = new JLabel("LOGIN");
+			loginLabel = new JLabel("Iniciar sesión");
 			loginLabel.setVerticalAlignment(SwingConstants.TOP);
-	        loginLabel.setBounds(66,27,111,42);
-	        loginLabel.setFont(new Font(null, Font.PLAIN, 35));
+	        loginLabel.setBounds(45,22,184,42);
+	        loginLabel.setFont(new Font("Dialog", Font.PLAIN, 30));
 	        rightInnerPanel.add(loginLabel);
 	            
-		    creatAccountLabel = new JLabel("Create an account?");
+		    creatAccountLabel = new JLabel("¿Crear una cuenta?");
 		    creatAccountLabel.setBounds(24, 310, 159, 15);
 		    rightInnerPanel.add(creatAccountLabel);
 	 }
@@ -158,7 +158,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	 
 	 
 	 private void initializePassword() {
-		    passwordLabel = new JLabel("Password");
+		    passwordLabel = new JLabel("Contraseña");
 		    passwordLabel.setBounds(34,163,70,15);
 		    rightInnerPanel.add(passwordLabel);    
 		    passwordField = new JPasswordField();
@@ -198,14 +198,14 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	}
 	 
 	 private void initialzeButtons() {
-		    loginButton = new JButton("Login");
-			loginButton.setBounds(34, 227, 100, 25);
+		    loginButton = new JButton("Iniciar sesión");
+			loginButton.setBounds(34, 227, 111, 25);
 	        loginButton.setFocusable(false);
 	        loginButton.addActionListener(this);
 	        loginButton.setBackground(Color.lightGray);
 	        rightInnerPanel.add(loginButton);
 		    
-	        signUpButton = new JButton("Sign Up");
+	        signUpButton = new JButton("Regístrate");
 			signUpButton.setBounds(201, 305, 100, 25);
 	        signUpButton.setFocusable(false);
 	        signUpButton.addActionListener(this);

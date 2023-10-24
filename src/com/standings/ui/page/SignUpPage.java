@@ -61,6 +61,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	
 	
 	public SignUpPage(HashMap<String, String> loginInfo) {
+		setTitle("Registrarse");
 		
 		initializFrameGraphics(loginInfo);
 		initializePanelsGraphics();
@@ -112,8 +113,8 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
     }
     
    private void initializeLoginLabel() {
-		loginLabel = new JLabel("SIGN UP");
-		loginLabel.setBounds(66, 27, 144, 42);
+		loginLabel = new JLabel("Rigistrarse");
+		loginLabel.setBounds(60, 23, 188, 42);
 		loginLabel.setVerticalAlignment(SwingConstants.TOP);
 		loginLabel.setFont(new Font(null, Font.PLAIN, 35));
 		rightInnerPanel.add(loginLabel);
@@ -133,7 +134,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
    }
    
    private void initializePassword() {
-	    passwordLabel = new JLabel("Password");
+	    passwordLabel = new JLabel("Contraseña");
 	    passwordLabel.setBounds(34, 232, 70, 15);
 	    rightInnerPanel.add(passwordLabel);
 	    passwordField = new JPasswordField();
@@ -145,7 +146,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 
    
    private void initializeFullName() {
-		fullNameLabel = new JLabel("Full Name");
+		fullNameLabel = new JLabel("Nombre");
 		fullNameLabel.setBounds(34, 109, 70, 13);
 		rightInnerPanel.add(fullNameLabel);
 		
@@ -199,7 +200,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
    }
    
    private void initializeCreatAcountLabel() {
-	    creatAccountLabel = new JLabel("Already have an account?");
+	    creatAccountLabel = new JLabel("¿Ya tienes una cuenta?");
 	    creatAccountLabel.setBounds(21, 379, 159, 15);
 	    rightInnerPanel.add(creatAccountLabel);
   }
@@ -212,8 +213,8 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
    }
    
    private void initializeLoginButton() {	
-		loginButton = new JButton("Login");
-		loginButton.setBounds(194, 374, 100, 25);
+		loginButton = new JButton("Inicia sesión");
+		loginButton.setBounds(183, 374, 111, 25);
 		loginButton.setFocusable(false);
 		loginButton.setBackground(Color.LIGHT_GRAY);
 		rightInnerPanel.add(loginButton);
@@ -221,7 +222,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
    }
    
    private void initializeSignUpButton() {
-       signUpButton = new JButton("Sign Up");
+       signUpButton = new JButton("Regístrate");
        signUpButton.setBounds(34, 304, 100, 25);
        signUpButton.addActionListener(this);
        signUpButton.setFocusable(false); 

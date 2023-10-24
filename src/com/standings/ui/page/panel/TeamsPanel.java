@@ -70,18 +70,16 @@ public class TeamsPanel extends JPanel  {
     }
     
     private void initializeNflLeagueLabel() {
-    	nflLeagueLabel = new JLabel("NFL Category");
+    	nflLeagueLabel = new JLabel("Categoría NFL");
         nflLeagueLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
         nflLeagueLabel.setBounds(23, 55, 148, 54);
-        //nflLeagueLabel.setBackground(Color.WHITE);
         this.add(nflLeagueLabel);
     }
     
     private void initializeAfcLeagueLabel() {
-        afcLeagueLabel = new JLabel("AFC Category");
+        afcLeagueLabel = new JLabel("Categoría AFC");
         afcLeagueLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-        afcLeagueLabel.setBounds(23, 370, 148, 54);
-       // nflLeagueLabel.setBackground(Color.WHITE);
+        afcLeagueLabel.setBounds(23, 410, 148, 54);  
         this.add(afcLeagueLabel);
 	}
     
@@ -192,27 +190,27 @@ public class TeamsPanel extends JPanel  {
         raidersIconLabel = new JLabel("");
         raidersIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
         raidersIconLabel.setIcon(raidersIcon);
-        raidersIconLabel.setBounds(107, 397, 210, 125);
+        raidersIconLabel.setBounds(107, 457, 210, 125); 
         this.add(raidersIconLabel);       
         
         raidersNameLabel = new JLabel("Raiders");
         raidersNameLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
-        raidersNameLabel.setBounds(329, 431, 100, 45);
+        raidersNameLabel.setBounds(329, 491, 100, 45); 
         this.add(raidersNameLabel);
         
         raidersStadiumLabel = new JLabel("Vegas Stadium");
         raidersStadiumLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        raidersStadiumLabel.setBounds(329, 521, 148, 54);
+        raidersStadiumLabel.setBounds(329, 581, 148, 54); 
         this.add(raidersStadiumLabel);
         
         raidersFundiationLabel = new JLabel("1959");
         raidersFundiationLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        raidersFundiationLabel.setBounds(329, 572, 148, 54);
+        raidersFundiationLabel.setBounds(329, 632, 148, 54); 
         this.add(raidersFundiationLabel);
         
         raidersCityLabel = new JLabel("Las Vegas");
         raidersCityLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        raidersCityLabel.setBounds(329, 615, 148, 54);
+        raidersCityLabel.setBounds(329, 675, 148, 54); 
         this.add(raidersCityLabel);
     }
  
@@ -221,29 +219,29 @@ public class TeamsPanel extends JPanel  {
         bengalsIconLabel = new JLabel("");
         bengalsIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
         bengalsIconLabel.setIcon(bengalsIcon);
-        bengalsIconLabel.setBounds(961, 383, 210, 125);
+        bengalsIconLabel.setBounds(961, 457, 210, 125); 
         this.add(bengalsIconLabel);
         
         
         bengalsNameLabel = new JLabel("Bengals");
         bengalsNameLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
-        bengalsNameLabel.setBounds(1183, 433, 100, 45);
+        bengalsNameLabel.setBounds(1183, 491, 100, 45); 
         this.add(bengalsNameLabel);
         
         
         bengalsStadiumLabel = new JLabel("Paycor Stadium");
         bengalsStadiumLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        bengalsStadiumLabel.setBounds(1183, 521, 148, 54);
+        bengalsStadiumLabel.setBounds(1183, 581, 148, 54); 
         this.add(bengalsStadiumLabel);
         
         bengalsFundiationLabel = new JLabel("1920");
         bengalsFundiationLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        bengalsFundiationLabel.setBounds(1183, 571, 148, 54);
+        bengalsFundiationLabel.setBounds(1183, 632, 148, 54); 
         this.add(bengalsFundiationLabel);
         
         bengalsCityLabel = new JLabel("Cincinnati");
         bengalsCityLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        bengalsCityLabel.setBounds(1183, 615, 148, 54);
+        bengalsCityLabel.setBounds(1183, 675, 148, 54); 
         this.add(bengalsCityLabel); 
     }
     
@@ -252,29 +250,29 @@ public class TeamsPanel extends JPanel  {
          chiefsIconLabel = new JLabel("");
          chiefsIconLabel.setHorizontalAlignment(SwingConstants.CENTER);
          chiefsIconLabel.setIcon(chiefsIcon);
-         chiefsIconLabel.setBounds(533, 383, 210, 125);
+         chiefsIconLabel.setBounds(533, 457, 210, 125); 
          this.add(chiefsIconLabel);
          
          
          chiefsNameLabel = new JLabel("Chiefs");
          chiefsNameLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
-         chiefsNameLabel.setBounds(740, 428, 100, 45);
+         chiefsNameLabel.setBounds(740, 491, 100, 45); 
          this.add(chiefsNameLabel);
          
          
          chiefsStadiumLabel = new JLabel("Arrowhead Stadium");
          chiefsStadiumLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-         chiefsStadiumLabel.setBounds(740, 520, 148, 54);
+         chiefsStadiumLabel.setBounds(740, 581, 148, 54); 
          this.add(chiefsStadiumLabel);
          
          chiefsFundiationLabel = new JLabel("1949");
          chiefsFundiationLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-         chiefsFundiationLabel.setBounds(740, 571, 148, 54);
+         chiefsFundiationLabel.setBounds(740, 632, 148, 54); 
          this.add(chiefsFundiationLabel);
          
          chiefsCityLabel = new JLabel("Kansas City");
          chiefsCityLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-         chiefsCityLabel.setBounds(740, 615, 148, 54);
+         chiefsCityLabel.setBounds(740, 675, 148, 54); 
          this.add(chiefsCityLabel);
     }
 }

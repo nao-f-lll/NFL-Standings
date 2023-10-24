@@ -49,9 +49,17 @@ public class Team {
 	    public void incrementTies() { ties++; }
 	    
 	    public void incrementGamesPlayed() { gamesPlayed++; }
-
 	    
- 
+	    
+	    public void decrementWins() { wins--; }
+	    
+	    public void decrementLosses() { losses--; }
+	    
+	    public void decrementTies() { ties--; }
+	    
+	    public void decrementGamesPlayed() { gamesPlayed--; }
+
+
 }
 
 

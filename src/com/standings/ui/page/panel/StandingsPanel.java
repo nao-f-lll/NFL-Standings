@@ -74,7 +74,7 @@ public class StandingsPanel extends JPanel  {
          							};
             
          	columns =	new String[] {
-         				             		"Team", "Match Played", "Wins", "Losses", "Ties", "Points"
+         				             		"Equipo", "Partidos Jugados", "Victorias", "Derrotas", "Empates", "Puntos"
          				             	};										
 
            

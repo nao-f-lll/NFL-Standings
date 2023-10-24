@@ -38,6 +38,9 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 
 	private static final long serialVersionUID = -3261993617585437616L;
 	
+	private final static String NEW_STANDINGS_TYPE = "New entry";
+	private final static String EXISTING_STANDINGS_TYPE = "Exisitng entry";
+	
     private JLabel localClubLabel;
     private JLabel localClubPointsLabel;
     private JTextField localClubField;
@@ -91,7 +94,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     	
     	comboWeekModel = new DefaultComboBoxModel<>();	
     	for (int i = 1; i < 11; i++) {
-    		comboWeekModel.addElement("Week " + i);
+    		comboWeekModel.addElement("Semana " + i);
     	}
     	
         weekComboBox = new JComboBox<>(comboWeekModel);
@@ -99,7 +102,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         weekComboBox.setBounds(1033, 130, 114, 45);
         this.add(weekComboBox);
         
-        localClubLabel = new JLabel("Local Club");
+        localClubLabel = new JLabel("Equipo Local");
         localClubLabel.setBounds(829, 215, 103, 37);
         this.add(localClubLabel);
         
@@ -110,7 +113,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         
         
         
-        visitorClubLabel = new JLabel("Visitor Club");
+        visitorClubLabel = new JLabel("Equipo Visitante");
         visitorClubLabel.setBounds(829, 355, 117, 25);
         this.add(visitorClubLabel);
         
@@ -120,12 +123,12 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         this.add(visitorClubField);
         
         
-        localClubPointsLabel = new JLabel("Points");
+        localClubPointsLabel = new JLabel("Puntos");
         localClubPointsLabel.setBounds(1250, 215, 71, 37);
         this.add(localClubPointsLabel);
         
         
-        visitorClubPointsLabel = new JLabel("Points");
+        visitorClubPointsLabel = new JLabel("Puntos");
         visitorClubPointsLabel.setBounds(1250, 352, 84, 31);
         this.add(visitorClubPointsLabel);
         
@@ -142,21 +145,21 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         this.add(visitorClubPointsField);
         fieldFocusListener(null,visitorClubPointsField);
         
-        submitButton = new JButton("Submit");
+        submitButton = new JButton("Guardar");
         submitButton.setBounds(778, 535, 130, 45);
         submitButton.setFocusable(false);
         submitButton.setBackground(Color.lightGray);
         submitButton.addActionListener(this);
         this.add(submitButton);
         
-        updateButton = new JButton("Update");
+        updateButton = new JButton("Actualizar");
         updateButton.setBounds(1001, 535, 130, 45);
         updateButton.setFocusable(false);
         updateButton.setBackground(Color.lightGray);
         updateButton.addActionListener(this);
         this.add(updateButton);
         
-        cancelButton = new JButton("Cancel");
+        cancelButton = new JButton("Cancelar");
         cancelButton.setBounds(1222, 535, 130, 45);
         cancelButton.setFocusable(false);
         cancelButton.setBackground(Color.lightGray);
@@ -174,7 +177,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         
         
         
-        titleInstructionsLabel = new JLabel("Instruction for Inserting/Updating Match Data");
+        titleInstructionsLabel = new JLabel("Instrucciones para insertar/actualizar los datos");
         titleInstructionsLabel.setIcon(new ImageIcon(SportsDashboardPage.class.getResource("/images/instructionBlue.png")));
         titleInstructionsLabel.setForeground(new Color(0, 0, 0));
         titleInstructionsLabel.setBounds(49, 10, 536, 105);
@@ -187,12 +190,12 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
                 "<html>" +
                 "<body style='width: 500px;'>" +
                 "<ul>" +
-                "<li>Select the week of the match from 'Week 1' to 'Week 10' in the drop-down.</li> <br>" +
-                "<li>Enter the local and visitor club names along with their points..</li> <br>" +
-                "<li>Click 'Submit' to save match results or 'Update' to modify data.</li> <br>"+
-                "<li>'Cancel' discards changes.</li> <br>" + 
+                "<li>Selecciona la semana del partido desde 'Semana 1' hasta 'Semana 10' en el desplegable.</li> <br>" +
+                "<li>Ingrese los nombres de los clubes locales y visitantes junto con sus puntos.</li> <br>" +
+                "<li>Haz click en 'Guardar' para guardar los resultados del partido o 'Actualizar' para <br> actualizar los datos</li> <br>"+
+                "<li>'Cancelar' para descartar los cambios</li> " + 
                 "</ul>" +         
-                "<p style='text-indent: 30px;'>    Remember to save your input. Thank you for helping maintain match records.</p>" +     
+                "<p style='text-indent: 30px;'>Recuerde guardar su entrada. Gracias por ayudar a mantener los resultados </p> <p style='text-indent: 30px;'>  de los partidos</p>" +     
                 "</body>" +
                 "</html>"
             );
@@ -217,7 +220,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		instructionPanel.add(nflIconLabel);
         
         
-		termsOfUse = new JLabel("<html><p style='text-indent: 10px; white-space: nowrap;'><a href=\"https://nao-f-lll.github.io/paginas/terminos.html\">Terms of use</a></p></html>");
+		termsOfUse = new JLabel("<html><p style='text-indent: 10px; white-space: nowrap;'><a href=\"https://nao-f-lll.github.io/paginas/terminos.html\">Términos de uso</a></p></html>");
 		termsOfUse.setBounds(235, 630, 250, 40);
 		termsOfUse.setFont(new Font("Dialog", Font.PLAIN, 13));
 		instructionPanel.add(termsOfUse);
@@ -279,7 +282,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				for (Team team : this.teams) {
 					if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
 						int sizeOfListOfGames = games.size() - 1;
-						StandingsCalculation.updateStandings(team, games.get(sizeOfListOfGames));  
+						StandingsCalculation.updateStandings(team, games.get(sizeOfListOfGames), NEW_STANDINGS_TYPE);  
 						
 					}
 				}
@@ -310,12 +313,17 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				for (int i = 0; i < games.size(); i++) {
 					
 					if (games.get(i).getLocalTeam().equals(localClubField.getText()) && games.get(i).getVisitorTeam().equals(visitorClubField.getText())) {
+							
+						
+						games.get(i).setOldLocalScore(games.get(i).getLocalScore());
+						games.get(i).setOldVisitorScore(games.get(i).getVisitorScore());
+						
 						games.get(i).setLocalScore(Integer.parseInt(localClubPointsField.getText()));
 						games.get(i).setVisitorScore(Integer.parseInt(visitorClubPointsField.getText()));
 						
 						for (Team team : this.teams) {
 							if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
-								StandingsCalculation.updateStandings(team, games.get(i));  
+								StandingsCalculation.updateStandings(team, games.get(i), EXISTING_STANDINGS_TYPE);  
 								
 							}
 						}
@@ -424,7 +432,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		
 		comboWeekModel = new DefaultComboBoxModel<>();
         for (int i = 1; i < 11; i++) {
-            comboWeekModel.addElement("Week " + i);
+            comboWeekModel.addElement("Semana " + i);
         }
         weekComboBox.setModel(comboWeekModel);
 	}

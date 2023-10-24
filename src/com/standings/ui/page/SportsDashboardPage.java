@@ -40,13 +40,9 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
     
 	private ArrayList<Team> teams;
 	private List<Game> games;
-    
-	
-	
-
-    
+  
     public SportsDashboardPage() {
-        setTitle("Sports Dashboard");
+        setTitle("Panel administrativo");
         setResizable(false);
         setSizeAndCenter();
 
@@ -89,30 +85,30 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
        scoresPanel.add(panelButton);
  
                
-       goToScoresButton = new JButton("Scores");
+       goToScoresButton = new JButton("Partidos");
        goToScoresButton.setFont(new Font("Tahoma", Font.BOLD, 25));
-       goToScoresButton.setBounds(10, 10, 134, 33);
+       goToScoresButton.setBounds(10, 10, 163, 33);
        goToScoresButton.setFocusable(false);
        goToScoresButton.setBackground(Color.WHITE);
        goToScoresButton.setBorder(new CustomBorder(20));
                 
-       goToStandingButton = new JButton("Standings");
+       goToStandingButton = new JButton("Clasificación");
        goToStandingButton.setFont(new Font("Tahoma", Font.BOLD, 25));
-       goToStandingButton.setBounds(205, 10, 183, 33);
+       goToStandingButton.setBounds(205, 10, 212, 33);
        goToStandingButton.setFocusable(false);
        goToStandingButton.setBackground(Color.WHITE);
        goToStandingButton.setBorder(null);
        
-       goToTeamsButton = new JButton("Teams");
+       goToTeamsButton = new JButton("Equipos");
        goToTeamsButton.setFont(new Font("Tahoma", Font.BOLD, 25));
-       goToTeamsButton.setBounds(427, 10, 141, 33);
+       goToTeamsButton.setBounds(427, 10, 152, 33);
        goToTeamsButton.setFocusable(false);
        goToTeamsButton.setBackground(Color.WHITE);
        goToTeamsButton.setBorder(null);
        
-       goToUpdateDataButton = new JButton("Update Data");
+       goToUpdateDataButton = new JButton("Actualizar datos");
        goToUpdateDataButton.setFont(new Font("Tahoma", Font.BOLD, 25));
-       goToUpdateDataButton.setBounds(1251, 10, 246, 33);
+       goToUpdateDataButton.setBounds(1253, 10, 259, 33);
        goToUpdateDataButton.setFocusable(false);
        goToUpdateDataButton.setBackground(Color.WHITE);
        goToUpdateDataButton.setBorder(null);
@@ -129,10 +125,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
        panelButton.add(goToTeamsButton);
        panelButton.add(goToUpdateDataButton);
        
-       
- 
-       
-             
+            
              getContentPane().setLayout(new BorderLayout());
              getContentPane().add(mainPanel, BorderLayout.CENTER);
      	        
@@ -171,7 +164,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         JPanel panelToShow = buttonPanelMap.get(clickedButton);
 
         if (panelToShow != null) {
-            clickedButton.setBorder(new CustomBorder(20));
+            clickedButton.setBorder(new CustomBorder(25));
             showPanel(panelToShow);
         }
     }

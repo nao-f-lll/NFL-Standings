@@ -11,6 +11,11 @@ import com.standings.model.Team;
 
 public class StandingsCalculation {
 
+	private final static String NEW_STANDINGS_TYPE = "New entry";
+	private final static String EXISTING_STANDINGS_TYPE = "Exisitng entry";
+	private final static int defaultLocalScore = 0;
+	private final static int  defaultVisitorScore = 0;
+	
 	private FootballTeamName[] nflTeams;
 	private String[] teamsNames;
 	
@@ -70,13 +75,12 @@ public class StandingsCalculation {
 	            });
 	        }
 		 
-		 
-		 
+		 	 
 		  //MODIFIES : Team
 		  //EFFECTS  : update the fields of a team based on the given game.
 		 
-		 public static void updateStandings(Team team, Game game) {
-			 updateStandingsBasedOnMatch(team, game);
+		 public static void updateStandings(Team team, Game game, String type) {
+			 updateStandingsBasedOnMatch(team, game, type);
 		 }
 	    
 		  //REQUIRES : list of teams and list of games musn't be null.
@@ -87,7 +91,7 @@ public class StandingsCalculation {
 	     	
 	    	for (Game game : games) {	
 	    		 for (Team team : teams) {
-	    			 updateStandingsBasedOnMatch(team, game);
+	    			 updateStandingsBasedOnMatch(team, game, NEW_STANDINGS_TYPE);
 	    	        }    		  		
 	    	}		    
 	    }
@@ -95,31 +99,94 @@ public class StandingsCalculation {
 		  //MODIFIES : Team
 		  //EFFECTS  : if a team is present in a game, update it's fields based on the game data.
 		         
-	    private static void updateStandingsBasedOnMatch(Team team, Game game) {
+	    private static void updateStandingsBasedOnMatch(Team team, Game game, String type) {
 	    	
-	        if (team.getName().equals(game.getLocalTeam())) {
-	            if (game.getLocalScore() > game.getVisitorScore()) {
-	                team.incrementWins();
-	            } else if (game.getLocalScore() < game.getVisitorScore()) {
-	                team.incrementLosses();
-	            } else {
-	                team.incrementTies();
-	            }
-	            team.setPoints(team.getPoints() + game.getLocalScore());
-	            team.incrementGamesPlayed();
+	    	if (type.equals(NEW_STANDINGS_TYPE)) {
+	    		
+	    		if (team.getName().equals(game.getLocalTeam())) {
+	    			if (game.getLocalScore() > game.getVisitorScore()) {
+	    				team.incrementWins();
+	    			} else if (game.getLocalScore() < game.getVisitorScore()) {
+	    				team.incrementLosses();
+	    			} else {
+	    				team.incrementTies();
+	    			}
+	    			team.setPoints(team.getPoints() + game.getLocalScore());
+	    			team.incrementGamesPlayed();
 	            
-	        } else if (team.getName().equals(game.getVisitorTeam())) {
-	            if (game.getVisitorScore() > game.getLocalScore()) {
-	                team.incrementWins();
-	            } else if (game.getVisitorScore() < game.getLocalScore()) {
-	                team.incrementLosses();
-	            } else {
-	                team.incrementTies();
-	            }
-	            team.setPoints(team.getPoints() + game.getVisitorScore());
-	            team.incrementGamesPlayed();
-	        }
-	    }
+	    		} else if (team.getName().equals(game.getVisitorTeam())) {
+	    				if (game.getVisitorScore() > game.getLocalScore()) {
+	    					team.incrementWins();
+	    				} else if (game.getVisitorScore() < game.getLocalScore()) {
+	    					team.incrementLosses();
+	    				} else {
+	    					team.incrementTies();
+	    				}
+	    				team.setPoints(team.getPoints() + game.getVisitorScore());
+	    				team.incrementGamesPlayed();
+	    		}
+	    		
+    		
+	    		
+	    	} else if (type.equals(EXISTING_STANDINGS_TYPE)) {
+	    	    	if (game.getOldLocalScore() == game.getOldVisitorScore()) {
+	    	    		if (team.getName().equals(game.getLocalTeam())) {
+	    	    			if (game.getLocalScore() > game.getVisitorScore()) {
+	    	    				team.incrementWins();
+	    	    				team.decrementTies();
+	    	    			} else if (game.getLocalScore() < game.getVisitorScore()) {
+	    	    				team.incrementLosses();
+	    	    				team.decrementTies();
+	    	    			} else {
+	    	    				team.incrementTies();
+	    	    			}
+	    	    			team.setPoints(team.getPoints() - game.getOldLocalScore() + game.getLocalScore());
+	    	    		}
+	    	        
+	    	    		if (team.getName().equals(game.getVisitorTeam())) {
+	    	    			if (game.getVisitorScore() > game.getLocalScore()) {
+	    	    				team.incrementWins();
+	    	    				team.decrementTies();
+	    	    			} else if (game.getVisitorScore() < game.getLocalScore()) {
+	    	    				team.incrementLosses();
+	    	    				team.decrementTies();
+	    	    			} else {
+	    	    				team.incrementTies();
+	    	    			}
+	    	    			team.setPoints(team.getPoints() - game.getOldVisitorScore() + game.getVisitorScore());
+	    	    		}
+	    	    	} else {
+	    	    		if (team.getName().equals(game.getLocalTeam())) {
+	    	    			if (game.getLocalScore() > game.getVisitorScore()) {
+	    	    				team.incrementWins();
+	    	    				team.decrementLosses();
+	    	    			} else if (game.getLocalScore() < game.getVisitorScore()) {
+	    	    				team.incrementLosses();
+	    	    				team.decrementWins();
+	    	    			} else {
+	    	    				team.incrementTies();
+	    	    			}
+	    	    			team.setPoints(team.getPoints() - game.getOldLocalScore() + game.getLocalScore());
+	    	    		}
+	    	        
+	    	    		if (team.getName().equals(game.getVisitorTeam())) {
+	    	    			if (game.getVisitorScore() > game.getLocalScore()) {
+	    	    				team.incrementWins();
+	    	    				team.decrementLosses();
+	    	    			} else if (game.getVisitorScore() < game.getLocalScore()) {
+	    	    				team.incrementLosses();
+	    	    				team.decrementWins();
+	    	    			} else {
+	    	    				team.incrementTies();
+	    	    			}
+	    	    			team.setPoints(team.getPoints() - game.getOldVisitorScore() + game.getVisitorScore());
+	    	    		}
+	    	    	}	
+	    	      
+	    		}
+    
+	    	}
+
 	    
 		  //MODIFIES : games
 		  //EFFECTS  : returns the games list filled with random matches data.		 
@@ -133,8 +200,10 @@ public class StandingsCalculation {
 	                int localScore = random.nextInt(30); 
 	                int visitorScore = random.nextInt(30);
 
-	                Game match = new Game(teams[i], teams[j], localScore, visitorScore);
+	                Game match = new Game(teams[i], teams[j], localScore, visitorScore, defaultLocalScore, defaultVisitorScore);
 	                games.add(match);
+	                
+	                System.out.println(match.getLocalTeam()+ " " + match.getLocalScore() + " " + match.getVisitorTeam() + " " + match.getVisitorScore() );
 	            }
 	        }
 	        return games;
