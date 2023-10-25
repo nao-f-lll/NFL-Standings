@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.*;
 import com.standings.model.CustomBorder;
+import com.standings.model.CustomButton;
 import com.standings.model.ParentFrame;
 import com.standings.model.Team;
 import com.standings.model.Game;
@@ -40,6 +41,8 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
     
 	private ArrayList<Team> teams;
 	private List<Game> games;
+	
+
   
     public SportsDashboardPage() {
         setTitle("Panel administrativo");
@@ -125,7 +128,254 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
        panelButton.add(goToTeamsButton);
        panelButton.add(goToUpdateDataButton);
        
-            
+       
+       
+       
+       
+            ///
+       
+       
+       
+       JPanel weeksPanelButton = new JPanel();
+       weeksPanelButton.setLayout(null);
+       weeksPanelButton.setBackground(Color.WHITE);
+       weeksPanelButton.setBounds(0, 62, 1522, 60);
+       scoresPanel.add(weeksPanelButton);
+
+       int buttonWidth = 120;
+       int horizontalGap = 33; 
+       int initialX = 10;
+
+       JButton weekOneButton = new JButton("J-1");
+       weekOneButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       weekOneButton.setFocusable(false);
+       weekOneButton.setBorder(new CustomBorder(20));
+       weekOneButton.setBackground(Color.WHITE);
+       weekOneButton.setBounds(initialX, 10, buttonWidth, 33);
+       weekOneButton.setUI(new CustomButton()); ////add this to every button
+       weeksPanelButton.add(weekOneButton);
+       
+
+       
+       
+       
+       
+
+       JButton weekTwoButton = new JButton("J-2");
+       weekTwoButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       weekTwoButton.setFocusable(false);
+       weekTwoButton.setBorder(null);
+       weekTwoButton.setBackground(Color.WHITE);
+       weekTwoButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
+       weeksPanelButton.add(weekTwoButton);
+       
+       
+       
+
+       
+       JButton weekThreeButton = new JButton("J-3");
+       weekThreeButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       weekThreeButton.setFocusable(false);
+       weekThreeButton.setBorder(null);
+       weekThreeButton.setBackground(Color.WHITE);
+       weekThreeButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
+       weeksPanelButton.add(weekThreeButton);
+       
+       
+
+       
+       JButton weekFourButton  = new JButton("J-4");
+       weekFourButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       weekFourButton.setFocusable(false);
+       weekFourButton.setBorder(null);
+       weekFourButton.setBackground(Color.WHITE);
+       weekFourButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
+       weeksPanelButton.add(weekFourButton);
+       
+  
+       
+       JButton weekFiveButton = new JButton("J-5");
+       weekFiveButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       weekFiveButton.setFocusable(false);
+       weekFiveButton.setBorder(null);
+       weekFiveButton.setBackground(Color.WHITE);
+       weekFiveButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
+       weeksPanelButton.add(weekFiveButton);
+       
+       
+      
+       
+       JButton weekSixButton  = new JButton("J-6");
+       weekSixButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       weekSixButton.setFocusable(false);
+       weekSixButton.setBorder(null);
+       weekSixButton.setBackground(Color.WHITE);
+       weekSixButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
+       weeksPanelButton.add(weekSixButton);
+       
+       
+       
+       
+       
+       JButton weekSevenButton = new JButton("J-7");
+       weekSevenButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       weekSevenButton.setFocusable(false);
+       weekSevenButton.setBorder(null);
+       weekSevenButton.setBackground(Color.WHITE);     
+       weekSevenButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
+       weeksPanelButton.add(weekSevenButton);
+
+       
+       
+
+       
+       JButton weekEighthButton = new JButton("J-8");
+       weekEighthButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       weekEighthButton.setFocusable(false);
+       weekEighthButton.setBorder(null);
+       weekEighthButton.setBackground(Color.WHITE);
+       weekEighthButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
+       weeksPanelButton.add(weekEighthButton);
+       
+       
+       
+       
+       JButton weekNineButton = new JButton("J-9");
+       weekNineButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       weekNineButton.setFocusable(false);
+       weekNineButton.setBorder(null);
+       weekNineButton.setBackground(Color.WHITE);
+       weekNineButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
+       weeksPanelButton.add(weekNineButton);
+       
+       
+  
+       
+       JButton weekTenButton = new JButton("J-10");
+       weekTenButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+       weekTenButton.setFocusable(false);
+       weekTenButton.setBorder(null);
+       weekTenButton.setBackground(Color.WHITE);
+       weekTenButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
+       weeksPanelButton.add(weekTenButton);
+       
+       
+       
+       
+       JLabel name1 = new JLabel("Cardinals");
+       name1.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       name1.setBounds(365, 205, 159, 95);
+       scoresPanel.add(name1);
+       
+       JLabel nfl1 = new JLabel("");
+       nfl1.setIcon(new ImageIcon(ResizeIcon("/images/cardinals.png",140,90)));
+       nfl1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+       nfl1.setBounds(127, 182, 186, 118);
+       scoresPanel.add(nfl1);
+       
+       JLabel point1 = new JLabel("20");
+       point1.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       point1.setBounds(571, 205, 58, 95);
+       scoresPanel.add(point1);
+       
+       JLabel nfl2 = new JLabel("");
+       nfl2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+       nfl2.setIcon(new ImageIcon(ResizeIcon("/images/chiefs.png",140,90)));
+       nfl2.setBounds(127, 298, 174, 138);
+       scoresPanel.add(nfl2);
+       
+       JLabel name2 = new JLabel("Chiefs");
+       name2.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       name2.setBounds(365, 310, 159, 95);
+       scoresPanel.add(name2);
+       
+       JLabel point2 = new JLabel("10");
+       point2.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       point2.setBounds(571, 310, 58, 95);
+       scoresPanel.add(point2);
+       
+       
+       
+       
+       JLabel icon3 = new JLabel("");
+       icon3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+       icon3.setIcon(new ImageIcon(ResizeIcon("/images/bengals.png",140,90)));
+       icon3.setBounds(127, 516, 174, 118);
+       scoresPanel.add(icon3);
+      
+       
+       JLabel icon4 = new JLabel("");
+       icon4.setFont(new Font("Tahoma", Font.PLAIN, 20));
+       icon4.setIcon(new ImageIcon(ResizeIcon("/images/cowboys.png",140,90)));
+       icon4.setBounds(127, 638, 174, 118);
+       scoresPanel.add(icon4);
+       
+       JLabel name3 = new JLabel("Bengals");
+       name3.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       name3.setBounds(365, 536, 116, 95);
+       scoresPanel.add(name3);
+       
+       JLabel name4 = new JLabel("Cowboys");
+       name4.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       name4.setBounds(365, 644, 126, 95);
+       scoresPanel.add(name4);
+       
+       JLabel point3 = new JLabel("20");
+       point3.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       point3.setBounds(571, 536, 58, 95);
+       scoresPanel.add(point3);
+       
+       JLabel point4 = new JLabel("20");
+       point4.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       point4.setBounds(571, 644, 58, 95);
+       scoresPanel.add(point4);
+       
+       JLabel name5 = new JLabel("Steelers");
+       name5.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       name5.setBounds(1102, 205, 159, 95);
+       scoresPanel.add(name5);
+       
+       JLabel point5 = new JLabel("20");
+       point5.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       point5.setBounds(1305, 205, 58, 95);
+       scoresPanel.add(point5);
+       
+       JLabel name6 = new JLabel("Raiders");
+       name6.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       name6.setBounds(1102, 310, 159, 95);
+       scoresPanel.add(name6);
+       
+       JLabel point6 = new JLabel("20");
+       point6.setFont(new Font("Tahoma", Font.PLAIN, 27));
+       point6.setBounds(1305, 310, 58, 95);
+       scoresPanel.add(point6);
+       
+       JLabel icon5 = new JLabel("");
+       icon5.setFont(new Font("Tahoma", Font.PLAIN, 20));
+       icon5.setBounds(858, 183, 149, 138);
+       icon5.setIcon(new ImageIcon(ResizeIcon("/images/steelers.png",140,90)));
+       scoresPanel.add(icon5);
+       
+       JLabel icon6 = new JLabel("");
+       icon6.setFont(new Font("Tahoma", Font.PLAIN, 20));
+       icon6.setBounds(858, 301, 176, 135);
+       icon6.setIcon(new ImageIcon(ResizeIcon("/images/raiders.png",140,90)));
+       scoresPanel.add(icon6);
+       
+       
+    
+       
+       
+     
+       
+       
+       
+       
+       ///
+       
+       
+       
+       
              getContentPane().setLayout(new BorderLayout());
              getContentPane().add(mainPanel, BorderLayout.CENTER);
      	        

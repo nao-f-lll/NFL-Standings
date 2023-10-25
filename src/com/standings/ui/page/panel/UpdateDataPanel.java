@@ -41,6 +41,19 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	private final static String NEW_STANDINGS_TYPE = "New entry";
 	private final static String EXISTING_STANDINGS_TYPE = "Exisitng entry";
 	
+    
+    private final int SOME_OR_ALL_FIELDS_ARE_EMPTY = 1;
+    private final int WRONG_TEAM_NAME = 2;
+    private final int THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED = 6;
+
+
+    private final int ALL_POINTS_ARE_INVALID = 3;
+    private final int LOCAL_POINTS_ARE_INVALID = 4;
+    private final int VISITOR_POINTS_ARE_INVALID = 5;
+    
+    private final int GAME_IS_ALREADY_IN_STANDINGS = 10;
+    
+	
     private JLabel localClubLabel;
     private JLabel localClubPointsLabel;
     private JTextField localClubField;
@@ -67,20 +80,12 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 
 	private int validationNumber;
     
-    
-    private final int SOME_OR_ALL_FIELDS_ARE_EMPTY = 1;
-    private final int WRONG_TEAM_NAME = 2;
-    private final int THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED = 6;
 
-
-    private final int ALL_POINTS_ARE_INVALID = 3;
-    private final int LOCAL_POINTS_ARE_INVALID = 4;
-    private final int VISITOR_POINTS_ARE_INVALID = 5;
 
     
     private JLabel errorMessageForLocalPointsField;
     private JLabel errorMessageForVisitorPointsField;
-    /// need revise
+    
 	private List<Game> games;
 	private ArrayList<Team> teams;
 	private StandingsPanel standingsPanel;
@@ -277,7 +282,23 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			} else if(validationNumber == ALL_POINTS_ARE_INVALID || validationNumber == LOCAL_POINTS_ARE_INVALID || validationNumber == VISITOR_POINTS_ARE_INVALID) {
 				handleValidationNumber(validationNumber); 
 			} else {
-				//////
+				
+				
+				boolean isgameExist = false;
+				
+				for (int i = 0; i < games.size(); i++) {
+
+					isgameExist = (games.get(i).getLocalTeam().equals(localClubField.getText())) && (games.get(i).getVisitorTeam().equals(visitorClubField.getText()));
+					
+					if (isgameExist) {
+						handleValidationNumber(GAME_IS_ALREADY_IN_STANDINGS); 
+						break;
+					}
+				}
+
+				if (!isgameExist) {
+
+					
 				new AddGameUtil(this.games,localClubField.getText(),visitorClubField.getText(),localClubPointsField.getText(),visitorClubPointsField.getText());		
 				for (Team team : this.teams) {
 					if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
@@ -290,8 +311,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				StandingsCalculation.sortStandings(this.teams);
 				standingsPanel.renderUpdatedStandings();		
 				resetFieldsAndWeek();
+					
+				}
 				
-				////
+				
 			}
 
 			
@@ -347,27 +370,31 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		
 		switch (validationNumber) {
 		case SOME_OR_ALL_FIELDS_ARE_EMPTY:
-			userDialog("Some fields are empty, fields must be filled", "Fields Requirement");        
+			userDialog("Algunos campos están vacíos, le faltan campos por rellenar", "Requisitos de campos");        
 			break;
 		case WRONG_TEAM_NAME:
-			userDialog("You have inserted the wrong team name, see the Teams panel for reference ", " Wrong Team name");
+			userDialog("Has insertado un nombre de equipo incorrecto, ver el panel de Equipos para referencia", " Nombre de equipo incorrecto");
 			break;		
 		case THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED:
-			userDialog("You have inserted the same name for both teams, see the Teams panel for reference ", " Same name for both Teams");
+			userDialog("Has insertado el mismo nombre para los dos equipos, ver el panel de Equipos para referencia", " Los dos equipos tienen el mismo nombre");
 			break;
 		case ALL_POINTS_ARE_INVALID:
 			localClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
 			visitorClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
-			userDialog("Incorrect set of points, points must be a number in this range (0 to 99)","error");
+			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
 			
 			break;
 		case LOCAL_POINTS_ARE_INVALID:	
 			localClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
-			userDialog("Incorrect set of points, points must be a number in this range (0 to 99)","Fields Requirement");
+			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
 			break;
 		case VISITOR_POINTS_ARE_INVALID:
 			visitorClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
-			userDialog("Incorrect set of points, points must be a number in this range (0 to 99)","Fields Requirement");
+			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
+			break;
+			
+		case GAME_IS_ALREADY_IN_STANDINGS:
+			userDialog("Este partido ya existe, asegurate que has introducido un nuevo partido","Requisitos de campos");
 			break;
 		default :
 		}
@@ -375,7 +402,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	
 	
 	
-	 public void fieldFocusListener(JTextField localPoints, JTextField visitorPoints) {
+	 public void fieldFocusListener(JTextField localPoints, JTextField visitorPoints) {  // add option for localTeam and visitorTeam names
 		 if (localPoints != null) {
 			 localPoints.addFocusListener(new FocusListener() {
 				    @Override
@@ -415,7 +442,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	        JPanel buttonPanel = (JPanel)fieldRequirementPane.getComponent(1);
 	        
 	        JButton accepetButton = (JButton)buttonPanel.getComponent(0);
-	        accepetButton.setText("Accept");
+	        accepetButton.setText("Aceptar");
 	        accepetButton.setFocusable(false);
 	        accepetButton.setBackground(Color.LIGHT_GRAY);
 	        

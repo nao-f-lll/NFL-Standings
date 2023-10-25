@@ -129,6 +129,24 @@ public class StandingsCalculation {
     		
 	    		
 	    	} else if (type.equals(EXISTING_STANDINGS_TYPE)) {
+	    		
+	    		boolean areOldAndNewgamesTies = game.getOldLocalScore() == game.getOldVisitorScore() && game.getLocalScore() == game.getVisitorScore();
+	    		boolean areOldAndNewgamesWins = game.getOldLocalScore() > game.getOldVisitorScore() && game.getLocalScore() > game.getVisitorScore();
+	    		boolean areOldAndNewgamesLose = game.getOldLocalScore() < game.getOldVisitorScore() && game.getLocalScore() < game.getVisitorScore();
+	    		
+	    		if (areOldAndNewgamesTies || areOldAndNewgamesWins || areOldAndNewgamesLose) {
+	    			
+	    			if (team.getName().equals(game.getLocalTeam())) {
+	    				
+	    				team.setPoints(team.getPoints() - game.getOldLocalScore() + game.getLocalScore());
+	    			} 
+	    			if (team.getName().equals(game.getVisitorTeam())) {
+	    				team.setPoints(team.getPoints() - game.getOldLocalScore() + game.getLocalScore());
+	    			}
+	    			
+	    		} else {
+	    			    		
+	    		
 	    	    	if (game.getOldLocalScore() == game.getOldVisitorScore()) {
 	    	    		if (team.getName().equals(game.getLocalTeam())) {
 	    	    			if (game.getLocalScore() > game.getVisitorScore()) {
@@ -155,6 +173,7 @@ public class StandingsCalculation {
 	    	    			}
 	    	    			team.setPoints(team.getPoints() - game.getOldVisitorScore() + game.getVisitorScore());
 	    	    		}
+	    	    		
 	    	    	} else {
 	    	    		if (team.getName().equals(game.getLocalTeam())) {
 	    	    			if (game.getLocalScore() > game.getVisitorScore()) {
@@ -163,6 +182,12 @@ public class StandingsCalculation {
 	    	    			} else if (game.getLocalScore() < game.getVisitorScore()) {
 	    	    				team.incrementLosses();
 	    	    				team.decrementWins();
+	    	    			} else if (game.getOldLocalScore() > game.getOldVisitorScore()){
+	    	    				team.decrementWins();
+	    	    				team.incrementTies();
+	    	    			} else if (game.getOldLocalScore() < game.getOldVisitorScore()) {
+	    	    				team.decrementLosses();
+	    	    				team.incrementTies();
 	    	    			} else {
 	    	    				team.incrementTies();
 	    	    			}
@@ -176,6 +201,13 @@ public class StandingsCalculation {
 	    	    			} else if (game.getVisitorScore() < game.getLocalScore()) {
 	    	    				team.incrementLosses();
 	    	    				team.decrementWins();
+	    	    			
+	    	    			} else if (game.getOldLocalScore() < game.getOldVisitorScore()){
+	    	    				team.decrementWins();
+	    	    				team.incrementTies();
+	    	    			} else if (game.getOldLocalScore() > game.getOldVisitorScore()) {
+	    	    				team.decrementLosses();
+	    	    				team.incrementTies();
 	    	    			} else {
 	    	    				team.incrementTies();
 	    	    			}
@@ -183,6 +215,7 @@ public class StandingsCalculation {
 	    	    		}
 	    	    	}	
 	    	      
+	    			}
 	    		}
     
 	    	}

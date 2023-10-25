@@ -223,6 +223,8 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		errorMessageForEmail.setForeground(Color.RED);
 		rightInnerPanel.add(errorMessageForEmail);
 		
+		
+		
 		errorMessageForPassword = new JLabel();
 		errorMessageForPassword.setForeground(Color.RED);
 		errorMessageForPassword.setBounds(136, 164, 111, 25);
@@ -293,21 +295,21 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		switch (validationNumber) {
 		case ALL_FIELDS_ARE_EMPTY:
 			//errorMessageForPassword.setBounds(138, 164, 111, 25);      need test
-			errorMessageForEmail.setText("Field is required");
-			errorMessageForPassword.setText("Field is required");
+			errorMessageForEmail.setText("Campo obligatorio");
+			errorMessageForPassword.setText("Campo obligatorio");
 			break;
 		case EMAIL_FIELD_IS_EMPTY:
-			errorMessageForEmail.setText("Field is required");
+			errorMessageForEmail.setText("Campo obligatorio");
 			break;
 		case PASSWORD_FIELD_IS_EMPTY:
-			errorMessageForPassword.setText("Field is required");
+			errorMessageForPassword.setText("Campo obligatorio");
 			break;
 		case EMAIL_NOT_FOUND:
-			errorMessageForEmail.setText("Email is not found");
+			errorMessageForEmail.setText("Email no registrado");
 			break;
 		case INCORRECT_PASSWORD:
 			//errorMessageForPassword.setBounds(138, 164, 111, 25);      need test
-			errorMessageForPassword.setText("Incorrect password");
+			errorMessageForPassword.setText("Clave incorrecta");
 			break;
 		default :
 			this.dispose();

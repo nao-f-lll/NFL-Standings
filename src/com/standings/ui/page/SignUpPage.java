@@ -342,31 +342,31 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	private boolean handleEmptyFields(String userFullName, String userEmail, String userPassword) {
 
 		if (SignUpValidationUtil.checkForEmptyField(userFullName, userEmail, userPassword)) {
-			promptErrorMessage(1, 1, 1,"Field is required");
+			promptErrorMessage(1, 1, 1,"Campo obligatorio");
 			return false;
 			
 		} else if (SignUpValidationUtil.checkForEmptyField(userEmail, userFullName)) {
-			promptErrorMessage(1, 1, 0,"Field is required");
+			promptErrorMessage(1, 1, 0,"Campo obligatorio");
 			return false;
 			
 		} else if (SignUpValidationUtil.checkForEmptyField(userEmail, userPassword)) {
-			promptErrorMessage(0, 1, 1, "Field is required");
+			promptErrorMessage(0, 1, 1, "Campo obligatorio");
 			return false;
 				
 		} else if (SignUpValidationUtil.checkForEmptyField(userFullName, userPassword)) {		
-			promptErrorMessage(1, 0, 1, "Field is required");	
+			promptErrorMessage(1, 0, 1, "Campo obligatorio");	
 			return false;
 	
 		} else if (SignUpValidationUtil.checkForEmptyField(userFullName)) {
-			promptErrorMessage(1, 0, 0, "Field is required");
+			promptErrorMessage(1, 0, 0, "Campo obligatorio");
 			return false;
 			
 		} else if (SignUpValidationUtil.checkForEmptyField(userEmail)) {
-			promptErrorMessage(0, 1, 0, "Field is required");
+			promptErrorMessage(0, 1, 0, "Campo obligatorio");
 			return false;
 			
 		} else if (SignUpValidationUtil.checkForEmptyField(userPassword)) {
-			promptErrorMessage(0, 0, 1, "Field is required");
+			promptErrorMessage(0, 0, 1, "Campo obligatorio");
 			return false;
 		}
 		return true;
@@ -384,20 +384,20 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 							new LoginPage(loginInfo);
 					} else {
 					
-							userDialog("Password must be a minimum of 8 characters"
-									+ " and must include at least one uppercase and one number", "Password Requirement");
+							userDialog("La contraseña debe tener un mínimo de 8 caracteres"
+									+ " y debe incluir al menos una mayúscula y un número", "Requisito de contraseña");
 					}
 				} else {
-					promptErrorMessage(0, 1, 0, "Email already exists");
+					promptErrorMessage(0, 1, 0, "El email ya existe");
 				}
 				
 			} else {
-				promptErrorMessage(0, 1, 0, "Invalid email format");
+				promptErrorMessage(0, 1, 0, "Formato inválido");
 			}
 					
 		} else {
 			errorMessageForFullName.setBounds(114, 103, 144, 25);
-			promptErrorMessage(1, 0, 0, "Full Name must be a text");
+			promptErrorMessage(1, 0, 0, "Solo se permite texto");
 		}
 	}
 	
