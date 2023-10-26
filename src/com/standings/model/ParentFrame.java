@@ -10,7 +10,7 @@ import com.standings.ui.page.LoginPage;
 public class ParentFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private final ImageIcon nflIconFrame = new ImageIcon(LoginPage.class.getResource("/images/nflDark.png"));
+	private final ImageIcon nflIconFrame = new ImageIcon(LoginPage.class.getResource("/images/nflExternal.png"));
 	private Image logo;
 	private static  Image logoStatic;
     

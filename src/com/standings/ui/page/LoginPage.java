@@ -294,7 +294,6 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	private void handleValidationNumber(int validationNumber) {
 		switch (validationNumber) {
 		case ALL_FIELDS_ARE_EMPTY:
-			//errorMessageForPassword.setBounds(138, 164, 111, 25);      need test
 			errorMessageForEmail.setText("Campo obligatorio");
 			errorMessageForPassword.setText("Campo obligatorio");
 			break;
@@ -308,7 +307,6 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 			errorMessageForEmail.setText("Email no registrado");
 			break;
 		case INCORRECT_PASSWORD:
-			//errorMessageForPassword.setBounds(138, 164, 111, 25);      need test
 			errorMessageForPassword.setText("Clave incorrecta");
 			break;
 		default :
