@@ -5,15 +5,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import com.standings.ui.page.panel.subpanel.*;
+
 import com.standings.model.CustomBorder;
 import com.standings.model.CustomButton;
+import com.standings.model.Game;
+import com.standings.model.Team;
 
 public class ScoresPanel extends JPanel implements ActionListener{
 
@@ -45,28 +50,23 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	private JButton weekNineButton;
 	private JButton weekTenButton;
 	
+	private ArrayList<Team> teams;
+	private List<Game> games;
 	
-	public ScoresPanel(JPanel panelButton) {
+	private Map<String, String> teamLogos = new HashMap<>();
+	
+	public ScoresPanel(JPanel panelButton, ArrayList<Team> teams, List<Game> games) {
 	       
 		
 		this.panelButton = panelButton;
+		this.games = games;
+		this.teams = teams;
 		
 		
+		initializeTeamLogos();
+		initializeWeekPanels();
 		
-		 weekOnePanel   = new WeekOnePanel();
-		 weekTwoPanel   = new WeekTwoPanel();
-		 weekThreePanel = new WeekThreePanel();
-		 weekFourPanel  = new WeekFourPanel();
-		 weekFivePanel  = new WeekFivePanel();
-		 weekSixPanel   = new WeekSixPanel();
-		 weekSevenPanel = new WeekSevenPanel();
-		 weekEighthPanel = new WeekEighthPanel();
-		 weekNinePanel  = new WeekNinePanel();
-		 weekTenPanel   = new WeekTenPanel();
-		
-		
-		
-		 this.add(weekOnePanel);
+	
 		
 		
 		
@@ -211,10 +211,42 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekTenButton.addActionListener(this);
 	       
 	       
+	       
+	       
 	   
 	}
 
 
+	
+	
+	
+	public void initializeWeekPanels() {
+		
+		 weekOnePanel   = new WeekOnePanel(this.teams, this.games, teamLogos);
+		 weekTwoPanel   = new WeekTwoPanel(this.teams, this.games, teamLogos);
+		 weekThreePanel = new WeekThreePanel(this.teams, this.games, teamLogos);
+		 weekFourPanel  = new WeekFourPanel(this.teams, this.games, teamLogos);
+		 weekFivePanel  = new WeekFivePanel(this.teams, this.games, teamLogos);
+		 //weekSixPanel   = new WeekSixPanel();
+		// weekSevenPanel = new WeekSevenPanel();
+		 //weekEighthPanel = new WeekEighthPanel();
+		// weekNinePanel  = new WeekNinePanel();
+		// weekTenPanel   = new WeekTenPanel();
+		
+		
+		
+		 this.add(weekOnePanel);
+	}
+	
+
+	private void initializeTeamLogos() {
+	    teamLogos.put("Cowboys", "/images/cowboys.png");
+	    teamLogos.put("Cardinals", "/images/cardinals.png");
+	    teamLogos.put("Chiefs", "/images/chiefs.png");
+	    teamLogos.put("Bengals", "/images/bengals.png");
+	    teamLogos.put("Raiders", "/images/raiders.png");
+	    teamLogos.put("Steelers", "/images/steelers.png");
+	}
     
 
 	private void showPanel(JPanel panelToShow) {
@@ -256,4 +288,6 @@ public class ScoresPanel extends JPanel implements ActionListener{
         }
         
     }
+    
+    
 }

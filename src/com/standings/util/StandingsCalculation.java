@@ -224,17 +224,20 @@ public class StandingsCalculation {
 		  //MODIFIES : games
 		  //EFFECTS  : returns the games list filled with random matches data.		 
 	    
+	    
 	    private static List<Game> generateMatchesData(String[] teams) {
 	        List<Game> games = new ArrayList<>();
 	        Random random = new Random();
 
+
+	        
 	        for (int i = 0; i < teams.length; i++) {
 	            for (int j = i + 1; j < teams.length; j++) {
 	                int localScore = random.nextInt(30); 
 	                int visitorScore = random.nextInt(30);
 
 	                Game match = new Game(teams[i], teams[j], localScore, visitorScore, defaultLocalScore, defaultVisitorScore);
-	                games.add(match);
+	                games.add(match);	                
 	                
 	                System.out.println(match.getLocalTeam()+ " " + match.getLocalScore() + " " + match.getVisitorTeam() + " " + match.getVisitorScore() );
 	            }

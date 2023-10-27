@@ -31,6 +31,7 @@ import com.standings.model.ParentFrame;
 import com.standings.model.Team;
 import com.standings.ui.page.SportsDashboardPage;
 import com.standings.util.AddGameUtil;
+//import com.standings.util.AutocompleteTextField;
 import com.standings.util.StandingsCalculation;
 import com.standings.util.StandingsDataUtil;
 
@@ -89,13 +90,24 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	private List<Game> games;
 	private ArrayList<Team> teams;
 	private StandingsPanel standingsPanel;
+	private ScoresPanel scoresPanel;
+	
     
+	
+	//private AutocompleteTextField autocompleteTextField;
+	
     
-    public UpdateDataPanel( ArrayList<Team> teams, List<Game> games, StandingsPanel standingsPanel) {
+    public UpdateDataPanel( ArrayList<Team> teams, List<Game> games, StandingsPanel standingsPanel, ScoresPanel scoresPanel) {
  
     	this.games = games;
     	this.teams = teams;
     	this.standingsPanel = standingsPanel;
+    	
+    	
+    	
+   
+    	
+    	
     	
     	comboWeekModel = new DefaultComboBoxModel<>();	
     	for (int i = 1; i < 11; i++) {
@@ -110,6 +122,14 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         localClubLabel = new JLabel("Equipo Local");
         localClubLabel.setBounds(829, 215, 103, 37);
         this.add(localClubLabel);
+        
+        
+        
+        
+        
+     	//autocompleteTextField = new AutocompleteTextField();
+    	//autocompleteTextField.setBounds(791, 262, 155, 37); // Adjust the bounds as needed
+    	//this.add(autocompleteTextField);
         
         localClubField = new JTextField();
         localClubField.setBounds(791, 262, 155, 37);
@@ -356,6 +376,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				StandingsCalculation.sortStandings(this.teams);
 				standingsPanel.renderUpdatedStandings();			
 				resetFieldsAndWeek();
+				scoresPanel.initializeWeekPanels();   
 				/// add fedback to the user
 			}
 	

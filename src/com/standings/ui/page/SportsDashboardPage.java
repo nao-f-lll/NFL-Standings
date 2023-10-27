@@ -39,6 +39,9 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
     private ArrayList<Team> teams;
 	private List<Game> games;
 	
+	
+	
+
 
   
     public SportsDashboardPage() {
@@ -59,10 +62,13 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         panelButton.setBackground(Color.WHITE);
         
 
-        scoresPanel = new ScoresPanel(panelButton);
+        
         standingsPanel = new StandingsPanel(teams, games);   
-        teamsPanel = new TeamsPanel();     
-        updateDataPanel = new UpdateDataPanel(teams, games,standingsPanel);
+        scoresPanel = new ScoresPanel(panelButton, teams, games);
+        teamsPanel = new TeamsPanel();          
+        updateDataPanel = new UpdateDataPanel(teams, games,standingsPanel, scoresPanel);
+        
+        
         scoresPanel.setLayout(null);
         standingsPanel.setLayout(null);
         teamsPanel.setLayout(null);
@@ -117,17 +123,6 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
        panelButton.add(goToStandingButton);
        panelButton.add(goToTeamsButton);
        panelButton.add(goToUpdateDataButton);
-       
-       
-       
-       
-       
-            ///
-    
-       
-       ///
-       
-       
        
        
              getContentPane().setLayout(new BorderLayout());
