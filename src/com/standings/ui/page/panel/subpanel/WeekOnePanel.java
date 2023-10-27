@@ -45,6 +45,7 @@ public class WeekOnePanel extends JPanel{
 	private ArrayList<Team> teams;
 	private List<Game> games;
 	private Map<String, String> teamLogos;
+	private List<List<Game>> weeks;
 	
 	public WeekOnePanel(ArrayList<Team> teams, List<Game> games, Map<String, String> teamLogos) {
 		
@@ -53,6 +54,7 @@ public class WeekOnePanel extends JPanel{
 		   	this.games = games;
 		   	this.teams = teams;
 		   	this.teamLogos = teamLogos;
+	
 	       
 	       
 			
@@ -66,7 +68,7 @@ public class WeekOnePanel extends JPanel{
 		       firstLocalTeamIcon.setBounds(127, 61, 186, 118);
 		       this.add(firstLocalTeamIcon);
 		       
-		       firstLocalTeamPoint = new JLabel("20");
+		       firstLocalTeamPoint = new JLabel("");
 		       firstLocalTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		       firstLocalTeamPoint.setBounds(571, 80, 58, 95);
 		       this.add(firstLocalTeamPoint);
@@ -85,13 +87,11 @@ public class WeekOnePanel extends JPanel{
 		       
 		     
 		       
-		       firstVisitorTeamPoint = new JLabel("10");
+		       firstVisitorTeamPoint = new JLabel("");
 		       firstVisitorTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		       firstVisitorTeamPoint.setBounds(571, 210, 58, 95);
 		       this.add(firstVisitorTeamPoint);
-		       
-		       
-		       
+		       		       
 		       
 		       secondLocalTeamName = new JLabel("");
 		       secondLocalTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
@@ -103,7 +103,7 @@ public class WeekOnePanel extends JPanel{
 		       secondLocalTeamIcon.setBounds(127, 381, 174, 118);
 		       this.add(secondLocalTeamIcon);
 		      	       
-		       secondLocalTeamPoint = new JLabel("20");
+		       secondLocalTeamPoint = new JLabel("");
 		       secondLocalTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		       secondLocalTeamPoint.setBounds(571, 404, 58, 95);
 		       this.add(secondLocalTeamPoint);
@@ -124,12 +124,11 @@ public class WeekOnePanel extends JPanel{
 		       
 		       
 		       
-		       secondVisitorTeamPoint = new JLabel("20");
+		       secondVisitorTeamPoint = new JLabel("");
 		       secondVisitorTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		       secondVisitorTeamPoint.setBounds(571, 529, 58, 95);
 		       this.add(secondVisitorTeamPoint);
-		       
-		       
+		       	       
 		       
 		       thirdLocalTeamName = new JLabel("");
 		       thirdLocalTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
@@ -141,13 +140,10 @@ public class WeekOnePanel extends JPanel{
 		       thirdLocalTeamIcon.setBounds(855, 51, 149, 138);
 		       this.add(thirdLocalTeamIcon);
 		       
-		       thirdLocalTeamPoint = new JLabel("20");
+		       thirdLocalTeamPoint = new JLabel("");
 		       thirdLocalTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		       thirdLocalTeamPoint.setBounds(1305, 80, 58, 95);
 		       this.add(thirdLocalTeamPoint);
-		       
-		      
-		       
 		       
 		       
 		       thirdVisitorTeamName = new JLabel("");
@@ -161,7 +157,7 @@ public class WeekOnePanel extends JPanel{
 		       thirdVisitorTeamIcon.setBounds(855, 200, 176, 135);
 		       this.add(thirdVisitorTeamIcon);
 		       
-		       thirdVisitorTeamPoint = new JLabel("20");
+		       thirdVisitorTeamPoint = new JLabel("");
 		       thirdVisitorTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 		       thirdVisitorTeamPoint.setBounds(1305, 221, 58, 95);
 		       this.add(thirdVisitorTeamPoint);
@@ -185,7 +181,7 @@ public class WeekOnePanel extends JPanel{
         firstVisitorTeamPoint.setText(String.valueOf(games.get(0).getVisitorScore()));
          
         
-        
+       
           secondLocalTeamName.setText(games.get(9).getLocalTeam());
           setTeamIcon(secondLocalTeamIcon, games.get(9).getLocalTeam());
     	  secondLocalTeamPoint.setText(String.valueOf(games.get(9).getLocalScore()));
@@ -205,7 +201,6 @@ public class WeekOnePanel extends JPanel{
     	  thirdVisitorTeamName.setText(games.get(14).getVisitorTeam());
     	  setTeamIcon(thirdVisitorTeamIcon, games.get(14).getVisitorTeam());
     	  thirdVisitorTeamPoint.setText(String.valueOf(games.get(14).getVisitorScore()));
-        
     }
 	
 	private void setTeamIcon(JLabel label, String teamName) {

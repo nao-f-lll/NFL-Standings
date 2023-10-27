@@ -27,6 +27,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
     
     private JPanel mainPanel;
     private JPanel panelButton;
+    
     private ScoresPanel scoresPanel;
     private StandingsPanel standingsPanel;
     private TeamsPanel teamsPanel; 
@@ -38,6 +39,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
     private JButton goToUpdateDataButton;
     private ArrayList<Team> teams;
 	private List<Game> games;
+	private List<List<Game>> weeks;
 	
 	
 	
@@ -51,6 +53,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
 
         teams = new ArrayList<>();
         games = new ArrayList<>();
+        weeks = new ArrayList<>();
         
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -63,8 +66,8 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         
 
         
-        standingsPanel = new StandingsPanel(teams, games);   
-        scoresPanel = new ScoresPanel(panelButton, teams, games);
+        standingsPanel = new StandingsPanel(teams, games, weeks);   
+        scoresPanel = new ScoresPanel(panelButton, teams, games, weeks);
         teamsPanel = new TeamsPanel();          
         updateDataPanel = new UpdateDataPanel(teams, games,standingsPanel, scoresPanel);
         

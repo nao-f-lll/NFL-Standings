@@ -30,8 +30,9 @@ public class StandingsPanel extends JPanel  {
 	private FootballTeamName[] nflTeams;
 	private Object[][] rows;
 	private String[] columns;
+	private List<List<Game>> weeks;
 
-		public StandingsPanel( ArrayList<Team> teams, List<Game> games) {
+		public StandingsPanel( ArrayList<Team> teams, List<Game> games, List<List<Game>> weeks) {
 	    	
 
             table = new JTable();
@@ -41,6 +42,7 @@ public class StandingsPanel extends JPanel  {
             
             this.teams = teams;
             this.games = games;
+            this.weeks = weeks;
         
             
 			nflTeams = FootballTeamName.values();
@@ -78,9 +80,9 @@ public class StandingsPanel extends JPanel  {
          				             	};										
 
            
-           
+         	
           
-           new StandingsCalculation(this.teams, this.games);
+           new StandingsCalculation(this.teams, this.games, this.weeks);
            renderUpdatedStandings();
                  
          

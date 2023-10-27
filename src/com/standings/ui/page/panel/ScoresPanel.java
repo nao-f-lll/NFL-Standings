@@ -25,16 +25,16 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 2653188263518760831L;
 
 	
-	private JPanel weekOnePanel;
-	private JPanel weekTwoPanel;
-	private JPanel weekThreePanel;
-	private JPanel weekFourPanel;
-	private JPanel weekFivePanel;
-	private JPanel weekSixPanel;
-	private JPanel weekSevenPanel;
-	private JPanel weekEighthPanel;
-	private JPanel weekNinePanel;
-	private JPanel weekTenPanel;
+	private WeekOnePanel weekOnePanel;
+	private WeekTwoPanel weekTwoPanel;
+	private WeekThreePanel weekThreePanel;
+	private WeekFourPanel weekFourPanel;
+	private WeekFivePanel weekFivePanel;	
+	private WeekSixPanel weekSixPanel;
+	private WeekSevenPanel weekSevenPanel;
+	private WeekEighthPanel weekEighthPanel;
+	private WeekNinePanel weekNinePanel;
+	private WeekTenPanel weekTenPanel;
 	
 	private JPanel weeksPanelButton;
 	private JPanel panelButton;
@@ -52,16 +52,16 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	
 	private ArrayList<Team> teams;
 	private List<Game> games;
-	
+	private List<List<Game>> weeks;
 	private Map<String, String> teamLogos = new HashMap<>();
 	
-	public ScoresPanel(JPanel panelButton, ArrayList<Team> teams, List<Game> games) {
+	public ScoresPanel(JPanel panelButton, ArrayList<Team> teams, List<Game> games, List<List<Game>> weeks) {
 	       
 		
 		this.panelButton = panelButton;
 		this.games = games;
 		this.teams = teams;
-		
+		this.weeks = weeks;
 		
 		initializeTeamLogos();
 		initializeWeekPanels();
@@ -228,14 +228,44 @@ public class ScoresPanel extends JPanel implements ActionListener{
 		 weekFourPanel  = new WeekFourPanel(this.teams, this.games, teamLogos);
 		 weekFivePanel  = new WeekFivePanel(this.teams, this.games, teamLogos);
 		 //weekSixPanel   = new WeekSixPanel();
-		// weekSevenPanel = new WeekSevenPanel();
+		 //weekSevenPanel = new WeekSevenPanel();
 		 //weekEighthPanel = new WeekEighthPanel();
-		// weekNinePanel  = new WeekNinePanel();
-		// weekTenPanel   = new WeekTenPanel();
+		 //weekNinePanel  = new WeekNinePanel();
+		 //weekTenPanel   = new WeekTenPanel();
 		
 		
 		
 		 this.add(weekOnePanel);
+	}
+	
+	/////////////////////////////////////////////////////////////////////
+	public void renderWeeksScores(int selectedWeek) {
+		
+		switch (selectedWeek) {
+		case 1:
+			weekOnePanel.addGameInfo(this.teams, this.games);
+			break;
+		case 2:
+			weekTwoPanel.addGameInfo(this.teams, this.games);
+			break;
+		case 3:
+			weekThreePanel.addGameInfo(this.teams, this.games);
+			break;
+		case 4:
+			weekFourPanel.addGameInfo(this.teams, this.games);
+			break;
+		case 5:
+			weekFivePanel.addGameInfo(this.teams, this.games);;
+			break;		
+		default:
+			
+		}
+		
+		
+	
+		
+		
+
 	}
 	
 

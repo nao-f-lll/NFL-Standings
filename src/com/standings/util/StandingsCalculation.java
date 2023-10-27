@@ -18,11 +18,12 @@ public class StandingsCalculation {
 	
 	private FootballTeamName[] nflTeams;
 	private String[] teamsNames;
+
 	
-		public StandingsCalculation(ArrayList<Team> teams,  List<Game> games) {
+		public StandingsCalculation(ArrayList<Team> teams,  List<Game> games, List<List<Game>> weeks) {
 		 
 			asignteamNames();
-			initializeTheCalculation(teamsNames, teams, games);
+			initializeTheCalculation(teamsNames, teams, games, weeks);
 		}
 		
 		
@@ -41,11 +42,12 @@ public class StandingsCalculation {
 		  //MODIFIES : teams, games
 		  //EFFECTS  : generate and update the standings table data.
 		
-		private static void initializeTheCalculation(String[] teamsNames, ArrayList<Team> teams,  List<Game> games) {
+		private static void initializeTheCalculation(String[] teamsNames, ArrayList<Team> teams,  List<Game> games, List<List<Game>> weeks) {
 			
 			games.addAll(generateMatchesData(teamsNames)); 
 			updateStandings(teams, games);           
 			sortStandings(teams);
+			//organizeMatchesIntoWeeks(games, teamsNames, weeks);
 		}
 		
 		  //REQUIRES : list musen't be empty.
@@ -242,7 +244,51 @@ public class StandingsCalculation {
 	                System.out.println(match.getLocalTeam()+ " " + match.getLocalScore() + " " + match.getVisitorTeam() + " " + match.getVisitorScore() );
 	            }
 	        }
+	        
+	        
+	        
+	        
 	        return games;
 	    }
+	    
+	    
+	    
+	    ///////////////////////////////////////////////
+	    
+	   /* 
+	    private static void organizeMatchesIntoWeeks(List<Game> games, String[] teams, List<List<Game>> weeks) {
+	        List<String> teamsList = new ArrayList<>();
+	        for (String team : teams) {
+	            teamsList.add(team);
+	        }
+
+	        for (int week = 0; week < teams.length - 1; week++) {
+	            List<Game> weekGames = new ArrayList<>();
+	            for (int i = 0; i < teamsList.size(); i++) {
+	                int localTeamIndex = i;
+	                int visitorTeamIndex = (i + week) % teamsList.size();
+	                String localTeam = teamsList.get(localTeamIndex);
+	                String visitorTeam = teamsList.get(visitorTeamIndex);
+
+	                Game matchedGame = null;
+	                for (Game game : games) {
+	                    if ((game.getLocalTeam().equals(localTeam) && game.getVisitorTeam().equals(visitorTeam)) ||
+	                            (game.getLocalTeam().equals(visitorTeam) && game.getVisitorTeam().equals(localTeam))) {
+	                        weekGames.add(game);
+	                        matchedGame = game;
+	                        break;
+	                    }
+	                }
+
+	                if (matchedGame != null) {
+	                    //games.remove(matchedGame);
+	                }
+	            }
+	            weeks.add(weekGames);
+	        }
+	    }
+
+	    */
+    
 	    
 }

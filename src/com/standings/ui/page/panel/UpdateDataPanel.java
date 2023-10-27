@@ -80,6 +80,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     private JLabel termsOfUse;
 
 	private int validationNumber;
+	/////////////////////
+	private int selectedWeekNumber = 0;
     
 
 
@@ -91,8 +93,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	private ArrayList<Team> teams;
 	private StandingsPanel standingsPanel;
 	private ScoresPanel scoresPanel;
-	
-    
+
 	
 	//private AutocompleteTextField autocompleteTextField;
 	
@@ -102,16 +103,14 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     	this.games = games;
     	this.teams = teams;
     	this.standingsPanel = standingsPanel;
-    	
-    	
-    	
-   
+    	this.scoresPanel = scoresPanel;
     	
     	
     	
     	comboWeekModel = new DefaultComboBoxModel<>();	
     	for (int i = 1; i < 11; i++) {
     		comboWeekModel.addElement("Semana " + i);
+    		
     	}
     	
         weekComboBox = new JComboBox<>(comboWeekModel);
@@ -276,6 +275,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		errorMessageForVisitorPointsField.setBounds(1310, 390, 130, 40);  
 		errorMessageForVisitorPointsField.setForeground(Color.RED);
 		this.add(errorMessageForVisitorPointsField);
+		
+
+
+
     }
        
     
@@ -374,9 +377,11 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				}
 				
 				StandingsCalculation.sortStandings(this.teams);
-				standingsPanel.renderUpdatedStandings();			
+				standingsPanel.renderUpdatedStandings();
+				scoresPanel.renderWeeksScores(whichWeekIsSelected());	
+				System.out.println(whichWeekIsSelected());
 				resetFieldsAndWeek();
-				scoresPanel.initializeWeekPanels();   
+				
 				/// add fedback to the user
 			}
 	
@@ -386,6 +391,32 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			resetFieldsAndWeek();
 		}
 	}
+	
+	
+	/////////////////////////////////////////////////////////////////
+	private int whichWeekIsSelected() {
+
+    weekComboBox.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	          
+	            String selectedWeek = (String) weekComboBox.getSelectedItem();
+
+	            String[] parts = selectedWeek.split(" ");
+	            if (parts.length == 2) {
+	                String weekNumber = parts[1];
+	                selectedWeekNumber = Integer.parseInt(weekNumber);
+	                
+	            }
+	            
+	        }
+	    });
+    	System.out.println(selectedWeekNumber + "from inside tehran");
+	    return selectedWeekNumber;
+	}
+	
+
+	
 	
 	public void handleValidationNumber(int validationNumber) {
 		
@@ -454,7 +485,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	}
 	
 	
-	private void userDialog(String dialogText, String dialogTitle) {
+	private void userDialog(String dialogText, String dialogTitle ) {
 		
 		 JOptionPane fieldRequirementPane = new JOptionPane(dialogText,JOptionPane.YES_OPTION);
 
