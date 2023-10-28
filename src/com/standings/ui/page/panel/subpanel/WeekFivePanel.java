@@ -47,6 +47,11 @@ public class WeekFivePanel extends JPanel{
 	private List<Game> games;
 	private Map<String, String> teamLogos;
 	
+	
+	final int  GAME_ONE = 12;
+	final int  GAME_TWO = 13;
+	final int  GAME_THREE = 14;
+	
 	public WeekFivePanel(ArrayList<Team> teams, List<Game> games,  Map<String, String> teamLogos) {
 		 
 	
@@ -179,36 +184,36 @@ public class WeekFivePanel extends JPanel{
 		    
 			
 			
-			firstLocalTeamName.setText(games.get(4).getLocalTeam());
-			setTeamIcon(firstLocalTeamIcon, games.get(4).getLocalTeam());
-			firstLocalTeamPoint.setText(String.valueOf(games.get(4).getLocalScore()));
+			firstLocalTeamName.setText(games.get(GAME_ONE).getLocalTeam());
+			setTeamIcon(firstLocalTeamIcon, games.get(GAME_ONE).getLocalTeam());
+			firstLocalTeamPoint.setText(String.valueOf(games.get(GAME_ONE).getLocalScore()));
 	    
 	    
-			firstVisitorTeamName.setText(games.get(4).getVisitorTeam());
-			setTeamIcon(firstVisitorTeamIcon, games.get(4).getVisitorTeam());
-			firstVisitorTeamPoint.setText(String.valueOf(games.get(4).getVisitorScore()));
+			firstVisitorTeamName.setText(games.get(GAME_ONE).getVisitorTeam());
+			setTeamIcon(firstVisitorTeamIcon, games.get(GAME_ONE).getVisitorTeam());
+			firstVisitorTeamPoint.setText(String.valueOf(games.get(GAME_ONE).getVisitorScore()));
 	     
 	    
 	    
-			secondLocalTeamName.setText(games.get(6).getLocalTeam());
-			setTeamIcon(secondLocalTeamIcon, games.get(6).getLocalTeam());
-			secondLocalTeamPoint.setText(String.valueOf(games.get(6).getLocalScore()));
+			secondLocalTeamName.setText(games.get(GAME_TWO).getLocalTeam());
+			setTeamIcon(secondLocalTeamIcon, games.get(GAME_TWO).getLocalTeam());
+			secondLocalTeamPoint.setText(String.valueOf(games.get(GAME_TWO).getLocalScore()));
 		  
 			
-			secondVisitorTeamName.setText(games.get(6).getVisitorTeam());
-			setTeamIcon(secondVisitorTeamIcon, games.get(6).getVisitorTeam());
-			secondVisitorTeamPoint.setText(String.valueOf(games.get(6).getVisitorScore()));
+			secondVisitorTeamName.setText(games.get(GAME_TWO).getVisitorTeam());
+			setTeamIcon(secondVisitorTeamIcon, games.get(GAME_TWO).getVisitorTeam());
+			secondVisitorTeamPoint.setText(String.valueOf(games.get(GAME_TWO).getVisitorScore()));
 		
 		  
 		  
-			thirdLocalTeamName.setText(games.get(10).getLocalTeam());
-			setTeamIcon(thirdLocalTeamIcon, games.get(10).getLocalTeam());
-			thirdLocalTeamPoint.setText(String.valueOf(games.get(10).getLocalScore()));
+			thirdLocalTeamName.setText(games.get(GAME_THREE).getLocalTeam());
+			setTeamIcon(thirdLocalTeamIcon, games.get(GAME_THREE).getLocalTeam());
+			thirdLocalTeamPoint.setText(String.valueOf(games.get(GAME_THREE).getLocalScore()));
 		  
 		  
-			thirdVisitorTeamName.setText(games.get(10).getVisitorTeam());
-			setTeamIcon(thirdVisitorTeamIcon, games.get(10).getVisitorTeam());
-			thirdVisitorTeamPoint.setText(String.valueOf(games.get(10).getVisitorScore()));
+			thirdVisitorTeamName.setText(games.get(GAME_THREE).getVisitorTeam());
+			setTeamIcon(thirdVisitorTeamIcon, games.get(GAME_THREE).getVisitorTeam());
+			thirdVisitorTeamPoint.setText(String.valueOf(games.get(GAME_THREE).getVisitorScore()));
 	    
 		}
 

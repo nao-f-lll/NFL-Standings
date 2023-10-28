@@ -3,8 +3,6 @@ package com.standings.util;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
-
 import com.standings.model.FootballTeamName;
 import com.standings.model.Game;
 import com.standings.model.Team;
@@ -24,6 +22,7 @@ public class StandingsCalculation {
 		 
 			asignteamNames();
 			initializeTheCalculation(teamsNames, teams, games, weeks);
+			//organizeMatchesIntoWeeks(games,  weeks);
 		}
 		
 		
@@ -44,7 +43,8 @@ public class StandingsCalculation {
 		
 		private static void initializeTheCalculation(String[] teamsNames, ArrayList<Team> teams,  List<Game> games, List<List<Game>> weeks) {
 			
-			games.addAll(generateMatchesData(teamsNames)); 
+			games.addAll(generateMatchesDataFirstHalfPart(teamsNames)); 
+			games.addAll(generateMatchesDataSecondHalfPart(teamsNames));
 			updateStandings(teams, games);           
 			sortStandings(teams);
 			//organizeMatchesIntoWeeks(games, teamsNames, weeks);
@@ -87,7 +87,7 @@ public class StandingsCalculation {
 	    
 		  //REQUIRES : list of teams and list of games musn't be null.
 		  //MODIFIES : Team
-		  //EFFECTS  : update the fields of a teams based on the given games.
+		  //EFFECTS  : update the fields of a team based on the given games.
 		 
 	    public static void updateStandings(List<Team> teams, List<Game> games) {
 	     	
@@ -224,71 +224,66 @@ public class StandingsCalculation {
 
 	    
 		  //MODIFIES : games
-		  //EFFECTS  : returns the games list filled with random matches data.		 
-	    
-	    
-	    private static List<Game> generateMatchesData(String[] teams) {
+		  //EFFECTS  : returns the games list filled with random matches data.	
+
+
+	    private static List<Game> generateMatchesDataFirstHalfPart(String[] teams) {
 	        List<Game> games = new ArrayList<>();
-	        Random random = new Random();
+	        int totalWeeks = 5;
+	        int gamesPerWeek = teams.length / 2;
 
+	        for (int week = 1; week <= totalWeeks; week++) {
+	            for (int i = 0; i < gamesPerWeek; i++) {
+	                String team1 = teams[i];
+	                String team2 = teams[teams.length - 1 - i];
 
-	        
-	        for (int i = 0; i < teams.length; i++) {
-	            for (int j = i + 1; j < teams.length; j++) {
-	                int localScore = random.nextInt(30); 
-	                int visitorScore = random.nextInt(30);
+	                int localScore = (int) (Math.random() * 31);
+	                int visitorScore = (int) (Math.random() * 31);
 
-	                Game match = new Game(teams[i], teams[j], localScore, visitorScore, defaultLocalScore, defaultVisitorScore);
-	                games.add(match);	                
-	                
-	                System.out.println(match.getLocalTeam()+ " " + match.getLocalScore() + " " + match.getVisitorTeam() + " " + match.getVisitorScore() );
+	                Game game = new Game(team1, team2, localScore, visitorScore, defaultLocalScore, defaultVisitorScore, week);
+	                games.add(game);
+
+	                System.out.println(game.getLocalTeam() + " " + game.getLocalScore() + " " + game.getVisitorTeam() + " " + game.getVisitorScore() + " " + game.getWeekNumber());
 	            }
+
+	        
+	            rotateTeamsArray(teams);
 	        }
-	        
-	        
-	        
-	        
+
 	        return games;
 	    }
 	    
-	    
-	    
-	    ///////////////////////////////////////////////
-	    
-	   /* 
-	    private static void organizeMatchesIntoWeeks(List<Game> games, String[] teams, List<List<Game>> weeks) {
-	        List<String> teamsList = new ArrayList<>();
-	        for (String team : teams) {
-	            teamsList.add(team);
-	        }
 
-	        for (int week = 0; week < teams.length - 1; week++) {
-	            List<Game> weekGames = new ArrayList<>();
-	            for (int i = 0; i < teamsList.size(); i++) {
-	                int localTeamIndex = i;
-	                int visitorTeamIndex = (i + week) % teamsList.size();
-	                String localTeam = teamsList.get(localTeamIndex);
-	                String visitorTeam = teamsList.get(visitorTeamIndex);
+	    private static List<Game> generateMatchesDataSecondHalfPart(String[] teams) {
+	        List<Game> games = new ArrayList<>();
+	        int totalWeeks = 9;
+	        int gamesPerWeek = teams.length / 2;
 
-	                Game matchedGame = null;
-	                for (Game game : games) {
-	                    if ((game.getLocalTeam().equals(localTeam) && game.getVisitorTeam().equals(visitorTeam)) ||
-	                            (game.getLocalTeam().equals(visitorTeam) && game.getVisitorTeam().equals(localTeam))) {
-	                        weekGames.add(game);
-	                        matchedGame = game;
-	                        break;
-	                    }
-	                }
+	        for (int week = 6; week <= totalWeeks; week++) {
+	            for (int i = 0; i < gamesPerWeek; i++) {
+	                String team1 = teams[i];
+	                String team2 = teams[teams.length - 1 - i];
 
-	                if (matchedGame != null) {
-	                    //games.remove(matchedGame);
-	                }
+	                int localScore = (int) (Math.random() * 31);
+	                int visitorScore = (int) (Math.random() * 31);
+
+	                Game game = new Game(team2, team1, localScore, visitorScore, defaultLocalScore, defaultVisitorScore, week);
+	                games.add(game);
+
+	                System.out.println(game.getLocalTeam() + " " + game.getLocalScore() + " " + game.getVisitorTeam() + " " + game.getVisitorScore() + " " + game.getWeekNumber());
 	            }
-	            weeks.add(weekGames);
+
+	        
+	            rotateTeamsArray(teams);
 	        }
+
+	        return games;
 	    }
 
-	    */
-    
+	    private static void rotateTeamsArray(String[] teams) {
+	        String temp = teams[teams.length - 1];
+	        System.arraycopy(teams, 1, teams, 2, teams.length - 2);
+	        teams[1] = temp;
+	    }
 	    
 }

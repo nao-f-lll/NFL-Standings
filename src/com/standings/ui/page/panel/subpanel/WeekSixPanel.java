@@ -1,10 +1,13 @@
 package com.standings.ui.page.panel.subpanel;
 
+import static com.standings.model.ParentFrame.ResizeIconStatic;
+
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -42,6 +45,11 @@ public class WeekSixPanel extends JPanel{
 	private ArrayList<Team> teams;
 	private List<Game> games;
 	private Map<String, String> teamLogos;
+	
+	
+	final int  GAME_ONE = 15;
+	final int  GAME_TWO = 16;
+	final int  GAME_THREE = 17;
 	
 	public WeekSixPanel(ArrayList<Team> teams, List<Game> games,  Map<String, String> teamLogos) {
 		
@@ -162,6 +170,52 @@ public class WeekSixPanel extends JPanel{
 	       thirdVisitorTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       thirdVisitorTeamPoint.setBounds(1305, 221, 58, 95);
 	       this.add(thirdVisitorTeamPoint);
-	
+	       
+	       addGameInfo(this.teams, this.games);
 	}
+	
+	public void addGameInfo(ArrayList<Team> teams,  List<Game> games) {
+        
+		
+		firstLocalTeamName.setText(games.get(GAME_ONE).getLocalTeam());
+	    setTeamIcon(firstLocalTeamIcon, games.get(GAME_ONE).getLocalTeam());
+        firstLocalTeamPoint.setText(String.valueOf(games.get(GAME_ONE).getLocalScore()));
+        
+        
+        firstVisitorTeamName.setText(games.get(GAME_ONE).getVisitorTeam());
+        setTeamIcon(firstVisitorTeamIcon, games.get(GAME_ONE).getVisitorTeam());
+        firstVisitorTeamPoint.setText(String.valueOf(games.get(GAME_ONE).getVisitorScore()));
+	
+     
+          secondLocalTeamName.setText(games.get(GAME_TWO).getLocalTeam());
+          setTeamIcon(secondLocalTeamIcon, games.get(GAME_TWO).getLocalTeam());
+    	  secondLocalTeamPoint.setText(String.valueOf(games.get(GAME_TWO).getLocalScore()));
+    	  
+    	
+    	  secondVisitorTeamName.setText(games.get(GAME_TWO).getVisitorTeam());
+    	  setTeamIcon(secondVisitorTeamIcon, games.get(GAME_TWO).getVisitorTeam());
+    	  secondVisitorTeamPoint.setText(String.valueOf(games.get(GAME_TWO).getVisitorScore()));
+    	
+    	  
+    	  
+    	  thirdLocalTeamName.setText(games.get(GAME_THREE).getLocalTeam());
+    	  setTeamIcon(thirdLocalTeamIcon, games.get(GAME_THREE).getLocalTeam());
+    	  thirdLocalTeamPoint.setText(String.valueOf(games.get(GAME_THREE).getLocalScore()));
+    	  
+    	  
+    	  thirdVisitorTeamName.setText(games.get(GAME_THREE).getVisitorTeam());
+    	  setTeamIcon(thirdVisitorTeamIcon, games.get(GAME_THREE).getVisitorTeam());
+    	  thirdVisitorTeamPoint.setText(String.valueOf(games.get(GAME_THREE).getVisitorScore()));
+    }
+	
+	
+	private void setTeamIcon(JLabel label, String teamName) {
+	    if (teamLogos.containsKey(teamName)) {
+	        String iconPath = teamLogos.get(teamName);
+	        label.setIcon(new ImageIcon(ResizeIconStatic(iconPath, 140, 90)));
+	    } else {
+	        label.setIcon(null);
+	    }
+	}
+	
 }

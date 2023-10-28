@@ -52,7 +52,6 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	
 	private ArrayList<Team> teams;
 	private List<Game> games;
-	private List<List<Game>> weeks;
 	private Map<String, String> teamLogos = new HashMap<>();
 	
 	public ScoresPanel(JPanel panelButton, ArrayList<Team> teams, List<Game> games, List<List<Game>> weeks) {
@@ -61,15 +60,10 @@ public class ScoresPanel extends JPanel implements ActionListener{
 		this.panelButton = panelButton;
 		this.games = games;
 		this.teams = teams;
-		this.weeks = weeks;
 		
 		initializeTeamLogos();
 		initializeWeekPanels();
-		
-	
-		
-		
-		
+				
 	       weeksPanelButton = new JPanel();
 	       weeksPanelButton.setLayout(null);
 	       weeksPanelButton.setBackground(Color.WHITE);
@@ -100,9 +94,6 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekTwoButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);   
 	       weeksPanelButton.add(weekTwoButton);
 	       
-	       
-	       
-
 	       
 	       weekThreeButton = new JButton("J-3");
 	       weekThreeButton.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -161,8 +152,6 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekSevenButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
 	       weeksPanelButton.add(weekSevenButton);
 
-	       
-	       
 
 	       
 	       weekEighthButton = new JButton("J-8");
@@ -209,36 +198,25 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekEighthButton.addActionListener(this);
 	       weekNineButton.addActionListener(this);
 	       weekTenButton.addActionListener(this);
-	       
-	       
-	       
-	       
-	   
+	          
 	}
-
-
-	
-	
 	
 	public void initializeWeekPanels() {
 		
-		 weekOnePanel   = new WeekOnePanel(this.teams, this.games, teamLogos);
-		 weekTwoPanel   = new WeekTwoPanel(this.teams, this.games, teamLogos);
-		 weekThreePanel = new WeekThreePanel(this.teams, this.games, teamLogos);
-		 weekFourPanel  = new WeekFourPanel(this.teams, this.games, teamLogos);
-		 weekFivePanel  = new WeekFivePanel(this.teams, this.games, teamLogos);
-		 //weekSixPanel   = new WeekSixPanel();
-		 //weekSevenPanel = new WeekSevenPanel();
-		 //weekEighthPanel = new WeekEighthPanel();
-		 //weekNinePanel  = new WeekNinePanel();
-		 //weekTenPanel   = new WeekTenPanel();
-		
-		
+		 weekOnePanel    = new WeekOnePanel(this.teams, this.games, teamLogos);
+		 weekTwoPanel    = new WeekTwoPanel(this.teams, this.games, teamLogos);
+		 weekThreePanel  = new WeekThreePanel(this.teams, this.games, teamLogos);
+		 weekFourPanel   = new WeekFourPanel(this.teams, this.games, teamLogos);
+		 weekFivePanel   = new WeekFivePanel(this.teams, this.games, teamLogos);
+		 weekSixPanel    = new WeekSixPanel(this.teams, this.games, teamLogos);
+		 weekSevenPanel  = new WeekSevenPanel(this.teams, this.games, teamLogos);
+		 weekEighthPanel = new WeekEighthPanel(this.teams, this.games, teamLogos);
+		 weekNinePanel   = new WeekNinePanel(this.teams, this.games, teamLogos);
+		 weekTenPanel    = new WeekTenPanel(this.teams, this.games, teamLogos);
 		
 		 this.add(weekOnePanel);
 	}
 	
-	/////////////////////////////////////////////////////////////////////
 	public void renderWeeksScores(int selectedWeek) {
 		
 		switch (selectedWeek) {
@@ -255,17 +233,26 @@ public class ScoresPanel extends JPanel implements ActionListener{
 			weekFourPanel.addGameInfo(this.teams, this.games);
 			break;
 		case 5:
-			weekFivePanel.addGameInfo(this.teams, this.games);;
-			break;		
+			weekFivePanel.addGameInfo(this.teams, this.games);
+			break;	
+		case 6:
+			weekSixPanel.addGameInfo(this.teams, this.games);
+			break;
+		case 7:
+			weekSevenPanel.addGameInfo(this.teams, this.games);
+			break;
+		case 8:
+			weekEighthPanel.addGameInfo(this.teams, this.games);
+			break;
+		case 9:
+			weekNinePanel.addGameInfo(this.teams, this.games);
+			break;
+		case 10:			
+			weekTenPanel.addGameInfo(this.teams, this.games);
+			break;
 		default:
 			
 		}
-		
-		
-	
-		
-		
-
 	}
 	
 
@@ -302,9 +289,7 @@ public class ScoresPanel extends JPanel implements ActionListener{
         buttonPanelMap.put(weekEighthButton, weekEighthPanel);
         buttonPanelMap.put(weekNineButton, weekNinePanel);
         buttonPanelMap.put(weekTenButton, weekTenPanel);
-
-	
-        
+    
         for (JButton button : buttonPanelMap.keySet()) {
             button.setBorder(null);
         }
@@ -315,9 +300,6 @@ public class ScoresPanel extends JPanel implements ActionListener{
         if (panelToShow != null) {
             clickedButton.setBorder(new CustomBorder(25));
             showPanel(panelToShow);
-        }
-        
+        }  
     }
-    
-    
 }

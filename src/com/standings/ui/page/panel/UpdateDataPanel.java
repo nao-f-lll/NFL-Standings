@@ -54,6 +54,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     
     private final int GAME_IS_ALREADY_IN_STANDINGS = 10;
     
+    private final int WEEK_NUMBER_IS_INCORRECT = 20;
+    
 	
     private JLabel localClubLabel;
     private JLabel localClubPointsLabel;
@@ -81,7 +83,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 
 	private int validationNumber;
 	/////////////////////
-	private int selectedWeekNumber = 0;
+	private int selectedWeekNumber;
     
 
 
@@ -322,7 +324,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				if (!isgameExist) {
 
 					
-				new AddGameUtil(this.games,localClubField.getText(),visitorClubField.getText(),localClubPointsField.getText(),visitorClubPointsField.getText());		
+				new AddGameUtil(this.games,localClubField.getText(),visitorClubField.getText(),localClubPointsField.getText(),visitorClubPointsField.getText(), whichWeekIsSelected());		
 				for (Team team : this.teams) {
 					if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
 						int sizeOfListOfGames = games.size() - 1;
@@ -332,11 +334,12 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				}
 				
 				StandingsCalculation.sortStandings(this.teams);
-				standingsPanel.renderUpdatedStandings();		
+				standingsPanel.renderUpdatedStandings();
+				scoresPanel.renderWeeksScores(whichWeekIsSelected());
 				resetFieldsAndWeek();
 					
 				}
-				
+				/// add fedback to the user
 				
 			}
 
@@ -356,32 +359,42 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				handleValidationNumber(validationNumber); 
 			} else {
 				
+				boolean updateStandings = false;
+				
 				for (int i = 0; i < games.size(); i++) {
 					
 					if (games.get(i).getLocalTeam().equals(localClubField.getText()) && games.get(i).getVisitorTeam().equals(visitorClubField.getText())) {
-							
+						System.out.println(games.get(i).getWeekNumber() + " game");
+						System.out.println(whichWeekIsSelected() + " selected");
+						if (games.get(i).getWeekNumber() == whichWeekIsSelected()) {
 						
-						games.get(i).setOldLocalScore(games.get(i).getLocalScore());
-						games.get(i).setOldVisitorScore(games.get(i).getVisitorScore());
 						
-						games.get(i).setLocalScore(Integer.parseInt(localClubPointsField.getText()));
-						games.get(i).setVisitorScore(Integer.parseInt(visitorClubPointsField.getText()));
+							games.get(i).setOldLocalScore(games.get(i).getLocalScore());
+							games.get(i).setOldVisitorScore(games.get(i).getVisitorScore());
 						
-						for (Team team : this.teams) {
-							if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
-								StandingsCalculation.updateStandings(team, games.get(i), EXISTING_STANDINGS_TYPE);  
+							games.get(i).setLocalScore(Integer.parseInt(localClubPointsField.getText()));
+							games.get(i).setVisitorScore(Integer.parseInt(visitorClubPointsField.getText()));
+						
+							for (Team team : this.teams) {
+								if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
+									StandingsCalculation.updateStandings(team, games.get(i), EXISTING_STANDINGS_TYPE);  
 								
+								}
 							}
+							updateStandings = true;
+						} else {
+							handleValidationNumber(WEEK_NUMBER_IS_INCORRECT);
 						}
-					} 
+					}
 				}
 				
+				
+				if (updateStandings) {
 				StandingsCalculation.sortStandings(this.teams);
 				standingsPanel.renderUpdatedStandings();
 				scoresPanel.renderWeeksScores(whichWeekIsSelected());	
-				System.out.println(whichWeekIsSelected());
 				resetFieldsAndWeek();
-				
+				}
 				/// add fedback to the user
 			}
 	
@@ -393,31 +406,30 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	}
 	
 	
-	/////////////////////////////////////////////////////////////////
-	private int whichWeekIsSelected() {
+	
 
-    weekComboBox.addActionListener(new ActionListener() {
+	private int whichWeekIsSelected() {
+	    weekComboBox.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	          
 	            String selectedWeek = (String) weekComboBox.getSelectedItem();
+	            String weekNumber = selectedWeek.substring(7);
 
-	            String[] parts = selectedWeek.split(" ");
-	            if (parts.length == 2) {
-	                String weekNumber = parts[1];
+	            try {
 	                selectedWeekNumber = Integer.parseInt(weekNumber);
-	                
+	                System.out.println(selectedWeekNumber + " from tehran"); // Move this line here
+	            } catch (NumberFormatException ex) {
+	                System.err.println("Error parsing week number: " + ex.getMessage());
+	                selectedWeekNumber = -1;
 	            }
-	            
 	        }
 	    });
-    	System.out.println(selectedWeekNumber + "from inside tehran");
+
+	    // Don't print selectedWeekNumber here
 	    return selectedWeekNumber;
 	}
-	
 
-	
-	
+
 	public void handleValidationNumber(int validationNumber) {
 		
 		switch (validationNumber) {
@@ -447,6 +459,9 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			
 		case GAME_IS_ALREADY_IN_STANDINGS:
 			userDialog("Este partido ya existe, asegurate que has introducido un nuevo partido","Requisitos de campos");
+			break;
+		case WEEK_NUMBER_IS_INCORRECT:
+			userDialog("La semana del partido que quieres modifcar es incorrecta", "Requisitos de campos");
 			break;
 		default :
 		}

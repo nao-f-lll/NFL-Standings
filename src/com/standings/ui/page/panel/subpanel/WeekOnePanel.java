@@ -45,8 +45,12 @@ public class WeekOnePanel extends JPanel{
 	private ArrayList<Team> teams;
 	private List<Game> games;
 	private Map<String, String> teamLogos;
-	private List<List<Game>> weeks;
 	
+	final int  GAME_ONE = 0;
+	final int  GAME_TWO = 1;
+	final int  GAME_THREE = 2;
+	
+
 	public WeekOnePanel(ArrayList<Team> teams, List<Game> games, Map<String, String> teamLogos) {
 		
 		   	this.setBounds(0, 115, 1525, 845);
@@ -168,39 +172,41 @@ public class WeekOnePanel extends JPanel{
 	}
 	
 	
+
+			
+	
 	public void addGameInfo(ArrayList<Team> teams,  List<Game> games) {
         
 		
-		firstLocalTeamName.setText(games.get(0).getLocalTeam());
-	    setTeamIcon(firstLocalTeamIcon, games.get(0).getLocalTeam());
-        firstLocalTeamPoint.setText(String.valueOf(games.get(0).getLocalScore()));
+		firstLocalTeamName.setText(games.get(GAME_ONE).getLocalTeam());
+	    setTeamIcon(firstLocalTeamIcon, games.get(GAME_ONE).getLocalTeam());
+        firstLocalTeamPoint.setText(String.valueOf(games.get(GAME_ONE).getLocalScore()));
         
         
-        firstVisitorTeamName.setText(games.get(0).getVisitorTeam());
-        setTeamIcon(firstVisitorTeamIcon, games.get(0).getVisitorTeam());
-        firstVisitorTeamPoint.setText(String.valueOf(games.get(0).getVisitorScore()));
-         
-        
-       
-          secondLocalTeamName.setText(games.get(9).getLocalTeam());
-          setTeamIcon(secondLocalTeamIcon, games.get(9).getLocalTeam());
-    	  secondLocalTeamPoint.setText(String.valueOf(games.get(9).getLocalScore()));
+        firstVisitorTeamName.setText(games.get(GAME_ONE).getVisitorTeam());
+        setTeamIcon(firstVisitorTeamIcon, games.get(GAME_ONE).getVisitorTeam());
+        firstVisitorTeamPoint.setText(String.valueOf(games.get(GAME_ONE).getVisitorScore()));
+	
+     
+          secondLocalTeamName.setText(games.get(GAME_TWO).getLocalTeam());
+          setTeamIcon(secondLocalTeamIcon, games.get(GAME_TWO).getLocalTeam());
+    	  secondLocalTeamPoint.setText(String.valueOf(games.get(GAME_TWO).getLocalScore()));
     	  
     	
-    	  secondVisitorTeamName.setText(games.get(9).getVisitorTeam());
-    	  setTeamIcon(secondVisitorTeamIcon, games.get(9).getVisitorTeam());
-    	  secondVisitorTeamPoint.setText(String.valueOf(games.get(9).getVisitorScore()));
+    	  secondVisitorTeamName.setText(games.get(GAME_TWO).getVisitorTeam());
+    	  setTeamIcon(secondVisitorTeamIcon, games.get(GAME_TWO).getVisitorTeam());
+    	  secondVisitorTeamPoint.setText(String.valueOf(games.get(GAME_TWO).getVisitorScore()));
     	
     	  
     	  
-    	  thirdLocalTeamName.setText(games.get(14).getLocalTeam());
-    	  setTeamIcon(thirdLocalTeamIcon, games.get(14).getLocalTeam());
-    	  thirdLocalTeamPoint.setText(String.valueOf(games.get(14).getLocalScore()));
+    	  thirdLocalTeamName.setText(games.get(GAME_THREE).getLocalTeam());
+    	  setTeamIcon(thirdLocalTeamIcon, games.get(GAME_THREE).getLocalTeam());
+    	  thirdLocalTeamPoint.setText(String.valueOf(games.get(GAME_THREE).getLocalScore()));
     	  
     	  
-    	  thirdVisitorTeamName.setText(games.get(14).getVisitorTeam());
-    	  setTeamIcon(thirdVisitorTeamIcon, games.get(14).getVisitorTeam());
-    	  thirdVisitorTeamPoint.setText(String.valueOf(games.get(14).getVisitorScore()));
+    	  thirdVisitorTeamName.setText(games.get(GAME_THREE).getVisitorTeam());
+    	  setTeamIcon(thirdVisitorTeamIcon, games.get(GAME_THREE).getVisitorTeam());
+    	  thirdVisitorTeamPoint.setText(String.valueOf(games.get(GAME_THREE).getVisitorScore()));
     }
 	
 	private void setTeamIcon(JLabel label, String teamName) {

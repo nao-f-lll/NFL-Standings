@@ -2,15 +2,17 @@ package com.standings.model;
 
 public class Game {
 	
-	 private final String localTeam;
+	 	private final String localTeam;
 	    private final String visitorTeam;
 	    private int localScore;
 	    private int visitorScore;
 	    
 	    private int oldLocalScore;
 	    private int oldVisitorScore;
+	    
+	    private int weekNumber;
 
-	    public Game(String localTeam, String visitorTeam, int localScore, int visitorScore, int oldLocalScore, int oldVisitorScore) {
+	    public Game(String localTeam, String visitorTeam, int localScore, int visitorScore, int oldLocalScore, int oldVisitorScore, int weekNumber) {
 	    	
 	        this.localTeam = localTeam;
 	        this.visitorTeam = visitorTeam;
@@ -20,6 +22,7 @@ public class Game {
 	        this.oldLocalScore = oldLocalScore;
 	        this.oldVisitorScore = oldVisitorScore;
 	        
+	        this.weekNumber = weekNumber;
 	    }
 
 	    // getters
@@ -36,6 +39,8 @@ public class Game {
 	    public int getOldLocalScore() { return oldLocalScore; }
 	    
 	    public int getOldVisitorScore() { return oldVisitorScore; }
+	    
+	    public int getWeekNumber() { return weekNumber;}
 	    
 	    // setters
 
