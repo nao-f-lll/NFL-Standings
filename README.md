@@ -3,7 +3,7 @@
 <p align="center">
    <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/nao-f-lll/NFL-Standings/blob/main/.github/readme-images/app-icon.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/nao-f-lll/nao-f-lll.github.io/blob/main/imagenes/logos/nofondonegro.png?raw=true">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/nao-f-lll/NFL-Standings/blob/main/.github/readme-images/dark-app-icon.png">
   <img src="https://github.com/nao-f-lll/NFL-Standings/blob/main/.github/readme-images/app-icon.png" alt="app icon" width="200">
 </picture>
 </p>
