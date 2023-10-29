@@ -212,12 +212,19 @@ public class ScoresPanel extends JPanel implements ActionListener{
 		 weekSevenPanel  = new WeekSevenPanel(this.teams, this.games, teamLogos);
 		 weekEighthPanel = new WeekEighthPanel(this.teams, this.games, teamLogos);
 		 weekNinePanel   = new WeekNinePanel(this.teams, this.games, teamLogos);
-		 weekTenPanel    = new WeekTenPanel(this.teams, this.games, teamLogos);
+		 weekTenPanel   = new WeekTenPanel(this.teams, this.games, teamLogos);
+
 		
 		 this.add(weekOnePanel);
 	}
 	
 	public void renderWeeksScores(int selectedWeek) {
+		
+		int totalnumberOfGames;
+		int firstGameNumber;
+		int secondGameNumber;
+		int lastGameNumber;
+		int gameNumber;
 		
 		switch (selectedWeek) {
 		case 1:
@@ -247,13 +254,37 @@ public class ScoresPanel extends JPanel implements ActionListener{
 		case 9:
 			weekNinePanel.addGameInfo(this.teams, this.games);
 			break;
-		case 10:			
-			weekTenPanel.addGameInfo(this.teams, this.games);
+		case 10:	
+			 totalnumberOfGames = games.size();
+			 if (totalnumberOfGames == 30) {
+				 firstGameNumber = totalnumberOfGames - 1;
+				 secondGameNumber = totalnumberOfGames - 2;
+				 lastGameNumber = totalnumberOfGames - 3;
+ 
+				 weekTenPanel.addGameInfo(this.teams, this.games, lastGameNumber);
+				 weekTenPanel.addGameInfo(this.teams, this.games, secondGameNumber);
+				 weekTenPanel.addGameInfo(this.teams, this.games, firstGameNumber);
+				 
+			 } else if (totalnumberOfGames == 29) {
+				 firstGameNumber = totalnumberOfGames - 1;
+				 secondGameNumber = totalnumberOfGames - 2;
+				 
+				 weekTenPanel.addGameInfo(this.teams, this.games, secondGameNumber);
+				 weekTenPanel.addGameInfo(this.teams, this.games, firstGameNumber);
+				
+			 } else if (totalnumberOfGames == 28){
+				 
+				    gameNumber = totalnumberOfGames - 1;
+					weekTenPanel.addGameInfo(this.teams, this.games, gameNumber);
+				 
+			 }
+
 			break;
 		default:
 			
 		}
 	}
+	
 	
 
 	private void initializeTeamLogos() {

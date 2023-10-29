@@ -22,7 +22,7 @@ public class StandingsCalculation {
 		 
 			asignteamNames();
 			initializeTheCalculation(teamsNames, teams, games, weeks);
-			//organizeMatchesIntoWeeks(games,  weeks);
+			
 		}
 		
 		
@@ -47,7 +47,7 @@ public class StandingsCalculation {
 			games.addAll(generateMatchesDataSecondHalfPart(teamsNames));
 			updateStandings(teams, games);           
 			sortStandings(teams);
-			//organizeMatchesIntoWeeks(games, teamsNames, weeks);
+			
 		}
 		
 		  //REQUIRES : list musen't be empty.
@@ -243,7 +243,7 @@ public class StandingsCalculation {
 	                Game game = new Game(team1, team2, localScore, visitorScore, defaultLocalScore, defaultVisitorScore, week);
 	                games.add(game);
 
-	                System.out.println(game.getLocalTeam() + " " + game.getLocalScore() + " " + game.getVisitorTeam() + " " + game.getVisitorScore() + " " + game.getWeekNumber());
+	                //System.out.println(game.getLocalTeam() + " " + game.getLocalScore() + " " + game.getVisitorTeam() + " " + game.getVisitorScore() + " " + game.getWeekNumber());
 	            }
 
 	        
@@ -270,7 +270,7 @@ public class StandingsCalculation {
 	                Game game = new Game(team2, team1, localScore, visitorScore, defaultLocalScore, defaultVisitorScore, week);
 	                games.add(game);
 
-	                System.out.println(game.getLocalTeam() + " " + game.getLocalScore() + " " + game.getVisitorTeam() + " " + game.getVisitorScore() + " " + game.getWeekNumber());
+	               // System.out.println(game.getLocalTeam() + " " + game.getLocalScore() + " " + game.getVisitorTeam() + " " + game.getVisitorScore() + " " + game.getWeekNumber());
 	            }
 
 	        

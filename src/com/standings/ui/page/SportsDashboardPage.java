@@ -42,30 +42,57 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
 	private List<List<Game>> weeks;
 	
 	
-	
 
-
-  
     public SportsDashboardPage() {
-        setTitle("Panel administrativo");
+    	
+    	
+    	initializeFrameGraphics();	
+    	initializeStandingsData();
+		initializePanelGraphics();	
+    		        
+    }
+     
+    
+    private void initializeFrameGraphics() {
+    	setTitle("Panel administrativo");
         setResizable(false);
         setSizeAndCenter();
+    }
 
+    private void setSizeAndCenter() {
+        setSize(1538, 850);
+        setLocationRelativeTo(null);
+    }
+    
+    
+    private void initializeStandingsData() {
         teams = new ArrayList<>();
         games = new ArrayList<>();
         weeks = new ArrayList<>();
-        
+    }
+    
+    private void initializePanelGraphics() {
+    	initializeMainPanel();
+    	initializePanelButton();
+    	initializeButtons();
+    	initializeButtonPanels();
+    	lastPaint();
+    }
+    
+    private void initializeMainPanel() {
         mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        
-        
-        
+        mainPanel.setLayout(new BorderLayout()); 	
+    }
+   
+    
+    private void initializePanelButton() {
         panelButton = new JPanel();
         panelButton.setBounds(0, 0, 1522, 60);
         panelButton.setBackground(Color.WHITE);
-        
-
-        
+        panelButton.setLayout(null);
+    }
+    
+    private void initializeButtonPanels() {
         standingsPanel = new StandingsPanel(teams, games, weeks);   
         scoresPanel = new ScoresPanel(panelButton, teams, games, weeks);
         teamsPanel = new TeamsPanel();          
@@ -76,72 +103,69 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         standingsPanel.setLayout(null);
         teamsPanel.setLayout(null);
         updateDataPanel.setLayout(null);
+      
         
- 
         mainPanel.add(scoresPanel, BorderLayout.CENTER);
         scoresPanel.add(panelButton);
  
-               
-       goToScoresButton = new JButton("Partidos");
-       goToScoresButton.setFont(new Font("Tahoma", Font.BOLD, 25));
-       goToScoresButton.setBounds(10, 10, 163, 33);
-       goToScoresButton.setFocusable(false);
-       goToScoresButton.setBackground(Color.WHITE);
-       goToScoresButton.setBorder(new CustomBorder(20));
-       goToScoresButton.setUI(new CustomButton());
+
        
+    }
+    
+    
+    private void initializeButtons() {
+        goToScoresButton = new JButton("Partidos");
+        goToScoresButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+        goToScoresButton.setBounds(10, 10, 163, 33);
+        goToScoresButton.setFocusable(false);
+        goToScoresButton.setBackground(Color.WHITE);
+        goToScoresButton.setBorder(new CustomBorder(20));
+        goToScoresButton.setUI(new CustomButton());
+        
+                 
+        goToStandingButton = new JButton("Clasificación");
+        goToStandingButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+        goToStandingButton.setBounds(205, 10, 212, 33);
+        goToStandingButton.setFocusable(false);
+        goToStandingButton.setBackground(Color.WHITE);
+        goToStandingButton.setUI(new CustomButton());
+        goToStandingButton.setBorder(null);
+        
+        goToTeamsButton = new JButton("Equipos");
+        goToTeamsButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+        goToTeamsButton.setBounds(427, 10, 152, 33);
+        goToTeamsButton.setFocusable(false);
+        goToTeamsButton.setBackground(Color.WHITE);
+        goToTeamsButton.setUI(new CustomButton()); 
+        goToTeamsButton.setBorder(null);
+        
+        goToUpdateDataButton = new JButton("Actualizar datos");
+        goToUpdateDataButton.setFont(new Font("Tahoma", Font.BOLD, 25));
+        goToUpdateDataButton.setBounds(1253, 10, 259, 33);
+        goToUpdateDataButton.setFocusable(false);
+        goToUpdateDataButton.setBackground(Color.WHITE);
+        goToUpdateDataButton.setUI(new CustomButton()); 
+        goToUpdateDataButton.setBorder(null);
                 
-       goToStandingButton = new JButton("Clasificación");
-       goToStandingButton.setFont(new Font("Tahoma", Font.BOLD, 25));
-       goToStandingButton.setBounds(205, 10, 212, 33);
-       goToStandingButton.setFocusable(false);
-       goToStandingButton.setBackground(Color.WHITE);
-       goToStandingButton.setUI(new CustomButton());
-       goToStandingButton.setBorder(null);
-       
-       goToTeamsButton = new JButton("Equipos");
-       goToTeamsButton.setFont(new Font("Tahoma", Font.BOLD, 25));
-       goToTeamsButton.setBounds(427, 10, 152, 33);
-       goToTeamsButton.setFocusable(false);
-       goToTeamsButton.setBackground(Color.WHITE);
-       goToTeamsButton.setUI(new CustomButton()); 
-       goToTeamsButton.setBorder(null);
-       
-       goToUpdateDataButton = new JButton("Actualizar datos");
-       goToUpdateDataButton.setFont(new Font("Tahoma", Font.BOLD, 25));
-       goToUpdateDataButton.setBounds(1253, 10, 259, 33);
-       goToUpdateDataButton.setFocusable(false);
-       goToUpdateDataButton.setBackground(Color.WHITE);
-       goToUpdateDataButton.setUI(new CustomButton()); 
-       goToUpdateDataButton.setBorder(null);
-               
-       goToScoresButton.addActionListener(this);
-       goToStandingButton.addActionListener(this);
-       goToTeamsButton.addActionListener(this);
-       goToUpdateDataButton.addActionListener(this);
-       panelButton.setLayout(null);
-                
-                
-       panelButton.add(goToScoresButton);
-       panelButton.add(goToStandingButton);
-       panelButton.add(goToTeamsButton);
-       panelButton.add(goToUpdateDataButton);
-       
-       
-             getContentPane().setLayout(new BorderLayout());
-             getContentPane().add(mainPanel, BorderLayout.CENTER);
-     	        
+        goToScoresButton.addActionListener(this);
+        goToStandingButton.addActionListener(this);
+        goToTeamsButton.addActionListener(this);
+        goToUpdateDataButton.addActionListener(this);
+        
+        
+        panelButton.add(goToScoresButton);
+        panelButton.add(goToStandingButton);
+        panelButton.add(goToTeamsButton);
+        panelButton.add(goToUpdateDataButton);
+        
+    }
+    
+    private void lastPaint() {
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(mainPanel, BorderLayout.CENTER);
     }
 
-    private void setSizeAndCenter() {
-        //Toolkit toolkit = Toolkit.getDefaultToolkit();
-        //Dimension screenSize = toolkit.getScreenSize();
-        //setSize(screenSize.width, screenSize.height);
-        setSize(1538, 850);
-        //setLocation(screenSize.width / 2 - getWidth() / 2, screenSize.height / 2 - getHeight() / 2);
-        setLocationRelativeTo(null);
-    }
-
+    
     private void showPanel(JPanel panelToShow) {
         mainPanel.removeAll();
         mainPanel.add(panelButton);
@@ -170,15 +194,4 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
             showPanel(panelToShow);
         }
     }
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-			        new SportsDashboardPage();			    
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 }

@@ -86,9 +86,9 @@ public class StandingsPanel extends JPanel  {
            renderUpdatedStandings();
                  
          
-         JScrollPane sp = new JScrollPane(table);
-         sp.setEnabled(false);
-         sp.setBounds(10, 70, 1502, 703);
+         JScrollPane scrollPane = new JScrollPane(table);
+         scrollPane.setEnabled(false);
+         scrollPane.setBounds(10, 70, 1502, 703);
 
 
          JTableHeader tableHeader = table.getTableHeader();
@@ -110,7 +110,7 @@ public class StandingsPanel extends JPanel  {
             table.setRowHeight(100);
          
             table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-            this.add(sp, BorderLayout.CENTER);
+            this.add(scrollPane, BorderLayout.CENTER);
 
 	}
 		public void renderUpdatedStandings() {		

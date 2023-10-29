@@ -55,9 +55,9 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
     private JTextField fullNameField;
     private JButton loginButton;
 	
-    private JLabel errorMessageForEmail = new JLabel();
-    private JLabel errorMessageForPassword = new JLabel();
-    private JLabel errorMessageForFullName = new JLabel();
+    private JLabel errorMessageForEmail;
+    private JLabel errorMessageForPassword ;
+    private JLabel errorMessageForFullName;
 	
 	
 	public SignUpPage(HashMap<String, String> loginInfo) {
@@ -237,17 +237,24 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	   initializeFullNameErrorMessage();
    }
    
-   private void initializeEmailErrorMessage() {
+   
+   
+
+   
+   private void initializeEmailErrorMessage() {	   
+	   	errorMessageForEmail = new JLabel();
 		errorMessageForEmail.setForeground(Color.RED);
 		rightInnerPanel.add(errorMessageForEmail);
 		errorMessageForEmail.setBounds(137, 167, 111, 25);
    }
    private void initializePasswordErrorMessage() {
+	    errorMessageForPassword = new JLabel();
 		errorMessageForPassword.setForeground(Color.RED);
 		rightInnerPanel.add(errorMessageForPassword);
 		errorMessageForPassword.setBounds(137, 232, 111, 25);
    }
    private void initializeFullNameErrorMessage() {
+	    errorMessageForFullName = new JLabel();
 		errorMessageForFullName.setForeground(Color.RED);
 		rightInnerPanel.add(errorMessageForFullName);
 		errorMessageForFullName.setBounds(137, 103, 111, 25);
@@ -330,6 +337,9 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	}
 	
 	
+	
+	//EFFECTS:  if the handleEmptyFields returns true ; call handleCredentialvalidation passing to it all the fields.
+	
 	private void validateLogin(String userFullName, String userEmail, String userPassword) {
 		
 		if(handleEmptyFields(userFullName, userEmail, userPassword)) {
@@ -338,7 +348,8 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	}
 	
 
-
+	//EFFECTS:  checks if any field is empty, if any call the promptErrorMessage with appropriate arguments.
+	
 	private boolean handleEmptyFields(String userFullName, String userEmail, String userPassword) {
 
 		if (SignUpValidationUtil.checkForEmptyField(userFullName, userEmail, userPassword)) {
@@ -372,6 +383,9 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 		return true;
 	}
 
+	//MODIFIES: this
+	//EFFECTS:  if the credentials pass all the validations, open the main frame; otherwise prompt 
+	//          the user with appropriate message.
 	
 	private void handleCredentialvalidation(String userFullName, String userEmail, String userPassword) {
 		
@@ -402,6 +416,9 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	}
 	
 	
+	//MODIFIES: this
+	//EFFECTS:  prompt a message based on the active bits; 1 equals true and 0 equals false.
+	
 	private void promptErrorMessage(int fullNameBit, int emailBit, int passwordBit, String errorMessage) {
 	    for (int i = 0; i < 3 ; i++) {
 	    	if (fullNameBit == 1) {
@@ -417,7 +434,9 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	    }
 	}
 	
-	
+
+	//EFFECTS:  make a dialog with the message an title given by the caller method.
+
 	private void userDialog(String warrningText, String warrningTitle) {
 		
         JOptionPane passwordRequirementPane = new JOptionPane(warrningText, JOptionPane.YES_OPTION);

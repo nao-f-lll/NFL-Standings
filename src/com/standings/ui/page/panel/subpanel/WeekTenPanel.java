@@ -42,81 +42,77 @@ public class WeekTenPanel extends JPanel{
 	private JLabel thirdVisitorTeamIcon;
 	private JLabel thirdVisitorTeamPoint;
 	
-	private ArrayList<Team> teams;
-	private List<Game> games;
 	private Map<String, String> teamLogos;
 	
-	private final int  GAME_ONE;
-	private final int  GAME_TWO;
-	private final int  GAME_THREE;
+	
+	private final int GAME_ONE = 27; 
+	private final int GAME_TWO = 28;
+	private final int GAME_THREE = 29; 
+	
 	
 	public WeekTenPanel(ArrayList<Team> teams, List<Game> games, Map<String, String> teamLogos) {
 		
 	   	this.setBounds(0, 115, 1525, 845);
 	   	this.setLayout(null);
-	   	this.games = games;
-	   	this.teams = teams;
 	   	this.teamLogos = teamLogos;
 	   	
-	    int totalnumberOfGames = games.size();
-	   	
-	   	GAME_ONE = totalnumberOfGames - 3;
-	   	GAME_TWO = totalnumberOfGames - 2;
-	   	GAME_THREE = totalnumberOfGames - 1;
    	
-	       firstLocalTeamName = new JLabel("");
+	       firstLocalTeamName = new JLabel("Unknown");
 	       firstLocalTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       firstLocalTeamName.setBounds(365, 80, 159, 95);
 	       this.add(firstLocalTeamName);
 	       
 	       firstLocalTeamIcon = new JLabel("");
+	       firstLocalTeamIcon.setIcon(new ImageIcon(ResizeIconStatic("/images/unkowen.png", 140, 90)));
 	       firstLocalTeamIcon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	       firstLocalTeamIcon.setBounds(127, 61, 186, 118);
 	       this.add(firstLocalTeamIcon);
 	       
-	       firstLocalTeamPoint = new JLabel("");
+	       firstLocalTeamPoint = new JLabel("0");
 	       firstLocalTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       firstLocalTeamPoint.setBounds(571, 80, 58, 95);
 	       this.add(firstLocalTeamPoint);
 	       
 	             
 	       
-	       firstVisitorTeamName = new JLabel("");
+	       firstVisitorTeamName = new JLabel("Unknown");
 	       firstVisitorTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       firstVisitorTeamName.setBounds(365, 210, 159, 95);
 	       this.add(firstVisitorTeamName);
 	       
 	       firstVisitorTeamIcon = new JLabel("");
+	       firstVisitorTeamIcon.setIcon(new ImageIcon(ResizeIconStatic("/images/unkowen.png", 140, 90)));
 	       firstVisitorTeamIcon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	       firstVisitorTeamIcon.setBounds(127, 195, 174, 138);
 	       this.add(firstVisitorTeamIcon);
 	       
 	     
 	       
-	       firstVisitorTeamPoint = new JLabel("");
+	       firstVisitorTeamPoint = new JLabel("0");
 	       firstVisitorTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       firstVisitorTeamPoint.setBounds(571, 210, 58, 95);
 	       this.add(firstVisitorTeamPoint);
 	       		       
 	       
-	       secondLocalTeamName = new JLabel("");
+	       secondLocalTeamName = new JLabel("Unknown");
 	       secondLocalTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       secondLocalTeamName.setBounds(365, 404, 116, 95);
 	       this.add(secondLocalTeamName);
 	       
 	       secondLocalTeamIcon = new JLabel("");
+	       secondLocalTeamIcon.setIcon(new ImageIcon(ResizeIconStatic("/images/unkowen.png", 140, 90)));
 	       secondLocalTeamIcon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	       secondLocalTeamIcon.setBounds(127, 381, 174, 118);
 	       this.add(secondLocalTeamIcon);
 	      	       
-	       secondLocalTeamPoint = new JLabel("");
+	       secondLocalTeamPoint = new JLabel("0");
 	       secondLocalTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       secondLocalTeamPoint.setBounds(571, 404, 58, 95);
 	       this.add(secondLocalTeamPoint);
 	       
        
 	       
-	       secondVisitorTeamName = new JLabel("");
+	       secondVisitorTeamName = new JLabel("Unknown");
 	       secondVisitorTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       secondVisitorTeamName.setBounds(355, 529, 126, 95);      
 	       this.add(secondVisitorTeamName);
@@ -124,93 +120,97 @@ public class WeekTenPanel extends JPanel{
 	      
 	       
 	       secondVisitorTeamIcon = new JLabel("");
+	       secondVisitorTeamIcon.setIcon(new ImageIcon(ResizeIconStatic("/images/unkowen.png", 140, 90)));
 	       secondVisitorTeamIcon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	       secondVisitorTeamIcon.setBounds(127, 517, 194, 118);
 	       this.add(secondVisitorTeamIcon);
 	       
 	       
 	       
-	       secondVisitorTeamPoint = new JLabel("");
+	       secondVisitorTeamPoint = new JLabel("0");
 	       secondVisitorTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       secondVisitorTeamPoint.setBounds(571, 529, 58, 95);
 	       this.add(secondVisitorTeamPoint);
 	       	       
 	       
-	       thirdLocalTeamName = new JLabel("");
+	       thirdLocalTeamName = new JLabel("Unknown");
 	       thirdLocalTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       thirdLocalTeamName.setBounds(1102, 80, 159, 95);
 	       this.add(thirdLocalTeamName);
 	       
 	       thirdLocalTeamIcon = new JLabel("");
+	       thirdLocalTeamIcon.setIcon(new ImageIcon(ResizeIconStatic("/images/unkowen.png", 140, 90)));
 	       thirdLocalTeamIcon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	       thirdLocalTeamIcon.setBounds(855, 51, 149, 138);
 	       this.add(thirdLocalTeamIcon);
 	       
-	       thirdLocalTeamPoint = new JLabel("");
+	       thirdLocalTeamPoint = new JLabel("0");
 	       thirdLocalTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       thirdLocalTeamPoint.setBounds(1305, 80, 58, 95);
 	       this.add(thirdLocalTeamPoint);
 	       
 	       
-	       thirdVisitorTeamName = new JLabel("");
+	       thirdVisitorTeamName = new JLabel("Unknown");
 	       thirdVisitorTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       thirdVisitorTeamName.setBounds(1102, 221, 159, 95);
 	       this.add(thirdVisitorTeamName);
 	       
 	       
 	       thirdVisitorTeamIcon = new JLabel("");
+	       thirdVisitorTeamIcon.setIcon(new ImageIcon(ResizeIconStatic("/images/unkowen.png", 140, 90)));
 	       thirdVisitorTeamIcon.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	       thirdVisitorTeamIcon.setBounds(855, 200, 176, 135);
 	       this.add(thirdVisitorTeamIcon);
 	       
-	       thirdVisitorTeamPoint = new JLabel("");
+	       thirdVisitorTeamPoint = new JLabel("0");
 	       thirdVisitorTeamPoint.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       thirdVisitorTeamPoint.setBounds(1305, 221, 58, 95);
 	       this.add(thirdVisitorTeamPoint);
 	       
-
-	       addGameInfo(this.teams, this.games);
        
 }
+	
 
-
-
-		
-
-public void addGameInfo(ArrayList<Team> teams,  List<Game> games) {
+public void addGameInfo(ArrayList<Team> teams,  List<Game> games,int gameNumber) {
     
 	
-	firstLocalTeamName.setText(games.get(GAME_ONE).getLocalTeam());
-    setTeamIcon(firstLocalTeamIcon, games.get(GAME_ONE).getLocalTeam());
-    firstLocalTeamPoint.setText(String.valueOf(games.get(GAME_ONE).getLocalScore()));
-    
-    
-    firstVisitorTeamName.setText(games.get(GAME_ONE).getVisitorTeam());
-    setTeamIcon(firstVisitorTeamIcon, games.get(GAME_ONE).getVisitorTeam());
-    firstVisitorTeamPoint.setText(String.valueOf(games.get(GAME_ONE).getVisitorScore()));
+   	if (gameNumber == GAME_ONE) {
+   		
+   		firstLocalTeamName.setText(games.get(gameNumber).getLocalTeam());
+   	    setTeamIcon(firstLocalTeamIcon, games.get(gameNumber).getLocalTeam());
+   	    firstLocalTeamPoint.setText(String.valueOf(games.get(gameNumber).getLocalScore()));
+   	    
+   	    
+   	    firstVisitorTeamName.setText(games.get(gameNumber).getVisitorTeam());
+   	    setTeamIcon(firstVisitorTeamIcon, games.get(gameNumber).getVisitorTeam());
+   	    firstVisitorTeamPoint.setText(String.valueOf(games.get(gameNumber).getVisitorScore()));
+   		
+   	} else if (gameNumber ==  GAME_TWO) {
+        secondLocalTeamName.setText(games.get(gameNumber).getLocalTeam());
+        setTeamIcon(secondLocalTeamIcon, games.get(gameNumber).getLocalTeam());
+  	  secondLocalTeamPoint.setText(String.valueOf(games.get(gameNumber).getLocalScore()));
+  	  
+  	
+  	  secondVisitorTeamName.setText(games.get(gameNumber).getVisitorTeam());
+  	  setTeamIcon(secondVisitorTeamIcon, games.get(gameNumber).getVisitorTeam());
+  	  secondVisitorTeamPoint.setText(String.valueOf(games.get(gameNumber).getVisitorScore()));
+  	  
+   	} else if (gameNumber ==  GAME_THREE)  {
+   		
+  	  thirdLocalTeamName.setText(games.get(gameNumber).getLocalTeam());
+  	  setTeamIcon(thirdLocalTeamIcon, games.get(gameNumber).getLocalTeam());
+  	  thirdLocalTeamPoint.setText(String.valueOf(games.get(gameNumber).getLocalScore()));
+  	  
+  	  
+  	  thirdVisitorTeamName.setText(games.get(gameNumber).getVisitorTeam());
+  	  setTeamIcon(thirdVisitorTeamIcon, games.get(gameNumber).getVisitorTeam());
+  	  thirdVisitorTeamPoint.setText(String.valueOf(games.get(gameNumber).getVisitorScore()));
+   	}
+   	
 
- 
-      secondLocalTeamName.setText(games.get(GAME_TWO).getLocalTeam());
-      setTeamIcon(secondLocalTeamIcon, games.get(GAME_TWO).getLocalTeam());
-	  secondLocalTeamPoint.setText(String.valueOf(games.get(GAME_TWO).getLocalScore()));
-	  
-	
-	  secondVisitorTeamName.setText(games.get(GAME_TWO).getVisitorTeam());
-	  setTeamIcon(secondVisitorTeamIcon, games.get(GAME_TWO).getVisitorTeam());
-	  secondVisitorTeamPoint.setText(String.valueOf(games.get(GAME_TWO).getVisitorScore()));
-	
-	  
-	  
-	  thirdLocalTeamName.setText(games.get(GAME_THREE).getLocalTeam());
-	  setTeamIcon(thirdLocalTeamIcon, games.get(GAME_THREE).getLocalTeam());
-	  thirdLocalTeamPoint.setText(String.valueOf(games.get(GAME_THREE).getLocalScore()));
-	  
-	  
-	  thirdVisitorTeamName.setText(games.get(GAME_THREE).getVisitorTeam());
-	  setTeamIcon(thirdVisitorTeamIcon, games.get(GAME_THREE).getVisitorTeam());
-	  thirdVisitorTeamPoint.setText(String.valueOf(games.get(GAME_THREE).getVisitorScore()));
 }
-
+ 	
+ 
 private void setTeamIcon(JLabel label, String teamName) {
     if (teamLogos.containsKey(teamName)) {
         String iconPath = teamLogos.get(teamName);

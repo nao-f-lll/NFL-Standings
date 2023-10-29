@@ -5,8 +5,6 @@ import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -15,7 +13,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -56,6 +53,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     
     private final int WEEK_NUMBER_IS_INCORRECT = 20;
     
+    private final int WEEK_SELECTED_FOR_THIS_GAME_IS_WRONG = 30;
+    
+    private final int GAME_DOES_NOT_EXISTS = 40;
+    
 	
     private JLabel localClubLabel;
     private JLabel localClubPointsLabel;
@@ -82,7 +83,6 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     private JLabel termsOfUse;
 
 	private int validationNumber;
-	/////////////////////
 	private int selectedWeekNumber;
     
 
@@ -107,19 +107,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     	this.standingsPanel = standingsPanel;
     	this.scoresPanel = scoresPanel;
     	
+   	
+    	createWeekComboBox();
     	
     	
-    	comboWeekModel = new DefaultComboBoxModel<>();	
-    	for (int i = 1; i < 11; i++) {
-    		comboWeekModel.addElement("Semana " + i);
-    		
-    	}
-    	
-        weekComboBox = new JComboBox<>(comboWeekModel);
-        weekComboBox.setBackground(Color.LIGHT_GRAY);
-        weekComboBox.setBounds(1033, 130, 114, 45);
-        this.add(weekComboBox);
-        
         localClubLabel = new JLabel("Equipo Local");
         localClubLabel.setBounds(829, 215, 103, 37);
         this.add(localClubLabel);
@@ -163,13 +154,11 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         localClubPointsField.setBounds(1250, 264, 35, 34);
         this.add(localClubPointsField);
         localClubPointsField.setColumns(10);
-    	fieldFocusListener(localClubPointsField,null);
         
         visitorClubPointsField = new JTextField();
         visitorClubPointsField.setColumns(10);
         visitorClubPointsField.setBounds(1250, 392, 35, 34);
         this.add(visitorClubPointsField);
-        fieldFocusListener(null,visitorClubPointsField);
         
         submitButton = new JButton("Guardar");
         submitButton.setBounds(778, 535, 130, 45);
@@ -307,6 +296,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			} else if(validationNumber == ALL_POINTS_ARE_INVALID || validationNumber == LOCAL_POINTS_ARE_INVALID || validationNumber == VISITOR_POINTS_ARE_INVALID) {
 				handleValidationNumber(validationNumber); 
 			} else {
+			
 				
 				
 				boolean isgameExist = false;
@@ -320,6 +310,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 						break;
 					}
 				}
+				
+				if (whichWeekIsSelected() == 10) {
 
 				if (!isgameExist) {
 
@@ -337,10 +329,12 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				standingsPanel.renderUpdatedStandings();
 				scoresPanel.renderWeeksScores(whichWeekIsSelected());
 				resetFieldsAndWeek();
+				/// add fedback to the user
 					
 				}
-				/// add fedback to the user
-				
+				} else if (!isgameExist){
+					handleValidationNumber(WEEK_SELECTED_FOR_THIS_GAME_IS_WRONG); 
+				}		
 			}
 
 			
@@ -360,12 +354,17 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			} else {
 				
 				boolean updateStandings = false;
+				boolean doesGameNotExist = true;
 				
+				 
+				 
 				for (int i = 0; i < games.size(); i++) {
 					
+		
+					
+					
 					if (games.get(i).getLocalTeam().equals(localClubField.getText()) && games.get(i).getVisitorTeam().equals(visitorClubField.getText())) {
-						System.out.println(games.get(i).getWeekNumber() + " game");
-						System.out.println(whichWeekIsSelected() + " selected");
+						
 						if (games.get(i).getWeekNumber() == whichWeekIsSelected()) {
 						
 						
@@ -382,11 +381,23 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 								}
 							}
 							updateStandings = true;
+							
 						} else {
 							handleValidationNumber(WEEK_NUMBER_IS_INCORRECT);
+							doesGameNotExist = false;
 						}
+						
 					}
 				}
+				
+
+			    
+
+					if (doesGameNotExist && !updateStandings) {	
+						handleValidationNumber(GAME_DOES_NOT_EXISTS);
+					}		
+				
+
 				
 				
 				if (updateStandings) {
@@ -394,8 +405,9 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				standingsPanel.renderUpdatedStandings();
 				scoresPanel.renderWeeksScores(whichWeekIsSelected());	
 				resetFieldsAndWeek();
-				}
 				/// add fedback to the user
+				}
+				
 			}
 	
 			
@@ -405,28 +417,42 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		}
 	}
 	
-	
-	
 
-	private int whichWeekIsSelected() {
+	
+	
+	public void createWeekComboBox() {
+	    comboWeekModel = new DefaultComboBoxModel<>();
+	    for (int i = 1; i < 11; i++) {
+	        comboWeekModel.addElement("Semana " + i);
+	    }
+	    
+	    selectedWeekNumber = 1;
+
+	    weekComboBox = new JComboBox<>(comboWeekModel);
+	    weekComboBox.setBackground(Color.LIGHT_GRAY);
+	    weekComboBox.setBounds(1033, 130, 114, 45);
+	    this.add(weekComboBox);
+
 	    weekComboBox.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
 	            String selectedWeek = (String) weekComboBox.getSelectedItem();
-	            String weekNumber = selectedWeek.substring(7);
-
-	            try {
-	                selectedWeekNumber = Integer.parseInt(weekNumber);
-	                System.out.println(selectedWeekNumber + " from tehran"); // Move this line here
-	            } catch (NumberFormatException ex) {
-	                System.err.println("Error parsing week number: " + ex.getMessage());
-	                selectedWeekNumber = -1;
+	            String[] parts = selectedWeek.split(" ");
+	            if (parts.length == 2) {
+	                try {
+	                    int weekNumber = Integer.parseInt(parts[1]);
+	                    selectedWeekNumber = weekNumber;
+	                } catch (NumberFormatException ex) {
+	                    System.err.println("Error parsing week number");
+	                }
 	            }
 	        }
 	    });
-
-	    // Don't print selectedWeekNumber here
-	    return selectedWeekNumber;
+	}
+	
+	
+	private int whichWeekIsSelected() {
+		 return selectedWeekNumber;
 	}
 
 
@@ -443,17 +469,15 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			userDialog("Has insertado el mismo nombre para los dos equipos, ver el panel de Equipos para referencia", " Los dos equipos tienen el mismo nombre");
 			break;
 		case ALL_POINTS_ARE_INVALID:
-			localClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
-			visitorClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
 			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
 			
 			break;
 		case LOCAL_POINTS_ARE_INVALID:	
-			localClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
+
 			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
 			break;
 		case VISITOR_POINTS_ARE_INVALID:
-			visitorClubPointsField.setBorder(BorderFactory.createLineBorder(Color.red));
+
 			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
 			break;
 			
@@ -463,41 +487,15 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		case WEEK_NUMBER_IS_INCORRECT:
 			userDialog("La semana del partido que quieres modifcar es incorrecta", "Requisitos de campos");
 			break;
+		case WEEK_SELECTED_FOR_THIS_GAME_IS_WRONG:
+			userDialog("La semana del partido que quieres añadir es incorrecta", "Requisitos de campos");
+			break;
+		case GAME_DOES_NOT_EXISTS:
+			userDialog("El partido que quieres modificar no existe", "Requisitos de campos");
+			break;
 		default :
 		}
 	}	
-	
-	
-	
-	 public void fieldFocusListener(JTextField localPoints, JTextField visitorPoints) {  // add option for localTeam and visitorTeam names
-		 if (localPoints != null) {
-			 localPoints.addFocusListener(new FocusListener() {
-				    @Override
-				    public void focusGained(FocusEvent e) {
-				    	localClubPointsField.setBorder(BorderFactory.createLineBorder(Color.black));
-				    	visitorClubPointsField.setBorder(BorderFactory.createLineBorder(Color.black));
-				    }
-
-				    @Override
-				    public void focusLost(FocusEvent e) {
-				     
-				    }
-				});
-		 } else if (visitorPoints != null) {
-			 	visitorPoints.addFocusListener(new FocusListener() {
-				    @Override
-				    public void focusGained(FocusEvent e) {
-				    	visitorClubPointsField.setBorder(BorderFactory.createLineBorder(Color.black));
-				    	localClubPointsField.setBorder(BorderFactory.createLineBorder(Color.black));
-				    }
-
-				    @Override
-				    public void focusLost(FocusEvent e) {
-				       
-				    }
-				});
-		 }
-	}
 	
 	
 	private void userDialog(String dialogText, String dialogTitle ) {
@@ -523,6 +521,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		visitorClubField.setText("");
 		localClubPointsField.setText("");
 		visitorClubPointsField.setText("");
+		selectedWeekNumber = 1;
 		
 		comboWeekModel = new DefaultComboBoxModel<>();
         for (int i = 1; i < 11; i++) {
@@ -530,5 +529,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         }
         weekComboBox.setModel(comboWeekModel);
 	}
+	
+	
 
 }
