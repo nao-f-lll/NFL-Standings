@@ -3,8 +3,17 @@
 <p align="center">
  <!-- <img src=".github/readme-images/app-icon.png" alt="app icon" width="200"> -->
 
-   <img src="https://github.com/nao-f-lll/NFL-Standings/blob/main/.github/readme-images/app-icon.png" alt="app icon" width="200">
+   <!-- <img src="https://github.com/nao-f-lll/NFL-Standings/blob/main/.github/readme-images/app-icon.png" alt="app icon" width="200"> -->
+
+
+   <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/nao-f-lll/NFL-Standings/blob/main/.github/readme-images/app-icon.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/nao-f-lll/nao-f-lll.github.io/blob/main/imagenes/logos/nofondonegro.png?raw=true">
+<img src="https://github.com/nao-f-lll/NFL-Standings/blob/main/.github/readme-images/app-icon.png" alt="app icon" width="200">
+</picture>
 </p>
+
+
 
 
  | Windows                                                                                                       |  Linux                           | Docker | Stable Release| Preview Release |
