@@ -2,6 +2,7 @@ package com.standings.ui.page.panel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -81,6 +82,7 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekOneButton.setBackground(Color.WHITE);
 	       weekOneButton.setBounds(initialX, 10, buttonWidth, 33);
 	       weekOneButton.setUI(new CustomButton()); 
+	       weekOneButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	       weeksPanelButton.add(weekOneButton);
 	       
 
@@ -91,7 +93,8 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekTwoButton.setUI(new CustomButton());
 	       weekTwoButton.setBorder(null);
 	       weekTwoButton.setBackground(Color.WHITE);
-	       weekTwoButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);   
+	       weekTwoButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);  
+	       weekTwoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	       weeksPanelButton.add(weekTwoButton);
 	       
 	       
@@ -100,7 +103,8 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekThreeButton.setFocusable(false);
 	       weekThreeButton.setUI(new CustomButton());
 	       weekThreeButton.setBorder(null);
-	       weekThreeButton.setBackground(Color.WHITE);   
+	       weekThreeButton.setBackground(Color.WHITE);
+	       weekThreeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	       weekThreeButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
 	       weeksPanelButton.add(weekThreeButton);
 	       
@@ -113,6 +117,7 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekFourButton.setUI(new CustomButton());
 	       weekFourButton.setBorder(null);
 	       weekFourButton.setBackground(Color.WHITE);
+	       weekFourButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	       weekFourButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
 	       weeksPanelButton.add(weekFourButton);
 	       
@@ -124,6 +129,7 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekFiveButton.setUI(new CustomButton());
 	       weekFiveButton.setBorder(null);
 	       weekFiveButton.setBackground(Color.WHITE);  
+	       weekFiveButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	       weekFiveButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
 	       weeksPanelButton.add(weekFiveButton);
 	       
@@ -135,7 +141,8 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekSixButton.setFocusable(false);
 	       weekSixButton.setUI(new CustomButton());
 	       weekSixButton.setBorder(null);
-	       weekSixButton.setBackground(Color.WHITE);    
+	       weekSixButton.setBackground(Color.WHITE); 
+	       weekSixButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	       weekSixButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
 	       weeksPanelButton.add(weekSixButton);
 	       
@@ -148,7 +155,8 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekSevenButton.setFocusable(false);
 	       weekSevenButton.setUI(new CustomButton());
 	       weekSevenButton.setBorder(null);
-	       weekSevenButton.setBackground(Color.WHITE);     
+	       weekSevenButton.setBackground(Color.WHITE); 
+	       weekSevenButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	       weekSevenButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
 	       weeksPanelButton.add(weekSevenButton);
 
@@ -159,7 +167,8 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekEighthButton.setFocusable(false);
 	       weekEighthButton.setUI(new CustomButton());
 	       weekEighthButton.setBorder(null);
-	       weekEighthButton.setBackground(Color.WHITE);    
+	       weekEighthButton.setBackground(Color.WHITE); 
+	       weeksPanelButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	       weekEighthButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
 	       weeksPanelButton.add(weekEighthButton);
 	       
@@ -172,6 +181,7 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekNineButton.setUI(new CustomButton());
 	       weekNineButton.setBorder(null);
 	       weekNineButton.setBackground(Color.WHITE);
+	       weekNineButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	       weekNineButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
 	       weeksPanelButton.add(weekNineButton);
 	       
@@ -183,7 +193,8 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	       weekTenButton.setFocusable(false);
 	       weekTenButton.setUI(new CustomButton());
 	       weekTenButton.setBorder(null);
-	       weekTenButton.setBackground(Color.WHITE);   
+	       weekTenButton.setBackground(Color.WHITE); 
+	       weekTenButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	       weekTenButton.setBounds(initialX += buttonWidth + horizontalGap, 10, buttonWidth, 33);
 	       weeksPanelButton.add(weekTenButton);
 	       

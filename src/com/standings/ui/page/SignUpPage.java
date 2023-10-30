@@ -61,7 +61,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	
 	
 	public SignUpPage(HashMap<String, String> loginInfo) {
-		setTitle("Registrarse");
+		setTitle("Registrar");
 		
 		initializFrameGraphics(loginInfo);
 		initializePanelsGraphics();

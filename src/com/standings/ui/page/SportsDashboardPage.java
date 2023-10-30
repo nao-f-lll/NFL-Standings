@@ -121,6 +121,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         goToScoresButton.setBackground(Color.WHITE);
         goToScoresButton.setBorder(new CustomBorder(20));
         goToScoresButton.setUI(new CustomButton());
+        goToScoresButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
                  
         goToStandingButton = new JButton("Clasificación");
@@ -130,6 +131,8 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         goToStandingButton.setBackground(Color.WHITE);
         goToStandingButton.setUI(new CustomButton());
         goToStandingButton.setBorder(null);
+        goToStandingButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
         
         goToTeamsButton = new JButton("Equipos");
         goToTeamsButton.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -138,6 +141,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         goToTeamsButton.setBackground(Color.WHITE);
         goToTeamsButton.setUI(new CustomButton()); 
         goToTeamsButton.setBorder(null);
+        goToTeamsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         goToUpdateDataButton = new JButton("Actualizar datos");
         goToUpdateDataButton.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -146,6 +150,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         goToUpdateDataButton.setBackground(Color.WHITE);
         goToUpdateDataButton.setUI(new CustomButton()); 
         goToUpdateDataButton.setBorder(null);
+        goToUpdateDataButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 
         goToScoresButton.addActionListener(this);
         goToStandingButton.addActionListener(this);

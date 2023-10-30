@@ -28,7 +28,6 @@ import com.standings.model.ParentFrame;
 import com.standings.model.Team;
 import com.standings.ui.page.SportsDashboardPage;
 import com.standings.util.AddGameUtil;
-//import com.standings.util.AutocompleteTextField;
 import com.standings.util.StandingsCalculation;
 import com.standings.util.StandingsDataUtil;
 
@@ -96,10 +95,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	private StandingsPanel standingsPanel;
 	private ScoresPanel scoresPanel;
 
-	
-	//private AutocompleteTextField autocompleteTextField;
-	
-    
+
+ 
     public UpdateDataPanel( ArrayList<Team> teams, List<Game> games, StandingsPanel standingsPanel, ScoresPanel scoresPanel) {
  
     	this.games = games;
@@ -114,22 +111,13 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         localClubLabel = new JLabel("Equipo Local");
         localClubLabel.setBounds(829, 215, 103, 37);
         this.add(localClubLabel);
-        
-        
-        
-        
-        
-     	//autocompleteTextField = new AutocompleteTextField();
-    	//autocompleteTextField.setBounds(791, 262, 155, 37); // Adjust the bounds as needed
-    	//this.add(autocompleteTextField);
+    
         
         localClubField = new JTextField();
         localClubField.setBounds(791, 262, 155, 37);
         this.add(localClubField);
         localClubField.setColumns(10);
-        
-        
-        
+             
         visitorClubLabel = new JLabel("Equipo Visitante");
         visitorClubLabel.setBounds(829, 355, 117, 25);
         this.add(visitorClubLabel);
@@ -207,10 +195,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
                 "<ul>" +
                 "<li>Selecciona la semana del partido desde 'Semana 1' hasta 'Semana 10' en el desplegable.</li> <br>" +
                 "<li>Ingrese los nombres de los clubes locales y visitantes junto con sus puntos.</li> <br>" +
-                "<li>Haz click en 'Guardar' para guardar los resultados del partido o 'Actualizar' para <br> actualizar los datos</li> <br>"+
-                "<li>'Cancelar' para descartar los cambios</li> " + 
-                "</ul>" +         
-                "<p style='text-indent: 30px;'>Recuerde guardar su entrada. Gracias por ayudar a mantener los resultados </p> <p style='text-indent: 30px;'>  de los partidos</p>" +     
+                "<li> Haga click en 'Guardar' para guardar los resultados del partido o 'Actualizar' para <br> actualizar los datos</li> <br>"+
+                "<li>'Cancelar' para descartar los cambios</li> <br> " +                   
+                "<li>Recuerde guardar su entrada. Gracias por ayudar a mantener los resultados de los partidos</li>" +     
+                "</ul>" +
                 "</body>" +
                 "</html>"
             );
@@ -329,7 +317,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				standingsPanel.renderUpdatedStandings();
 				scoresPanel.renderWeeksScores(whichWeekIsSelected());
 				resetFieldsAndWeek();
-				/// add fedback to the user
+				userDialogFedback("Su partido se ha registrado correctamente", "Insertar entrada");
 					
 				}
 				} else if (!isgameExist){
@@ -405,7 +393,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				standingsPanel.renderUpdatedStandings();
 				scoresPanel.renderWeeksScores(whichWeekIsSelected());	
 				resetFieldsAndWeek();
-				/// add fedback to the user
+				userDialogFedback("Su partido se ha actualizado correctamente", "Actualizar de entrada");
 				}
 				
 			}
@@ -503,6 +491,23 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		 JOptionPane fieldRequirementPane = new JOptionPane(dialogText,JOptionPane.YES_OPTION);
 
 		 fieldRequirementPane.setMessageType(JOptionPane.WARNING_MESSAGE);
+
+	        JPanel buttonPanel = (JPanel)fieldRequirementPane.getComponent(1);
+	        
+	        JButton accepetButton = (JButton)buttonPanel.getComponent(0);
+	        accepetButton.setText("Aceptar");
+	        accepetButton.setFocusable(false);
+	        accepetButton.setBackground(Color.LIGHT_GRAY);
+	        
+	        JDialog passwordRequirementdialog = fieldRequirementPane.createDialog(this, dialogTitle);
+	        passwordRequirementdialog.setVisible(true);
+	}
+	
+	private void userDialogFedback(String dialogText, String dialogTitle ) {
+		
+		 JOptionPane fieldRequirementPane = new JOptionPane(dialogText,JOptionPane.YES_OPTION);
+
+		 fieldRequirementPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
 
 	        JPanel buttonPanel = (JPanel)fieldRequirementPane.getComponent(1);
 	        
