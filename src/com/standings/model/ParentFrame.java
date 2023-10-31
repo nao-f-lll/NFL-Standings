@@ -1,9 +1,11 @@
 package com.standings.model;
 
 import java.awt.Image;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import com.standings.ui.page.LoginPage;
 
@@ -13,11 +15,14 @@ public class ParentFrame extends JFrame {
 	private final ImageIcon nflIconFrame = new ImageIcon(LoginPage.class.getResource("/images/nflExternal.png"));
 	private Image logo;
 	private static  Image logoStatic;
-    
+
+	private static Map<String, String> teamLogos;
+	
 	public ParentFrame () {
 	    this.setIconImage(nflIconFrame.getImage());
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setVisible(true);
+	    
 	}
 	
 	//REQUIRES: image path to be a valid path that contain an image; width and height must be a positive integer.
@@ -38,4 +43,8 @@ public class ParentFrame extends JFrame {
 	}
 	
 	
+	
+	
+	
+
 }
