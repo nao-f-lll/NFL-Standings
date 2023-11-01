@@ -57,6 +57,9 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		
 		initializeFrameGraphics(loginInfo);	
 		initializePanelGraphics();	
+		
+	
+	
 	}
 	
 	

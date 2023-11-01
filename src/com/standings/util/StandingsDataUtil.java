@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.standings.model.FootballTeamName;
+import com.standings.ui.page.panel.UpdateDataPanel;
 
 
 
@@ -111,21 +112,66 @@ public class StandingsDataUtil {
         Matcher matcher = pattern.matcher(points);
         return matcher.find();
     }
+    
+    
+    public static void checkWhichBoxIsSelected(UpdateDataPanel UpdateData) {
+        boolean firstSelected = UpdateData.firstGameBox.isSelected();
+        boolean secondSelected = UpdateData.secondGameBox.isSelected();
+        boolean thirdSelected = UpdateData.thirdGameBox.isSelected();
+
+        if (firstSelected) {
+            UpdateData.isFirstBoxSelected = true;
+            UpdateData.isSecondBoxSelected = false;
+            UpdateData.isThirdBoxSelected = false;
+        } else if (secondSelected) {
+            UpdateData.isFirstBoxSelected = false;
+            UpdateData.isSecondBoxSelected = true;
+            UpdateData.isThirdBoxSelected = false;
+        } else if (thirdSelected) {
+            UpdateData.isFirstBoxSelected = false;
+            UpdateData.isSecondBoxSelected = false;
+            UpdateData.isThirdBoxSelected = true;
+        }
+    }
+
+    public static boolean areMultipleBoxesSelected(UpdateDataPanel UpdateData) {
+        int selectedCount = 0;
+
+        if (UpdateData.firstGameBox.isSelected()) {
+            selectedCount++;
+        }
+        
+        if (UpdateData.secondGameBox.isSelected()) {
+            selectedCount++;
+        }
+        
+        if (UpdateData.thirdGameBox.isSelected()) {
+            selectedCount++;
+        }
+
+        return selectedCount >= 2;
+    }
+    
+    
+    public static int checkIfNoBoxIsSelected(UpdateDataPanel UpdateData) {
+        int selectedCount = 0;
+
+        if (UpdateData.firstGameBox.isSelected()) {
+            selectedCount++;
+        }
+        
+        if (UpdateData.secondGameBox.isSelected()) {
+            selectedCount++;
+        }
+        
+        if (UpdateData.thirdGameBox.isSelected()) {
+            selectedCount++;
+        }
+
+        return selectedCount;
+    }
+    
 
     
 }
-    
-  
-    
 
-
-
-
-	
-	
-	
-	    
-
-
-       
-   

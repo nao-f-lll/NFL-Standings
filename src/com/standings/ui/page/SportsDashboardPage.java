@@ -51,11 +51,8 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
     	initializeStandingsData();
 		initializePanelGraphics();	
 		
+	
 		
-		
-		
-
-    		        
     }
      
     

@@ -1,12 +1,8 @@
 package com.standings.model;
 
 import java.awt.Image;
-import java.util.Map;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import com.standings.ui.page.LoginPage;
 
 public class ParentFrame extends JFrame {
@@ -16,7 +12,6 @@ public class ParentFrame extends JFrame {
 	private Image logo;
 	private static  Image logoStatic;
 
-	private static Map<String, String> teamLogos;
 	
 	public ParentFrame () {
 	    this.setIconImage(nflIconFrame.getImage());

@@ -117,7 +117,7 @@ public class TeamsPanel extends JPanel  {
         this.add(cowboysFundiationLabel);
         
         
-        cowboysCityLabel = new JLabel("Texas");
+        cowboysCityLabel = new JLabel("Dallas");
         cowboysCityLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
         cowboysCityLabel.setBounds(305, 323, 148, 54);
         this.add(cowboysCityLabel);
@@ -149,7 +149,7 @@ public class TeamsPanel extends JPanel  {
         cardinalsFundiationLabel.setBounds(733, 282, 148, 54);
         this.add(cardinalsFundiationLabel);
         
-        cardinalsCityLabel = new JLabel("Arizona");
+        cardinalsCityLabel = new JLabel("Phoenix");
         cardinalsCityLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
         cardinalsCityLabel.setBounds(733, 323, 148, 54);
         this.add(cardinalsCityLabel);

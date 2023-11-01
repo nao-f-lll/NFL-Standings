@@ -27,9 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
+import com.standings.model.CustomCheckBox;
 import com.standings.model.Game;
 import com.standings.model.ParentFrame;
 import com.standings.model.Team;
@@ -59,28 +57,23 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     
     private final int WEEK_NUMBER_IS_INCORRECT = 20;
     
-    private final int WEEK_SELECTED_FOR_THIS_GAME_IS_WRONG = 30;
-    
     private final int GAME_DOES_NOT_EXISTS = 40;
     
 	
-    //private JLabel localClubLabel;
-    //private JLabel localClubPointsLabel;
     private JTextField localClubField;
     private JTextField localClubPointsField;
     
-    //private JLabel visitorClubLabel;
-   // private JLabel visitorClubPointsLabel; 
+
     private JTextField visitorClubField;
     private JTextField visitorClubPointsField;
     
   
     private JComboBox<String> weekComboBox;
-    DefaultComboBoxModel<String> comboWeekModel;
+    private DefaultComboBoxModel<String> comboWeekModel;
     
     private JButton submitButton;
     private JButton updateButton;
-   // private JButton cancelButton;
+  
     
     private JLabel titleInstructionsLabel;
     private JPanel instructionPanel;
@@ -94,14 +87,12 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 
 
     
-    private JLabel errorMessageForLocalPointsField;
-    private JLabel errorMessageForVisitorPointsField;
-    
-	private List<Game> games;
+    private List<Game> games;
 	private ArrayList<Team> teams;
 	private StandingsPanel standingsPanel;
 	private ScoresPanel scoresPanel;
 
+	
 	
 	/////////
 	
@@ -138,27 +129,40 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	
 	
 	private Map<String, String> teamLogos;
-	
-	
-	
-	private boolean hasFieldChanged;
-	
-	////////////////7
 
- 
-    public UpdateDataPanel( ArrayList<Team> teams, List<Game> games, StandingsPanel standingsPanel, ScoresPanel scoresPanel) {
+	
+	
+	public CustomCheckBox firstGameBox;
+	public CustomCheckBox secondGameBox;
+	public CustomCheckBox thirdGameBox;
+	
+	public boolean isFirstBoxSelected;
+	public boolean isSecondBoxSelected;
+	public boolean isThirdBoxSelected;
+	
+
+	private int currentStep;
+	
+	
+	
+	public UpdateDataPanel( ArrayList<Team> teams, List<Game> games, StandingsPanel standingsPanel, ScoresPanel scoresPanel) {
  
     	this.games = games;
     	this.teams = teams;
     	this.standingsPanel = standingsPanel;
     	this.scoresPanel = scoresPanel;
-    	this.teamLogos = new HashMap<>();   	
+    	this.teamLogos = new HashMap<>();  
+    	currentStep = 1;
+ 
     	
-    	
-    	hasFieldChanged = false;
     	/////////////////
 		////////////////
 		
+
+    	 isFirstBoxSelected = false;
+    	 isSecondBoxSelected = false;
+    	 isThirdBoxSelected = false;
+    	
     	
 		localClubPointsField = new JTextField();
 		visitorClubPointsField = new JTextField();
@@ -176,7 +180,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         firstLocalTeamIcon.setBounds(840, 160, 100, 118);
         this.add(firstLocalTeamIcon);
         
-        
+      
         firstLocalTeamPointField = new JTextField();
         firstLocalTeamPointField.setFont(new Font("Tahoma", Font.PLAIN, 20));
         firstLocalTeamPointField.setBounds(1250, 203, 33, 27);
@@ -192,9 +196,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         
         allowToModifyField(firstLocalTeamPointLabel, firstLocalTeamPointField);
         
-        
-        
-        
+      
         
         firstVisitorTeamName = new JLabel();
 	    firstVisitorTeamName.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -219,6 +221,14 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	    
 	    allowToModifyField(firstVisitorTeamPointLabel, firstVisitorTeamPointField);
 	    
+	    
+	    
+		firstGameBox = new CustomCheckBox();
+		firstGameBox.setBounds(1300, 210 ,50 , 45);
+		firstGameBox.addActionListener(this);
+		this.add(firstGameBox);	
+		
+	    	    
 	    
 	    secondLocalTeamName = new JLabel();
 	    secondLocalTeamName.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -272,6 +282,12 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	    allowToModifyField(secondVisitorTeamPointLabel, secondVisitorTeamPointField);
 	    
 	    
+		secondGameBox = new CustomCheckBox();
+		secondGameBox.setBounds(1300, 350 ,50 , 45);
+		secondGameBox.addActionListener(this);
+		this.add(secondGameBox);
+	    
+	    
 	       
 	    thirdLocalTeamName = new JLabel();
 	    thirdLocalTeamName.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -323,6 +339,12 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	    allowToModifyField(thirdVisitorTeamPointLabel, thirdVisitorTeamPointField);
 	    
 	       
+	    
+		thirdGameBox = new CustomCheckBox();
+		thirdGameBox.setBounds(1300, 490 ,50 , 45);
+		thirdGameBox.addActionListener(this);
+		this.add(thirdGameBox);
+	    
 	       
 	       initializeTeamLogos();
 	       
@@ -332,50 +354,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
    		////////////////
 
 	       
-	       
-	       
-	       //////////////////
-    	
-    	
-       // localClubLabel = new JLabel("Equipo Local");
-        //localClubLabel.setBounds(829, 215, 103, 37);
-        //this.add(localClubLabel);
-    
-        
-       // localClubField = new JTextField();
-       // localClubField.setBounds(791, 262, 155, 37);
-        //this.add(localClubField);
-       // localClubField.setColumns(10);
-             
-        //visitorClubLabel = new JLabel("Equipo Visitante");
-       // visitorClubLabel.setBounds(829, 355, 117, 25);
-        //this.add(visitorClubLabel);
-        
-        //visitorClubField = new JTextField();
-       // visitorClubField.setColumns(10);
-       // visitorClubField.setBounds(791, 390, 155, 37);
-        //this.add(visitorClubField);
-        
-        
-       // localClubPointsLabel = new JLabel("Puntos");
-        //localClubPointsLabel.setBounds(1250, 215, 71, 37);
-        //this.add(localClubPointsLabel);
-        
-        
-        //visitorClubPointsLabel = new JLabel("Puntos");
-       // visitorClubPointsLabel.setBounds(1250, 352, 84, 31);
-        //this.add(visitorClubPointsLabel);
-        
-        
-       // localClubPointsField = new JTextField();
-        //localClubPointsField.setBounds(1250, 264, 35, 34);
-        //this.add(localClubPointsField);
-        //localClubPointsField.setColumns(10);
-        
-        //visitorClubPointsField = new JTextField();
-        //visitorClubPointsField.setColumns(10);
-        //visitorClubPointsField.setBounds(1250, 392, 35, 34);
-        //this.add(visitorClubPointsField);
+
         
         submitButton = new JButton("Guardar");
         submitButton.setBounds(930, 620, 130, 45);
@@ -391,14 +370,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         updateButton.addActionListener(this);
         this.add(updateButton);
         
-       // cancelButton = new JButton("Cancelar");
-       // cancelButton.setBounds(1222, 620, 130, 45);
-        //cancelButton.setFocusable(false);
-        //cancelButton.setBackground(Color.lightGray);
-        //cancelButton.addActionListener(this);
-        //this.add(cancelButton);
-        
-        
+      
         instructionPanel = new JPanel();
         instructionPanel.setBackground(new Color(255, 255, 255));
         instructionPanel.setBounds(0, 60, 627, 756);
@@ -432,16 +404,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
                 "</html>"
             );
         
-     
-
-      
+ 
         instructionsLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-        instructionsLabel.setBackground(this.getBackground());
-
-      
+        instructionsLabel.setBackground(this.getBackground());     
         instructionPanel.add(instructionsLabel);
-
-       
         instructionsLabel.setBounds(21, 179, 596, 227);
         
         nflIcon = new ImageIcon(ParentFrame.ResizeIconStatic("/images/nflWhite.png",280,200));
@@ -469,21 +435,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
                     }
                 }
             }
-        });
-								
-		errorMessageForLocalPointsField = new JLabel();
-		errorMessageForLocalPointsField.setText("");
-		errorMessageForLocalPointsField.setBounds(1310, 265, 130, 25);
-		errorMessageForLocalPointsField.setForeground(Color.RED);
-		this.add(errorMessageForLocalPointsField);
-		
-		
-		errorMessageForVisitorPointsField = new JLabel();
-		errorMessageForVisitorPointsField.setText("");
-		errorMessageForVisitorPointsField.setBounds(1310, 390, 130, 40);  
-		errorMessageForVisitorPointsField.setForeground(Color.RED);
-		this.add(errorMessageForVisitorPointsField);
-		
+        });			
     }
        
     
@@ -494,137 +446,87 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     
 	private void userClickLoginLogic(ActionEvent e) {
 		
-		/*
-		if (hasFieldChanged(firstLocalTeamPointField) || hasFieldChanged(firstVisitorTeamPointField)) {
-			
-			localClubPointsField = new JTextField();
-			visitorClubPointsField = new JTextField();
-			
-			localClubPointsField = firstLocalTeamPointField;
-			visitorClubPointsField = firstVisitorTeamPointField;
-			
+	
+	    if (e.getSource() == submitButton) {
+	        StandingsDataUtil.checkWhichBoxIsSelected(this);
 
-			
-			localClubField.setText("Cardinals");
-			visitorClubField.setText("Cowboys");
-			
-			
-			
-			System.out.println("one");
-			*/
-		/*} else if (hasFieldChanged(secondLocalTeamPointField) || hasFieldChanged(secondVisitorTeamPointField)) {
-			
-			localClubPointsField = new JTextField();
-			visitorClubPointsField = new JTextField();
-			
-			localClubPointsField = secondLocalTeamPointField;
-			visitorClubPointsField = secondVisitorTeamPointField;
-			
+	        if (StandingsDataUtil.areMultipleBoxesSelected(this)) {
+	            userDialog("Se permite añadir solo un partido", "Requisitos para añadir partidos");
+	            
+	        }else if (StandingsDataUtil.checkIfNoBoxIsSelected(this) == 0) {
+	        	
+	        	userDialog("Tienes que selecionar una caja", "Requisitos para añadir partidos");
+	
+	        } else  if (whichWeekIsSelected() != 10) {  
+	        	
+   
+	        	handleValidationNumber(GAME_IS_ALREADY_IN_STANDINGS);     
 
-			
-			localClubField.setText("Raiders");
-			visitorClubField.setText("Bengals");
-			
-			System.out.println("two");
-			
-		} else if (hasFieldChanged(thirdLocalTeamPointField) || hasFieldChanged(thirdVisitorTeamPointField)) {
-			
-			localClubPointsField = new JTextField();
-			visitorClubPointsField = new JTextField();
-			
-			localClubPointsField = thirdLocalTeamPointField;
-			visitorClubPointsField = thirdVisitorTeamPointField;
-		
-			
-			localClubField.setText("Steelers");
-			visitorClubField.setText("Chiefs");
-			
-			System.out.println("three");
-		}
-		
-		*/
-		
-		if (e.getSource() == submitButton) {
-			
-			
-			localClubPointsField = new JTextField();
-			visitorClubPointsField = new JTextField();
-			
-			localClubPointsField = firstLocalTeamPointField;
-			visitorClubPointsField = firstVisitorTeamPointField;
-			
+	        } else {
+	        	
+	        	if (currentStep <= 3) {
+	        	
+	        		boolean gameAdded = false;
+	        		
+	        		if (isFirstBoxSelected && currentStep == 1) {
+	        			handleStepOne();
+	        			gameAdded = true;
+	        			} else if (isSecondBoxSelected && currentStep == 2) {
+	        			handleStepTwo();
+	        			gameAdded = true;
+	        		} else if (isThirdBoxSelected && currentStep == 3) {
+	        			handleStepThree();
+	        			gameAdded = true;
+	        		}
+	            
 
-			
-			localClubField.setText("Cardinals");
-			visitorClubField.setText("Cowboys");
-			
-			
-			
-			
-			
-			validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(),visitorClubPointsField.getText());
+	        		if (!gameAdded) {
+	        			userDialog("Los partidos se deben añadir secuencialmente", "Requisitos para añadir partidos");
+	        			return;
+	        		}
+	        		
+	        	} else {
+    		     	
+	        		if (isFirstBoxSelected) {
+	        			handleStepOne();
+	        		} else if (isSecondBoxSelected) {
+	        			handleStepTwo();
+	        		} else if (isThirdBoxSelected) {
+	        			handleStepThree();  		
+	        		}
+	        	}
 
-			
-			//if (StandingsDataUtil.validateStandingsDataForEmpties(localClubField.getText(), visitorClubField.getText(), localClubPointsField.getText(),visitorClubPointsField.getText())) {
-				//handleValidationNumber(SOME_OR_ALL_FIELDS_ARE_EMPTY);
-			
-			//} else if (StandingsDataUtil.validateStandingsDataForWrongTeamName(localClubField.getText(), visitorClubField.getText())) {
-				//handleValidationNumber(WRONG_TEAM_NAME); 
-			//} else if (StandingsDataUtil.validateStandingsDataForSameTeamNAme(localClubField.getText(), visitorClubField.getText())) {
-				//handleValidationNumber(THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED); 
-			
-			
-			
-			if(validationNumber == ALL_POINTS_ARE_INVALID || validationNumber == LOCAL_POINTS_ARE_INVALID || validationNumber == VISITOR_POINTS_ARE_INVALID) {
-				handleValidationNumber(validationNumber); 
-			} else {
-			
-				
-				
-				boolean isgameExist = false;
-				
-				for (int i = 0; i < games.size(); i++) {
+	        	if (StandingsDataUtil.validateStandingsDataForEmpties(localClubField.getText(), visitorClubField.getText(), localClubPointsField.getText(),visitorClubPointsField.getText())) {
+	    			handleValidationNumber(SOME_OR_ALL_FIELDS_ARE_EMPTY);
+	        		
+	        	} else {
+	            
+	            validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(), visitorClubPointsField.getText());
 
-					isgameExist = (games.get(i).getLocalTeam().equals(localClubField.getText())) && (games.get(i).getVisitorTeam().equals(visitorClubField.getText()));
-					
-					if (isgameExist) {
-						handleValidationNumber(GAME_IS_ALREADY_IN_STANDINGS); 
-						break;
-					}
-				}
-			
-				
-				if (whichWeekIsSelected() == 10) {
+	            if (validationNumber == ALL_POINTS_ARE_INVALID || validationNumber == LOCAL_POINTS_ARE_INVALID || validationNumber == VISITOR_POINTS_ARE_INVALID) {
+	                handleValidationNumber(validationNumber);
+	                resetFields();
+	            } else {
+	                boolean isgameExist = false;
+	                for (int i = 0; i < games.size(); i++) {
+	                    isgameExist = (games.get(i).getLocalTeam().equals(localClubField.getText())) && (games.get(i).getVisitorTeam().equals(visitorClubField.getText()));
+	                    if (isgameExist) {
+	                        handleValidationNumber(GAME_IS_ALREADY_IN_STANDINGS);
+	                        resetFields();
+	                        break;
+	                    }
+	                }
 
-				if (!isgameExist) {
-
-					
-					new AddGameUtil(this.games,localClubField.getText(),visitorClubField.getText(),localClubPointsField.getText(),visitorClubPointsField.getText(), whichWeekIsSelected());		
-					
-					for (Team team : this.teams) {
-						if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
-							int sizeOfListOfGames = games.size() - 1;
-							StandingsCalculation.updateStandings(team, games.get(sizeOfListOfGames), NEW_STANDINGS_TYPE);  
-						
-						}
-				}
-					
-				
-						StandingsCalculation.sortStandings(this.teams);
-						standingsPanel.renderUpdatedStandings();
-						scoresPanel.renderWeeksScores(whichWeekIsSelected());
-						resetFieldsAndWeek();
-						userDialogFedback("Su partido se ha registrado correctamente", "Insertar entrada");
-				}
-					
-				} else if (whichWeekIsSelected() != 10){
-					handleValidationNumber(WEEK_SELECTED_FOR_THIS_GAME_IS_WRONG); 
-				}
-				
-			}
-
-			
-		} else if (e.getSource() == updateButton) {
+	                 
+	                    if (!isgameExist) {
+	                        addGameAndUpdateStandings();
+	                    }
+	               
+	            }
+	        }
+	       }
+       	        
+	    } else if (e.getSource() == updateButton) {
 			
 			validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(),visitorClubPointsField.getText());
 
@@ -646,10 +548,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 				 
 				for (int i = 0; i < games.size(); i++) {
 					
-		
-					
-					
-					if (games.get(i).getLocalTeam().equals(localClubField.getText()) && games.get(i).getVisitorTeam().equals(visitorClubField.getText())) {
+			if (games.get(i).getLocalTeam().equals(localClubField.getText()) && games.get(i).getVisitorTeam().equals(visitorClubField.getText())) {
 						
 						if (games.get(i).getWeekNumber() == whichWeekIsSelected()) {
 						
@@ -676,36 +575,67 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 					}
 				}
 				
-
-			    
-
-					if (doesGameNotExist && !updateStandings) {	
+				if (doesGameNotExist && !updateStandings) {	
 						handleValidationNumber(GAME_DOES_NOT_EXISTS);
 					}		
-				
-
-				
-				
+		
 				if (updateStandings) {
 				StandingsCalculation.sortStandings(this.teams);
 				standingsPanel.renderUpdatedStandings();
 				scoresPanel.renderWeeksScores(whichWeekIsSelected());	
 				resetFieldsAndWeek();
-				userDialogFedback("Su partido se ha actualizado correctamente", "Actualizar de entrada");
+				userDialogFedback("Su partido se ha actualizado correctamente", "Actualizar entrada");
 				}
 				
 			}
-	
-			
-		}// else if (e.getSource() == cancelButton) {
-			
-		//	resetFieldsAndWeek();
-		//}
+
+		}
+		
 	}
 	
+	
+	private void handleStepOne() {
+	    localClubPointsField.setText(firstLocalTeamPointField.getText());
+	    visitorClubPointsField.setText(firstVisitorTeamPointField.getText());
+	    localClubField.setText("Cardinals");
+	    visitorClubField.setText("Cowboys");
+	    System.out.println("one");
+	    currentStep++;
+	}
 
-	
-	
+	private void handleStepTwo() {
+	    localClubPointsField.setText(secondLocalTeamPointField.getText());
+	    visitorClubPointsField.setText(secondVisitorTeamPointField.getText());
+	    localClubField.setText("Raiders");
+	    visitorClubField.setText("Bengals");
+	    System.out.println("two");
+	    currentStep++;
+	}
+
+	private void handleStepThree() {
+	    localClubPointsField.setText(thirdLocalTeamPointField.getText());
+	    visitorClubPointsField.setText(thirdVisitorTeamPointField.getText());
+	    localClubField.setText("Steelers");
+	    visitorClubField.setText("Chiefs");
+	    System.out.println("three");
+	    currentStep++;
+	}
+
+	private void addGameAndUpdateStandings() {
+	    new AddGameUtil(this.games, localClubField.getText(), visitorClubField.getText(), localClubPointsField.getText(), visitorClubPointsField.getText(), whichWeekIsSelected());
+	    for (Team team : this.teams) {
+	        if (team.getName().equals(localClubField.getText()) || team.getName().equals(visitorClubField.getText())) {
+	            int sizeOfListOfGames = games.size() - 1;
+	            StandingsCalculation.updateStandings(team, games.get(sizeOfListOfGames), NEW_STANDINGS_TYPE);
+	        }
+	    }
+	    StandingsCalculation.sortStandings(this.teams);
+	    standingsPanel.renderUpdatedStandings();
+	    scoresPanel.renderWeeksScores(whichWeekIsSelected());
+	    resetFieldsAndWeek();
+	    userDialogFedback("Su partido se ha registrado correctamente", "Insertar entrada");
+	}
+
 	public void createWeekComboBox() {
 	    comboWeekModel = new DefaultComboBoxModel<>();
 	    for (int i = 1; i < 11; i++) {
@@ -739,9 +669,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	        }
 	    });
 	}
-	
-	
-	
+		
 	private void changeGames() {
 		
 		switch (selectedWeekNumber) {
@@ -855,6 +783,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	
 	
 	
+	
 	private void showLastGameInfo() {
 		
 		int totalnumberOfGames = games.size();
@@ -862,9 +791,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		int gameTwo = 28;
 		int gameThree = 29;
 
-		
-		
-		
+	
 		
       	firstLocalTeamName.setText("Cardinals");
         firstLocalTeamIcon.setIcon(new ImageIcon(ResizeIconStatic("/images/cardinals.png", 45, 30)));      
@@ -931,32 +858,35 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			 
 		 } else if (totalnumberOfGames == 29) {
 	
-	        	firstLocalTeamPointLabel.setText(String.valueOf(games.get(gameOne).getLocalScore()));
-	        	firstLocalTeamPointField.setText(String.valueOf(games.get(gameOne).getLocalScore()));
-	        	
-	        	
-	        	firstVisitorTeamPointField.setText(String.valueOf(games.get(gameOne).getVisitorScore()));
-	        	firstVisitorTeamPointLabel.setText(String.valueOf(games.get(gameOne).getVisitorScore()));
-	        	
-	        	
-	        	
-	        	secondLocalTeamPointField.setText(String.valueOf(games.get(gameTwo).getLocalScore()));
-	        	secondLocalTeamPointLabel.setText(String.valueOf(games.get(gameTwo).getLocalScore()));
-	        	
-	        	secondVisitorTeamPointField.setText(String.valueOf(games.get(gameTwo).getVisitorScore()));
-	        	secondVisitorTeamPointLabel.setText(String.valueOf(games.get(gameTwo).getVisitorScore()));
-	        	
-	        	
-	        	thirdLocalTeamPointField.setText("0");
-	        	thirdLocalTeamPointLabel.setText("0");
-	        	
-	        	
-	        	thirdVisitorTeamPointField.setText("0");
-	        	thirdVisitorTeamPointLabel.setText("0");
-			 
+			
+					
+		        	firstLocalTeamPointLabel.setText(String.valueOf(games.get(gameOne).getLocalScore()));
+		        	firstLocalTeamPointField.setText(String.valueOf(games.get(gameOne).getLocalScore()));
+		        	
+		        	
+		        	firstVisitorTeamPointField.setText(String.valueOf(games.get(gameOne).getVisitorScore()));
+		        	firstVisitorTeamPointLabel.setText(String.valueOf(games.get(gameOne).getVisitorScore()));
+		        	
+		        	
+		        	secondLocalTeamPointField.setText(String.valueOf(games.get(gameTwo).getLocalScore()));
+		        	secondLocalTeamPointLabel.setText(String.valueOf(games.get(gameTwo).getLocalScore()));
+		        	
+		        	secondVisitorTeamPointField.setText(String.valueOf(games.get(gameTwo).getVisitorScore()));
+		        	secondVisitorTeamPointLabel.setText(String.valueOf(games.get(gameTwo).getVisitorScore()));
+		        	
+		        	
+		        	thirdLocalTeamPointField.setText("?");
+		        	thirdLocalTeamPointLabel.setText("?");
+		        	
+		        	
+		        	thirdVisitorTeamPointField.setText("?");
+		        	thirdVisitorTeamPointLabel.setText("?");
+		        	
+        	
 			
 		 } else if (totalnumberOfGames == 28){
 			 
+	
 	        	firstLocalTeamPointLabel.setText(String.valueOf(games.get(gameOne).getLocalScore()));
 	        	firstLocalTeamPointField.setText(String.valueOf(games.get(gameOne).getLocalScore()));
 	        	
@@ -965,86 +895,51 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	        	firstVisitorTeamPointLabel.setText(String.valueOf(games.get(gameOne).getVisitorScore()));
 	        	
 	        	
+	        	secondLocalTeamPointField.setText("?");
+	        	secondLocalTeamPointLabel.setText("?");
 	        	
-	        	secondLocalTeamPointField.setText("0");
-	        	secondLocalTeamPointLabel.setText("0");
-	        	
-	        	secondVisitorTeamPointField.setText("0");
-	        	secondVisitorTeamPointLabel.setText("0");
-	        	
-	        	
-	        	thirdLocalTeamPointField.setText("0");
-	        	thirdLocalTeamPointLabel.setText("0");
+	        	secondVisitorTeamPointField.setText("?");
+	        	secondVisitorTeamPointLabel.setText("?");
 	        	
 	        	
-	        	thirdVisitorTeamPointField.setText("0");
-	        	thirdVisitorTeamPointLabel.setText("0");
-			 
+	        	thirdLocalTeamPointField.setText("?");
+	        	thirdLocalTeamPointLabel.setText("?");
+	        	
+	        	
+	        	thirdVisitorTeamPointField.setText("?");
+	        	thirdVisitorTeamPointLabel.setText("?");
+	        	
+	    
 
 			 
 		 } else {
         
-        
-
-        
-        firstLocalTeamPointField.setText("0");
-        firstLocalTeamPointLabel.setText("0");
-        
-        
-	      
-	    firstVisitorTeamPointField.setText("0");
-	    firstVisitorTeamPointLabel.setText("0");
+       
+        firstLocalTeamPointField.setText("?");
+        firstLocalTeamPointLabel.setText("?");
+  
+	    firstVisitorTeamPointField.setText("?");
+	    firstVisitorTeamPointLabel.setText("?");
 	    
 	    
-	    secondLocalTeamPointField.setText("0");
-	    secondLocalTeamPointLabel.setText("0");
+	    secondLocalTeamPointField.setText("?");
+	    secondLocalTeamPointLabel.setText("?");
 	  
 	    
 	    
-	    secondVisitorTeamPointField.setText("0");
-	    secondVisitorTeamPointLabel.setText("0");
+	    secondVisitorTeamPointField.setText("?");
+	    secondVisitorTeamPointLabel.setText("?");
 	    
 	    
-	    thirdLocalTeamPointField.setText("0");
-	    thirdLocalTeamPointLabel.setText("0");
+	    thirdLocalTeamPointField.setText("?");
+	    thirdLocalTeamPointLabel.setText("?");
 	    
-	    thirdVisitorTeamPointField.setText("0");
-	    thirdVisitorTeamPointLabel.setText("0");
+	    thirdVisitorTeamPointField.setText("?");
+	    thirdVisitorTeamPointLabel.setText("?");
 	    
-	    
-
-		 }
-	    
-	    
+		 }  
 	}
 
-	/*
-	private boolean hasFieldChanged(JTextField field) {
-		
-		
-	
-        field.getDocument().addDocumentListener(new DocumentListener() {
-        	
-        
-      	  public void changedUpdate(DocumentEvent e) {
-      		hasFieldChanged = true;
-      	  }
-      	  public void removeUpdate(DocumentEvent e) {
-      		hasFieldChanged = false;
-      	  }
-      	  public void insertUpdate(DocumentEvent e) {
-      		hasFieldChanged = false;
-      	  }
-      	  
-        });
-        
-        return hasFieldChanged;
-	}
-	
-	
-	*/
-	
-	
 	
 	private void allowToModifyField(JLabel label, JTextField field) {
 		
@@ -1053,12 +948,11 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	        public void mouseClicked(MouseEvent e) {
 	        	label.setVisible(false);
 	        	field.setVisible(true);
-	        	field.requestFocus();
+	        	
 	        }
 	    });
 		
-		
-		
+	
 		this.addMouseListener(new MouseAdapter() {
 			
 			  @Override
@@ -1070,41 +964,32 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		    });
 			
 		}
-	
-	
+		
 	public void handleValidationNumber(int validationNumber) {
 		
 		switch (validationNumber) {
 		case SOME_OR_ALL_FIELDS_ARE_EMPTY:
-			userDialog("Algunos campos están vacíos, le faltan campos por rellenar", "Requisitos de campos");        
-			break;
-		case WRONG_TEAM_NAME:
-			userDialog("Has insertado un nombre de equipo incorrecto, ver el panel de Equipos para referencia", " Nombre de equipo incorrecto");
-			break;		
-		case THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED:
-			userDialog("Has insertado el mismo nombre para los dos equipos, ver el panel de Equipos para referencia", " Los dos equipos tienen el mismo nombre");
+			userDialog("Algunos campos están vacíos, le faltan campos por rellenar", "Requisitos de campos");
+			currentStep--;
 			break;
 		case ALL_POINTS_ARE_INVALID:
 			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
-			
+			currentStep--;
 			break;
 		case LOCAL_POINTS_ARE_INVALID:	
-
 			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
+			currentStep--;
 			break;
 		case VISITOR_POINTS_ARE_INVALID:
-
 			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
-			break;
-			
+			currentStep--;
+			break;	
 		case GAME_IS_ALREADY_IN_STANDINGS:
 			userDialog("Este partido ya existe, asegurate que has introducido un nuevo partido","Requisitos de campos");
+			 //userDialog("No se pueden añadir más partidos", "Requisitos de campos");
 			break;
 		case WEEK_NUMBER_IS_INCORRECT:
 			userDialog("La semana del partido que quieres modifcar es incorrecta", "Requisitos de campos");
-			break;
-		case WEEK_SELECTED_FOR_THIS_GAME_IS_WRONG:
-			userDialog("La semana del partido que quieres añadir es incorrecta", "Requisitos de campos");
 			break;
 		case GAME_DOES_NOT_EXISTS:
 			userDialog("El partido que quieres modificar no existe", "Requisitos de campos");
@@ -1150,10 +1035,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	
 	private void resetFieldsAndWeek() {
 		
-		localClubField.setText("");
-		visitorClubField.setText("");
-		localClubPointsField.setText("");
-		visitorClubPointsField.setText("");
+		resetFields();
+		
 		selectedWeekNumber = 1;
 		showGameInfo(0, 1, 2);
 		
@@ -1164,6 +1047,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         weekComboBox.setModel(comboWeekModel);
 	}
 	
-	
-
+	private void resetFields() {
+		localClubField.setText("");
+		visitorClubField.setText("");
+		localClubPointsField.setText("");
+		visitorClubPointsField.setText("");
+	}
 }
