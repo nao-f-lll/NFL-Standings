@@ -57,7 +57,7 @@ public class WeekTenPanel extends JPanel{
 	   	this.teamLogos = teamLogos;
 	   	
    	
-	       firstLocalTeamName = new JLabel("Unknown");
+	       firstLocalTeamName = new JLabel("inexistente");
 	       firstLocalTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       firstLocalTeamName.setBounds(365, 80, 159, 95);
 	       this.add(firstLocalTeamName);
@@ -75,7 +75,7 @@ public class WeekTenPanel extends JPanel{
 	       
 	             
 	       
-	       firstVisitorTeamName = new JLabel("Unknown");
+	       firstVisitorTeamName = new JLabel("inexistente");
 	       firstVisitorTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       firstVisitorTeamName.setBounds(365, 210, 159, 95);
 	       this.add(firstVisitorTeamName);
@@ -94,9 +94,9 @@ public class WeekTenPanel extends JPanel{
 	       this.add(firstVisitorTeamPoint);
 	       		       
 	       
-	       secondLocalTeamName = new JLabel("Unknown");
+	       secondLocalTeamName = new JLabel("inexistente");
 	       secondLocalTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
-	       secondLocalTeamName.setBounds(365, 404, 116, 95);
+	       secondLocalTeamName.setBounds(365, 404, 159, 95);
 	       this.add(secondLocalTeamName);
 	       
 	       secondLocalTeamIcon = new JLabel("");
@@ -112,9 +112,9 @@ public class WeekTenPanel extends JPanel{
 	       
        
 	       
-	       secondVisitorTeamName = new JLabel("Unknown");
+	       secondVisitorTeamName = new JLabel("inexistente");
 	       secondVisitorTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
-	       secondVisitorTeamName.setBounds(355, 529, 126, 95);      
+	       secondVisitorTeamName.setBounds(355, 529, 159, 95);      
 	       this.add(secondVisitorTeamName);
 	       
 	      
@@ -133,7 +133,7 @@ public class WeekTenPanel extends JPanel{
 	       this.add(secondVisitorTeamPoint);
 	       	       
 	       
-	       thirdLocalTeamName = new JLabel("Unknown");
+	       thirdLocalTeamName = new JLabel("inexistente");
 	       thirdLocalTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       thirdLocalTeamName.setBounds(1102, 80, 159, 95);
 	       this.add(thirdLocalTeamName);
@@ -150,7 +150,7 @@ public class WeekTenPanel extends JPanel{
 	       this.add(thirdLocalTeamPoint);
 	       
 	       
-	       thirdVisitorTeamName = new JLabel("Unknown");
+	       thirdVisitorTeamName = new JLabel("inexistente");
 	       thirdVisitorTeamName.setFont(new Font("Tahoma", Font.PLAIN, 27));
 	       thirdVisitorTeamName.setBounds(1102, 221, 159, 95);
 	       this.add(thirdVisitorTeamName);

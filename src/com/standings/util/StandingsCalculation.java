@@ -225,8 +225,7 @@ public class StandingsCalculation {
 	    
 		  //MODIFIES : games
 		  //EFFECTS  : returns the games list filled with random matches data.	
-
-
+	    
 	    private static List<Game> generateMatchesDataFirstHalfPart(String[] teams) {
 	        List<Game> games = new ArrayList<>();
 	        int totalWeeks = 5;
@@ -243,7 +242,6 @@ public class StandingsCalculation {
 	                Game game = new Game(team1, team2, localScore, visitorScore, defaultLocalScore, defaultVisitorScore, week);
 	                games.add(game);
 
-	                //System.out.println(game.getLocalTeam() + " " + game.getLocalScore() + " " + game.getVisitorTeam() + " " + game.getVisitorScore() + " " + game.getWeekNumber());
 	            }
 
 	        
@@ -253,7 +251,9 @@ public class StandingsCalculation {
 	        return games;
 	    }
 	    
-
+	    
+		  //MODIFIES : games
+		  //EFFECTS  : returns the games list filled with random matches data.	
 	    private static List<Game> generateMatchesDataSecondHalfPart(String[] teams) {
 	        List<Game> games = new ArrayList<>();
 	        int totalWeeks = 9;
@@ -270,7 +270,6 @@ public class StandingsCalculation {
 	                Game game = new Game(team2, team1, localScore, visitorScore, defaultLocalScore, defaultVisitorScore, week);
 	                games.add(game);
 
-	               // System.out.println(game.getLocalTeam() + " " + game.getLocalScore() + " " + game.getVisitorTeam() + " " + game.getVisitorScore() + " " + game.getWeekNumber());
 	            }
 
 	        

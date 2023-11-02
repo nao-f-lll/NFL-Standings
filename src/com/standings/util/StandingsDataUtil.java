@@ -107,7 +107,7 @@ public class StandingsDataUtil {
     //         (e.g has only two digits from 0 to 99); otherwise false.
     
     private static boolean areValidPoints(String points) {
-        String regex = "\\b(100|\\d{1,2})\\b";
+        String regex = "^[0-9]{1,2}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(points);
         return matcher.find();

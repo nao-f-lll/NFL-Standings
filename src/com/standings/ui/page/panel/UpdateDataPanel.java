@@ -45,8 +45,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	
     
     private final int SOME_OR_ALL_FIELDS_ARE_EMPTY = 1;
-    private final int WRONG_TEAM_NAME = 2;
-    private final int THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED = 6;
+    //private final int WRONG_TEAM_NAME = 2;
+    //private final int THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED = 6;
 
 
     private final int ALL_POINTS_ARE_INVALID = 3;
@@ -142,7 +142,9 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	
 
 	private int currentStep;
-	
+
+
+	private boolean gameAdded;
 	
 	
 	public UpdateDataPanel( ArrayList<Team> teams, List<Game> games, StandingsPanel standingsPanel, ScoresPanel scoresPanel) {
@@ -153,11 +155,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     	this.scoresPanel = scoresPanel;
     	this.teamLogos = new HashMap<>();  
     	currentStep = 1;
- 
-    	
-    	/////////////////
-		////////////////
-		
+
 
     	 isFirstBoxSelected = false;
     	 isSecondBoxSelected = false;
@@ -350,10 +348,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	       
 	       createWeekComboBox();
 	       
-	       
-   		////////////////
 
-	       
 
         
         submitButton = new JButton("Guardar");
@@ -445,7 +440,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	}
     
 	private void userClickLoginLogic(ActionEvent e) {
-		
+
 	
 	    if (e.getSource() == submitButton) {
 	        StandingsDataUtil.checkWhichBoxIsSelected(this);
@@ -455,7 +450,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	            
 	        }else if (StandingsDataUtil.checkIfNoBoxIsSelected(this) == 0) {
 	        	
-	        	userDialog("Tienes que selecionar una caja", "Requisitos para añadir partidos");
+	        	userDialog("Tienes que selecionar una un partido para guardar", "Requisitos para añadir partidos");
 	
 	        } else  if (whichWeekIsSelected() != 10) {  
 	        	
@@ -466,7 +461,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	        	
 	        	if (currentStep <= 3) {
 	        	
-	        		boolean gameAdded = false;
+					gameAdded = false;
 	        		
 	        		if (isFirstBoxSelected && currentStep == 1) {
 	        			handleStepOne();
@@ -477,7 +472,32 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	        		} else if (isThirdBoxSelected && currentStep == 3) {
 	        			handleStepThree();
 	        			gameAdded = true;
-	        		}
+
+	        		} else if (isFirstBoxSelected) {
+						handleStepOne();
+						currentStep--;
+						if (isgameExist()) {
+						
+							gameAdded = true;
+							return;
+						}
+					} else if (isSecondBoxSelected) {
+						handleStepTwo();
+						currentStep--;
+						if (isgameExist()) {
+						
+							gameAdded = true;
+							return;
+						}
+					} else if (isThirdBoxSelected) {
+						handleStepThree();
+						currentStep--;
+						if (isgameExist()) {
+						
+							gameAdded = true;
+							return;
+						}
+					}
 	            
 
 	        		if (!gameAdded) {
@@ -511,8 +531,12 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	                for (int i = 0; i < games.size(); i++) {
 	                    isgameExist = (games.get(i).getLocalTeam().equals(localClubField.getText())) && (games.get(i).getVisitorTeam().equals(visitorClubField.getText()));
 	                    if (isgameExist) {
-	                        handleValidationNumber(GAME_IS_ALREADY_IN_STANDINGS);
-	                        resetFields();
+							if (!gameAdded) {
+								handleValidationNumber(GAME_IS_ALREADY_IN_STANDINGS);
+								//resetFields();
+							}
+
+
 	                        break;
 	                    }
 	                }
@@ -527,20 +551,28 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	       }
        	        
 	    } else if (e.getSource() == updateButton) {
-			
+	    	
+	    	 StandingsDataUtil.checkWhichBoxIsSelected(this);
+	    	
+	    	if (isFirstBoxSelected) {
+				choseGameToUpdate(isFirstBoxSelected, isSecondBoxSelected, isThirdBoxSelected);
+    		} else if (isSecondBoxSelected) {
+    			choseGameToUpdate(isFirstBoxSelected, isSecondBoxSelected, isThirdBoxSelected);
+    		} else if (isThirdBoxSelected) {
+    			choseGameToUpdate(isFirstBoxSelected, isSecondBoxSelected, isThirdBoxSelected);
+    		}
+	    	
 			validationNumber = StandingsDataUtil.validateStandingsDataForPoints(localClubPointsField.getText(),visitorClubPointsField.getText());
 
 			
 			if (StandingsDataUtil.validateStandingsDataForEmpties(localClubField.getText(), visitorClubField.getText(), localClubPointsField.getText(),visitorClubPointsField.getText())) {
 				handleValidationNumber(SOME_OR_ALL_FIELDS_ARE_EMPTY);
-			} else if (StandingsDataUtil.validateStandingsDataForWrongTeamName(localClubField.getText(), visitorClubField.getText())) {
-				handleValidationNumber(WRONG_TEAM_NAME); 
-			} else if (StandingsDataUtil.validateStandingsDataForSameTeamNAme(localClubField.getText(), visitorClubField.getText())) {
-				handleValidationNumber(THE_SAME_NAME_FOR_TEAMS_IS_NOT_ALLOWED); 
+				
 			} else if (validationNumber == ALL_POINTS_ARE_INVALID || validationNumber == LOCAL_POINTS_ARE_INVALID || validationNumber == VISITOR_POINTS_ARE_INVALID)  {
 				handleValidationNumber(validationNumber); 
 			} else {
 				
+	
 				boolean updateStandings = false;
 				boolean doesGameNotExist = true;
 				
@@ -592,6 +624,19 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		}
 		
 	}
+
+	private boolean isgameExist() {
+
+		boolean isgameExist = false;
+		for (int i = 0; i < games.size(); i++) {
+			isgameExist = (games.get(i).getLocalTeam().equals(localClubField.getText())) && (games.get(i).getVisitorTeam().equals(visitorClubField.getText()));
+			if (isgameExist) {
+				handleValidationNumber(GAME_IS_ALREADY_IN_STANDINGS);
+				break;
+			}
+		}
+		return isgameExist;
+	}
 	
 	
 	private void handleStepOne() {
@@ -599,7 +644,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	    visitorClubPointsField.setText(firstVisitorTeamPointField.getText());
 	    localClubField.setText("Cardinals");
 	    visitorClubField.setText("Cowboys");
-	    System.out.println("one");
+	    //System.out.println("one");
 	    currentStep++;
 	}
 
@@ -608,7 +653,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	    visitorClubPointsField.setText(secondVisitorTeamPointField.getText());
 	    localClubField.setText("Raiders");
 	    visitorClubField.setText("Bengals");
-	    System.out.println("two");
+	    //System.out.println("two");
 	    currentStep++;
 	}
 
@@ -617,7 +662,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	    visitorClubPointsField.setText(thirdVisitorTeamPointField.getText());
 	    localClubField.setText("Steelers");
 	    visitorClubField.setText("Chiefs");
-	    System.out.println("three");
+	    //System.out.println("three");
 	    currentStep++;
 	}
 
@@ -662,6 +707,9 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	                    int weekNumber = Integer.parseInt(parts[1]);
 	                    selectedWeekNumber = weekNumber;
 	                    changeGames();
+	                    firstGameBox.setSelected(false);
+	            		secondGameBox.setSelected(false);
+	            		thirdGameBox.setSelected(false);
 	                } catch (NumberFormatException ex) {
 	                    System.err.println("Error parsing week number");
 	                }
@@ -670,6 +718,158 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	    });
 	}
 		
+	
+	
+	
+	private void choseGameToUpdate(boolean firstBox, boolean secondBox, boolean thirdBox) {
+		if (firstBox) {
+			switch (selectedWeekNumber) {
+			case 1:
+				handleStepGameOne(0);
+				break;
+			case 2:
+				handleStepGameOne(3);
+				break;
+			case 3:
+				handleStepGameOne(6);
+				break;
+			case 4:
+				handleStepGameOne(9);
+				break;
+			case 5:
+				handleStepGameOne(12);
+				break;
+			case 6:
+				handleStepGameOne(15);
+				break;
+			case 7:
+				handleStepGameOne(18);
+				break;
+			case 8:
+				handleStepGameOne(21);
+				break;
+			case 9:
+				handleStepGameOne(24);
+				break;
+			case 10:
+				handleStepGameOne(27);
+				break;
+			default :
+			}
+		}else if (secondBox) {
+			switch (selectedWeekNumber) {
+			case 1:
+				handleStepGameTwo(1);
+				break;
+			case 2:
+				handleStepGameTwo(4);
+				break;
+			case 3:
+				handleStepGameTwo(7);
+				break;
+			case 4:
+				handleStepGameTwo(10);
+				break;
+			case 5:
+				handleStepGameTwo(13);
+				break;
+			case 6:
+				handleStepGameTwo(16);
+				break;
+			case 7:
+				handleStepGameTwo(19);
+				break;
+			case 8:
+				handleStepGameTwo(22);
+				break;
+			case 9:
+				handleStepGameTwo(25);
+				break;
+			case 10:
+				handleStepGameTwo(28);
+				break;
+			default :
+			}
+		}else if (thirdBox) {
+			
+			switch (selectedWeekNumber) {
+			case 1:
+				handleStepGameThree(2);
+				break;
+			case 2:
+				handleStepGameThree(5);
+				break;
+			case 3:
+				handleStepGameThree(8);
+				break;
+			case 4:
+				handleStepGameThree(11);
+				break;
+			case 5:
+				handleStepGameThree(14);
+				break;
+			case 6:
+				handleStepGameThree(17);
+				break;
+			case 7:
+				handleStepGameThree(20);
+				break;
+			case 8:
+				handleStepGameThree(23);
+				break;
+			case 9:
+				handleStepGameThree(26);
+				break;
+			case 10:
+				handleStepGameThree(29);
+				break;
+			default :
+			}
+		}
+	}
+	
+	
+	
+	private void handleStepGameOne(int gameNumber){
+		
+		  	localClubPointsField.setText(firstLocalTeamPointField.getText());
+		    visitorClubPointsField.setText(firstVisitorTeamPointField.getText());
+		    
+		    localClubField.setText(games.get(gameNumber).getLocalTeam());
+		    visitorClubField.setText(games.get(gameNumber).getVisitorTeam());
+		    
+		    isFirstBoxSelected = false;
+
+	}
+	
+
+	private void handleStepGameTwo(int gameNumber){
+		
+		  	localClubPointsField.setText(secondLocalTeamPointField.getText());
+		    visitorClubPointsField.setText(secondVisitorTeamPointField.getText());
+		    
+		    localClubField.setText(games.get(gameNumber).getLocalTeam());
+		    visitorClubField.setText(games.get(gameNumber).getVisitorTeam());
+		    
+		    isSecondBoxSelected = false;
+
+
+	}
+	
+
+	private void handleStepGameThree(int gameNumber){
+		
+		  	localClubPointsField.setText(thirdLocalTeamPointField.getText());
+		    visitorClubPointsField.setText(thirdVisitorTeamPointField.getText());
+		    
+		    localClubField.setText(games.get(gameNumber).getLocalTeam());
+		    visitorClubField.setText(games.get(gameNumber).getVisitorTeam());
+
+		    isThirdBoxSelected = false;
+
+	}
+	
+	
 	private void changeGames() {
 		
 		switch (selectedWeekNumber) {
@@ -1037,14 +1237,19 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		
 		resetFields();
 		
-		selectedWeekNumber = 1;
-		showGameInfo(0, 1, 2);
-		
+		//selectedWeekNumber = 1;
+		//showGameInfo(0, 1, 2);
+	/*	
 		comboWeekModel = new DefaultComboBoxModel<>();
         for (int i = 1; i < 11; i++) {
             comboWeekModel.addElement("Jornada " + i);
         }
         weekComboBox.setModel(comboWeekModel);
+        */
+		
+		firstGameBox.setSelected(false);
+		secondGameBox.setSelected(false);
+		thirdGameBox.setSelected(false);
 	}
 	
 	private void resetFields() {
