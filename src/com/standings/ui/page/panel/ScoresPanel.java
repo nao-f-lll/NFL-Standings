@@ -229,6 +229,11 @@ public class ScoresPanel extends JPanel implements ActionListener{
 		 this.add(weekOnePanel);
 	}
 	
+	
+	
+	//MODIFIES: week[One...Ten]Panel
+	//EFFECTS:  based on the selected week passed call the appropriate week panel
+	
 	public void renderWeeksScores(int selectedWeek) {
 		
 		int totalnumberOfGames;
@@ -317,6 +322,11 @@ public class ScoresPanel extends JPanel implements ActionListener{
         this.repaint();
     }
 
+	
+	  
+	//MODIFIES: this
+	//EFFECTS:  displays the the appropriate panel based on the clicked button by the user
+	
     @Override
     public void actionPerformed(ActionEvent e) {
       

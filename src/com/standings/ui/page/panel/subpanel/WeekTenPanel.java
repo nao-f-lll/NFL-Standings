@@ -169,7 +169,11 @@ public class WeekTenPanel extends JPanel{
 	       
        
 }
-	
+
+
+ //REQUIRES: Objects musen't be a null value.
+ //MODIFIES: this
+ //EFFECTS : based on the game boolean that holds true, change the information of the game.
 
 public void addGameInfo(ArrayList<Team> teams,  List<Game> games,int gameNumber) {
     
@@ -210,6 +214,9 @@ public void addGameInfo(ArrayList<Team> teams,  List<Game> games,int gameNumber)
 
 }
  	
+//REQUIRES: Object musen't be a null value.
+//MODIFIES: this
+//EFFECTS : set the appropriate icon for the given team
  
 private void setTeamIcon(JLabel label, String teamName) {
     if (teamLogos.containsKey(teamName)) {

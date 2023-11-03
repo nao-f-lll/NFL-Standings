@@ -114,6 +114,10 @@ public class StandingsDataUtil {
     }
     
     
+    //REQUIRES: UpdateDataPanel musen't be a null value.
+    //MODIFIES: UpdateDataPanel
+    //EFFECTS : if any box is selected change it's boolean to true
+    
     public static void checkWhichBoxIsSelected(UpdateDataPanel UpdateData) {
         boolean firstSelected = UpdateData.firstGameBox.isSelected();
         boolean secondSelected = UpdateData.secondGameBox.isSelected();
@@ -134,6 +138,12 @@ public class StandingsDataUtil {
         }
     }
 
+    
+    //REQUIRES: UpdateDataPanel musen't be a null value.
+    //MODIFIES: UpdateDataPanel
+    //EFFECTS : if any box is selected increment selectedCount by  1 and return true if the selected box are more than 1;
+    //			otherwise return false.
+    
     public static boolean areMultipleBoxesSelected(UpdateDataPanel UpdateData) {
         int selectedCount = 0;
 
@@ -152,6 +162,9 @@ public class StandingsDataUtil {
         return selectedCount >= 2;
     }
     
+    //REQUIRES: UpdateDataPanel musen't be a null value.
+    //MODIFIES: UpdateDataPanel
+    //EFFECTS : if any box is selected increment selectedCount by 1
     
     public static int checkIfNoBoxIsSelected(UpdateDataPanel UpdateData) {
         int selectedCount = 0;

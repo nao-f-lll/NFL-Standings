@@ -31,32 +31,59 @@ public class StandingsPanel extends JPanel  {
 	private Object[][] rows;
 	private String[] columns;
 	private List<List<Game>> weeks;
+	private ImageIcon cardinalsLogo;
+	private ImageIcon chiefsLogo;
+	private ImageIcon cowboysLogo;
+	private ImageIcon steelersLogo;
+	private ImageIcon raidersLogo;
+	private ImageIcon bengalsLogo;
 
 		public StandingsPanel( ArrayList<Team> teams, List<Game> games, List<List<Game>> weeks) {
 	    	
-
+			initializeFrameGraphics();
+			 
+            this.teams = teams;
+            this.games = games;
+            this.weeks = weeks;
+            
+            
+            initializeData();
+			ImageIcon[] icons = {cowboysLogo, cardinalsLogo, chiefsLogo, bengalsLogo, raidersLogo, steelersLogo};	
+			initializeTeamsNames(icons);
+			initializeTabel();
+            
+            
+         	
+	}
+		
+		
+		private void initializeFrameGraphics() {
+			
             table = new JTable();
             table.setEnabled(false);
             table.setFont(new Font("Tahoma", Font.PLAIN, 20));
             table.setBackground(new Color(255, 255, 255));
-            
-            this.teams = teams;
-            this.games = games;
-            this.weeks = weeks;
-        
-            
+		}
+		
+		
+		private void initializeData() {
+			initializeIcons();
+			
+			
+		}
+		
+		
+		private void initializeIcons() {
+			cardinalsLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/cardinals.png",100,60));
+			chiefsLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/chiefs.png",100,60));
+			cowboysLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/cowboys.png",100,60));
+			steelersLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/steelers.png",100,60));
+			raidersLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/raiders.png",100,60));
+			bengalsLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/bengals.png",100,60));
+		}
+		
+		private void initializeTeamsNames(ImageIcon[] icons ) {
 			nflTeams = FootballTeamName.values();
-			 
-			ImageIcon cardinalsLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/cardinals.png",100,60));
-			ImageIcon chiefsLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/chiefs.png",100,60));
-			ImageIcon cowboysLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/cowboys.png",100,60));
-			ImageIcon steelersLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/steelers.png",100,60));
-			ImageIcon raidersLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/raiders.png",100,60));
-			ImageIcon bengalsLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/bengals.png",100,60));
-			
-			ImageIcon[] icons = {cowboysLogo, cardinalsLogo, chiefsLogo, bengalsLogo, raidersLogo, steelersLogo};
-			
-			
 			int logoIndex = 0;
 			
 			for (FootballTeamName nflTeam : nflTeams) {
@@ -64,55 +91,56 @@ public class StandingsPanel extends JPanel  {
 				this.teams.add(team);
 			   logoIndex++;
 	    	}
-            
-            
-         	rows = new Object[][] {
-         							{null, null, null, null, null, null},
-         							{null, null, null, null, null, null},
-         							{null, null, null, null, null, null},
-         							{null, null, null, null, null, null},
-         							{null, null, null, null, null, null},
-         							{null, null, null, null, null, null},
-         							};
-            
-         	columns =	new String[] {
-         				             		"Equipo", "Partidos Jugados", "Victorias", "Derrotas", "Empates", "Puntos"
-         				             	};										
+		}
+		
+		private void initializeTabel() {
+			rows = new Object[][] {
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					};
 
-           
-         	
-          
-           new StandingsCalculation(this.teams, this.games, this.weeks);
-           renderUpdatedStandings();
-                 
-         
-         JScrollPane scrollPane = new JScrollPane(table);
-         scrollPane.setEnabled(false);
-         scrollPane.setBounds(10, 70, 1502, 703);
+					columns =	new String[] {
+		             		"Equipo", "Partidos Jugados", "Victorias", "Derrotas", "Empates", "Puntos"
+		             	};										
 
 
-         JTableHeader tableHeader = table.getTableHeader();
-         Dimension headerSize = tableHeader.getPreferredSize();
-         headerSize.height = 100; 
-         tableHeader.setPreferredSize(headerSize);
-         tableHeader.setReorderingAllowed(false);
-            
-         table.getTableHeader().setFont(new Font(null, 20, 20));
-         table.getTableHeader().setBackground(Color.LIGHT_GRAY);
-            
-     
-         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 
-         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 
-         table.setDefaultRenderer(Object.class, centerRenderer);
-            
-            table.setRowHeight(100);
-         
-            table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-            this.add(scrollPane, BorderLayout.CENTER);
+					new StandingsCalculation(this.teams, this.games, this.weeks);
+					renderUpdatedStandings();
 
-	}
+
+					JScrollPane scrollPane = new JScrollPane(table);
+					scrollPane.setEnabled(false);
+					scrollPane.setBounds(10, 70, 1502, 703);
+
+
+					JTableHeader tableHeader = table.getTableHeader();
+					Dimension headerSize = tableHeader.getPreferredSize();
+					headerSize.height = 100; 
+					tableHeader.setPreferredSize(headerSize);
+					tableHeader.setReorderingAllowed(false);
+
+					table.getTableHeader().setFont(new Font(null, 20, 20));
+					table.getTableHeader().setBackground(Color.LIGHT_GRAY);
+
+
+					DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+
+					centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
+					table.setDefaultRenderer(Object.class, centerRenderer);
+
+					table.setRowHeight(100);
+
+					table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+					this.add(scrollPane, BorderLayout.CENTER);
+
+			}
 		public void renderUpdatedStandings() {		
 			
 			int teamIndex = 0;

@@ -52,7 +52,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
     
     private int validationNumber;
     
-      
+         
 	public LoginPage(HashMap<String, String> loginInfo) {	
 		
 		initializeFrameGraphics(loginInfo);	
@@ -72,6 +72,8 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		this.setResizable(false);
 		this.setSize(650,400);
 		setSizeAndCenter();
+
+		
 	}
 	
     
@@ -315,6 +317,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 		default :
 			this.dispose();
 			new SportsDashboardPage();
+			
 		}
 	}	
 }

@@ -182,6 +182,10 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
         mainPanel.repaint();
     }
 
+    
+	//MODIFIES: this
+	//EFFECTS:  displays the the appropriate panel based on the clicked button by the user
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         Map<JButton, JPanel> buttonPanelMap = new HashMap<>();
@@ -202,17 +206,4 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
             showPanel(panelToShow);
         }
     }
-    
-    
-    public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-			        new SportsDashboardPage();			    
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 }
