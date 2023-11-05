@@ -264,7 +264,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	}
 	
 	
-	//MODIFIES: change validationNumber to hold the number of the specific credentials case if enter key is clicked.
+	//MODIFIES: change validationNumber to hold the number of the specific credentials case if the enter key is clicked.
 	//EFFECTS:  Call handleValidationNumber passing to it validationNumber.
 	
 	private void userKeyboardLoginLogic(KeyEvent e) {
@@ -276,7 +276,7 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	
 	
 	
-	//MODIFIES: change validationNumber to hold the number of the specific credentials case if first case is true
+	//MODIFIES: change validationNumber to hold the number of the specific credentials case if the first case is true
 	//EFFECTS:  Call handleValidationNumber passing to it validationNumber or open SignUpPage frame.
 	
 	private void userClickLoginLogic(ActionEvent e) {
@@ -293,8 +293,8 @@ public class LoginPage extends ParentFrame  implements ActionListener, KeyListen
 	
 
 	//MODIFIES: Change errorMessageForPassword bounds to handle different text.
-	//EFFECTS:  if the login credentials are valid let the user to login by opening a new frame;
-	//          otherwise prompt the error message.
+	//EFFECTS:  if the login credentials are valid let the user to log in by opening a new frame;
+	//          Otherwise prompt the error message.
 	
 	private void handleValidationNumber(int validationNumber) {
 		switch (validationNumber) {

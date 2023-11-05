@@ -50,7 +50,7 @@ public class StandingsCalculation {
 			
 		}
 		
-		  //REQUIRES : list musen't be empty.
+		  //REQUIRES : list musn't be empty.
 		  //MODIFIES : Team
 		  //EFFECTS  : sort the teams based on theirs fields in this order,
 		  //          (e.g wins, ties, losses, points)

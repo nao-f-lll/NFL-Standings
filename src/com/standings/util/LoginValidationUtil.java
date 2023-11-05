@@ -15,7 +15,7 @@ public class LoginValidationUtil {
 	
 	
     
-	//REQUIRES: userEmail and userPassword musen't be a null value.
+	//REQUIRES: userEmail and userPassword musn't be a null value.
 	//EFFECTS : returns the appropriate number case based on the given case.
 	
     public static int validateLogin(HashMap<String, String> loginInfo,  String userEmail, String userPassword) {

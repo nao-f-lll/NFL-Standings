@@ -230,9 +230,8 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	}
 	
 	
-	
-	//MODIFIES: week[One...Ten]Panel
-	//EFFECTS:  based on the selected week passed call the appropriate week panel
+	//MODIFIES: week [One...Ten] Panel
+	//EFFECTS:  based on the selected week passed call the appropriate week's panel
 	
 	public void renderWeeksScores(int selectedWeek) {
 		
@@ -325,7 +324,7 @@ public class ScoresPanel extends JPanel implements ActionListener{
 	
 	  
 	//MODIFIES: this
-	//EFFECTS:  displays the the appropriate panel based on the clicked button by the user
+	//EFFECTS:  displays the appropriate panel based on the clicked button by the user
 	
     @Override
     public void actionPerformed(ActionEvent e) {

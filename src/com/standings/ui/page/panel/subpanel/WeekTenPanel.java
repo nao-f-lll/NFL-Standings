@@ -168,63 +168,62 @@ public class WeekTenPanel extends JPanel{
 	       this.add(thirdVisitorTeamPoint);
 	       
        
-}
+	}
 
 
- //REQUIRES: Objects musen't be a null value.
- //MODIFIES: this
- //EFFECTS : based on the game boolean that holds true, change the information of the game.
+	//REQUIRES: Objects musen't be a null value.
+	//MODIFIES: this
+	//EFFECTS : based on the game boolean that holds true, change the information of the game.
 
-public void addGameInfo(ArrayList<Team> teams,  List<Game> games,int gameNumber) {
+	public void addGameInfo(ArrayList<Team> teams,  List<Game> games,int gameNumber) {
     
 	
-   	if (gameNumber == GAME_ONE) {
+		if (gameNumber == GAME_ONE) {
    		
-   		firstLocalTeamName.setText(games.get(gameNumber).getLocalTeam());
-   	    setTeamIcon(firstLocalTeamIcon, games.get(gameNumber).getLocalTeam());
-   	    firstLocalTeamPoint.setText(String.valueOf(games.get(gameNumber).getLocalScore()));
+			firstLocalTeamName.setText(games.get(gameNumber).getLocalTeam());
+			setTeamIcon(firstLocalTeamIcon, games.get(gameNumber).getLocalTeam());
+			firstLocalTeamPoint.setText(String.valueOf(games.get(gameNumber).getLocalScore()));
    	    
    	    
-   	    firstVisitorTeamName.setText(games.get(gameNumber).getVisitorTeam());
-   	    setTeamIcon(firstVisitorTeamIcon, games.get(gameNumber).getVisitorTeam());
-   	    firstVisitorTeamPoint.setText(String.valueOf(games.get(gameNumber).getVisitorScore()));
+			firstVisitorTeamName.setText(games.get(gameNumber).getVisitorTeam());
+			setTeamIcon(firstVisitorTeamIcon, games.get(gameNumber).getVisitorTeam());
+			firstVisitorTeamPoint.setText(String.valueOf(games.get(gameNumber).getVisitorScore()));
    		
    	} else if (gameNumber ==  GAME_TWO) {
-        secondLocalTeamName.setText(games.get(gameNumber).getLocalTeam());
-        setTeamIcon(secondLocalTeamIcon, games.get(gameNumber).getLocalTeam());
-  	  secondLocalTeamPoint.setText(String.valueOf(games.get(gameNumber).getLocalScore()));
+   			secondLocalTeamName.setText(games.get(gameNumber).getLocalTeam());
+   			setTeamIcon(secondLocalTeamIcon, games.get(gameNumber).getLocalTeam());
+   			secondLocalTeamPoint.setText(String.valueOf(games.get(gameNumber).getLocalScore()));
   	  
   	
-  	  secondVisitorTeamName.setText(games.get(gameNumber).getVisitorTeam());
-  	  setTeamIcon(secondVisitorTeamIcon, games.get(gameNumber).getVisitorTeam());
-  	  secondVisitorTeamPoint.setText(String.valueOf(games.get(gameNumber).getVisitorScore()));
+   			secondVisitorTeamName.setText(games.get(gameNumber).getVisitorTeam());
+   			setTeamIcon(secondVisitorTeamIcon, games.get(gameNumber).getVisitorTeam());
+   			secondVisitorTeamPoint.setText(String.valueOf(games.get(gameNumber).getVisitorScore()));
   	  
    	} else if (gameNumber ==  GAME_THREE)  {
    		
-  	  thirdLocalTeamName.setText(games.get(gameNumber).getLocalTeam());
-  	  setTeamIcon(thirdLocalTeamIcon, games.get(gameNumber).getLocalTeam());
-  	  thirdLocalTeamPoint.setText(String.valueOf(games.get(gameNumber).getLocalScore()));
+   			thirdLocalTeamName.setText(games.get(gameNumber).getLocalTeam());
+   			setTeamIcon(thirdLocalTeamIcon, games.get(gameNumber).getLocalTeam());
+   			thirdLocalTeamPoint.setText(String.valueOf(games.get(gameNumber).getLocalScore()));
   	  
   	  
-  	  thirdVisitorTeamName.setText(games.get(gameNumber).getVisitorTeam());
-  	  setTeamIcon(thirdVisitorTeamIcon, games.get(gameNumber).getVisitorTeam());
-  	  thirdVisitorTeamPoint.setText(String.valueOf(games.get(gameNumber).getVisitorScore()));
-   	}
-   	
-
-}
+   			thirdVisitorTeamName.setText(games.get(gameNumber).getVisitorTeam());
+   			setTeamIcon(thirdVisitorTeamIcon, games.get(gameNumber).getVisitorTeam());
+   			thirdVisitorTeamPoint.setText(String.valueOf(games.get(gameNumber).getVisitorScore()));
+   			}
+	}
  	
-//REQUIRES: Object musen't be a null value.
-//MODIFIES: this
-//EFFECTS : set the appropriate icon for the given team
+
+	//REQUIRES: Object mustn't be a null value.
+	//MODIFIES: this
+	//EFFECTS: set the appropriate icon for the given team
  
-private void setTeamIcon(JLabel label, String teamName) {
-    if (teamLogos.containsKey(teamName)) {
+	private void setTeamIcon(JLabel label, String teamName) {
+		if (teamLogos.containsKey(teamName)) {
         String iconPath = teamLogos.get(teamName);
         label.setIcon(new ImageIcon(ResizeIconStatic(iconPath, 140, 90)));
-    } else {
-        label.setIcon(null);
-    }
-}
+		} else {
+			label.setIcon(null);
+		}
+	}
 
 }

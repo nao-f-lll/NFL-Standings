@@ -82,6 +82,12 @@ public class StandingsPanel extends JPanel  {
 			bengalsLogo = new ImageIcon(ParentFrame.ResizeIconStatic("/images/bengals.png",100,60));
 		}
 		
+		
+		
+		//REQUIRES: icons must have six objects
+		//MODIFIES: Team
+		//EFFECTS:  assign to every team, it's icon
+		
 		private void initializeTeamsNames(ImageIcon[] icons ) {
 			nflTeams = FootballTeamName.values();
 			int logoIndex = 0;
@@ -141,6 +147,11 @@ public class StandingsPanel extends JPanel  {
 					this.add(scrollPane, BorderLayout.CENTER);
 
 			}
+		
+		
+		//MODIFIES: this
+		//EFFECTS:  render the standings table, based on the updated data.
+		
 		public void renderUpdatedStandings() {		
 			
 			int teamIndex = 0;

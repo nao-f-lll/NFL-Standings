@@ -11,7 +11,7 @@ public class SignUpValidationUtil {
 
     
     
-	//REQUIRES: fields musen't be a null value.
+	//REQUIRES: fields musn't be a null value.
 	//EFFECTS : returns false if no field is empty; otherwise return true.
     
 	public static boolean checkForEmptyField(String... fields) {

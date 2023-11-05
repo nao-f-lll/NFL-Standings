@@ -184,7 +184,7 @@ public class SportsDashboardPage extends ParentFrame implements ActionListener {
 
     
 	//MODIFIES: this
-	//EFFECTS:  displays the the appropriate panel based on the clicked button by the user
+    //EFFECTS:  displays the appropriate panel based on the clicked button by the user
     
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -179,11 +179,10 @@ public class WeekFourPanel extends JPanel{
 }
 	
 
-	//REQUIRES: Objects musen't be a null value.
-	 //MODIFIES: this
-	 //EFFECTS : set the teams information each in it appropriate game.
+		//REQUIRES: objects mustn't be a null value.
+		//MODIFIES: this
+		//EFFECTS: set the team information each in its appropriate game.
 	
-
 		public void addGameInfo(ArrayList<Team> teams,  List<Game> games) {
 		    
 			
@@ -223,9 +222,9 @@ public class WeekFourPanel extends JPanel{
 
 
 
-		//REQUIRES: Object musen't be a null value.
+		//REQUIRES: Object mustn't be a null value.
 		//MODIFIES: this
-		//EFFECTS : set the appropriate icon for the given team
+		//EFFECTS: set the appropriate icon for the given team
 		
 		private void setTeamIcon(JLabel label, String teamName) {
 			if (teamLogos.containsKey(teamName)) {

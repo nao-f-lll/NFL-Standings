@@ -113,7 +113,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
     }
     
    private void initializeLoginLabel() {
-		loginLabel = new JLabel("Rigistrarse");
+		loginLabel = new JLabel("Registrarse");
 		loginLabel.setBounds(60, 23, 188, 42);
 		loginLabel.setVerticalAlignment(SwingConstants.TOP);
 		loginLabel.setFont(new Font(null, Font.PLAIN, 35));
@@ -338,7 +338,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	
 	
 	
-	//EFFECTS:  if the handleEmptyFields returns true ; call handleCredentialvalidation passing to it all the fields.
+	//EFFECTS:  if the handleEmptyFields returns true; call handleCredentialvalidation passing to it all the fields.
 	
 	private void validateLogin(String userFullName, String userEmail, String userPassword) {
 		
@@ -348,7 +348,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	}
 	
 
-	//EFFECTS:  checks if any field is empty, if any call the promptErrorMessage with appropriate arguments.
+	//EFFECTS:  checks if any field is empty, if any call, the promptErrorMessage with appropriate arguments.
 	
 	private boolean handleEmptyFields(String userFullName, String userEmail, String userPassword) {
 
@@ -435,7 +435,7 @@ public class SignUpPage extends ParentFrame implements ActionListener, KeyListen
 	}
 	
 
-	//EFFECTS:  make a dialog with the message an title given by the caller method.
+	//EFFECTS:  make a dialog with the given message and title by the caller method.
 
 	private void userDialog(String warrningText, String warrningTitle) {
 		

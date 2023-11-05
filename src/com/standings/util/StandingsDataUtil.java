@@ -12,9 +12,9 @@ import com.standings.ui.page.panel.UpdateDataPanel;
 public class StandingsDataUtil {
     
 
-	private static final int ALL_POINTS_ARE_INVALID = 3;
-	private static final int LOCAL_POINTS_ARE_INVALID = 4;
-	private static final int VISITOR_POINTS_ARE_INVALID = 5;
+	private static final int ALL_POINTS_ARE_INVALID = 6;
+	private static final int LOCAL_POINTS_ARE_INVALID = 7;
+	private static final int VISITOR_POINTS_ARE_INVALID = 8;
 
 	
 	
@@ -28,7 +28,7 @@ public class StandingsDataUtil {
     }
     
        
-  //REQUIRES: fields musen't be a null value.
+  //REQUIRES: fields musn't be a null value.
   //EFFECTS : returns true if any field is empty; otherwise false.
     
     public static boolean checkFordEmptyFields(String localClubField, String visitorClubField, String localClubPointsField, String visitorClubPointsField) {
@@ -56,7 +56,7 @@ public class StandingsDataUtil {
     }
     
     
-    //REQUIRES: field musen't be a null value.
+    //REQUIRES: field musn't be a null value.
     //EFFECTS : returns true if the given team has a wrong name; otherwise false.
     
     private static boolean isNotValidTeamName(String teamName) {
@@ -79,7 +79,7 @@ public class StandingsDataUtil {
 
     }
     
-    //REQUIRES: fields musen't be a null value.
+    //REQUIRES: fields musn't be a null value.
     //EFFECTS : returns true if both teams has the same name; otherwise false.
     
     private static boolean isTheSameName(String localTeamName, String visitorTeamName) {
@@ -114,7 +114,7 @@ public class StandingsDataUtil {
     }
     
     
-    //REQUIRES: UpdateDataPanel musen't be a null value.
+    //REQUIRES: UpdateDataPanel musn't be a null value.
     //MODIFIES: UpdateDataPanel
     //EFFECTS : if any box is selected change it's boolean to true
     
@@ -139,7 +139,7 @@ public class StandingsDataUtil {
     }
 
     
-    //REQUIRES: UpdateDataPanel musen't be a null value.
+    //REQUIRES: UpdateDataPanel musn't be a null value.
     //MODIFIES: UpdateDataPanel
     //EFFECTS : if any box is selected increment selectedCount by  1 and return true if the selected box are more than 1;
     //			otherwise return false.
@@ -162,7 +162,7 @@ public class StandingsDataUtil {
         return selectedCount >= 2;
     }
     
-    //REQUIRES: UpdateDataPanel musen't be a null value.
+    //REQUIRES: UpdateDataPanel musn't be a null value.
     //MODIFIES: UpdateDataPanel
     //EFFECTS : if any box is selected increment selectedCount by 1
     

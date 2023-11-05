@@ -17,8 +17,8 @@ public class SignUpValidationUtilTest {
 
 	@Before 
 	public void setUp() {
-		 userFullName = "Naoufal";
-		 userEmail    = "naoufal@gmail.com";
+		 userFullName = "user";
+		 userEmail    = "user@gmail.com";
 		 userPassword = "Password!1";
 	}
 	
@@ -69,7 +69,7 @@ public class SignUpValidationUtilTest {
     
     @Test
     public void isValidEmailNotValidOne() {
-        boolean result = SignUpValidationUtil.isValidEmail("notval,idemail.vkk");
+        boolean result = SignUpValidationUtil.isValidEmail("not,valid.email");
         assertFalse(result);
     }
     

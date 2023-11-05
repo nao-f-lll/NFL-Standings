@@ -42,24 +42,22 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	
 	private final static String NEW_STANDINGS_TYPE = "New entry";
 	private final static String EXISTING_STANDINGS_TYPE = "Exisitng entry";
-	
-    
-    private final int SOME_OR_ALL_FIELDS_ARE_EMPTY = 1;
-    private final int NO_CHECK_BOX_IS_SELECTED_ADD_CASE = 2;
-    private final int MULTIPLE_CHEC_BOXES_ARE_SELECTED_ADD_CASE = 6;
-    private final int NO_CHECK_BOX_IS_SELECTED_UPDATE_CASE = 7;
-    private final int MULTIPLE_CHEC_BOXES_ARE_SELECTED_UPDATE_CASE = 8;
 
-    private final int ALL_POINTS_ARE_INVALID = 3;
-    private final int LOCAL_POINTS_ARE_INVALID = 4;
-    private final int VISITOR_POINTS_ARE_INVALID = 5;
-    
-    private final int GAME_IS_ALREADY_IN_STANDINGS = 10;
-    
-    private final int WEEK_NUMBER_IS_INCORRECT = 20;
-    
-    private final int GAME_DOES_NOT_EXISTS = 40;
-    
+	private final int SOME_OR_ALL_FIELDS_ARE_EMPTY = 1;
+	private final int NO_CHECK_BOX_IS_SELECTED_ADD_CASE = 2;
+	private final int MULTIPLE_CHEC_BOXES_ARE_SELECTED_ADD_CASE = 3;
+	private final int NO_CHECK_BOX_IS_SELECTED_UPDATE_CASE = 4;
+	private final int MULTIPLE_CHEC_BOXES_ARE_SELECTED_UPDATE_CASE = 5;
+	private final int ALL_POINTS_ARE_INVALID = 6;
+	private final int LOCAL_POINTS_ARE_INVALID = 7;
+	private final int VISITOR_POINTS_ARE_INVALID = 8; 
+	private final int GAME_IS_ALREADY_IN_STANDINGS = 9;  
+	private final int WEEK_NUMBER_IS_INCORRECT = 10;  
+	private final int GAME_DOES_NOT_EXISTS = 11;
+	 
+	private final int WARRNING_MESSAGE_TYPE = 2;
+	private final int INFORMATION_MESSAGE_TYPE = 1;
+	 
 	
     private JTextField localClubField;
     private JTextField localClubPointsField;
@@ -457,6 +455,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		userClickLoginLogic(e);
 	}
     
+
 	private void userClickLoginLogic(ActionEvent e) {
 
 	
@@ -494,7 +493,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	        		} else if (isFirstBoxSelected) {
 						handleStepOne();
 						currentStep--;
-						if (isgameExist()) {
+						if (isGameExist()) {
 						
 							gameAdded = true;
 							return;
@@ -502,7 +501,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 					} else if (isSecondBoxSelected) {
 						handleStepTwo();
 						currentStep--;
-						if (isgameExist()) {
+						if (isGameExist()) {
 						
 							gameAdded = true;
 							return;
@@ -510,7 +509,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 					} else if (isThirdBoxSelected) {
 						handleStepThree();
 						currentStep--;
-						if (isgameExist()) {
+						if (isGameExist()) {
 						
 							gameAdded = true;
 							return;
@@ -519,7 +518,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	            
 
 	        		if (!gameAdded) {
-	        			userDialog("Los partidos se deben añadir secuencialmente", "Requisitos para añadir partidos");
+	        			userDialog("Los partidos se deben añadir secuencialmente", "Requisitos para añadir partidos", INFORMATION_MESSAGE_TYPE);
 	        			return;
 	        		}
 	        		
@@ -673,7 +672,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		        			standingsPanel.renderUpdatedStandings();
 		        			scoresPanel.renderWeeksScores(whichWeekIsSelected());	
 		        			resetFieldsAndWeek();
-		        			userDialogFedback("Su partido se ha actualizado correctamente", "Actualizar entrada");
+		        			userDialog("Su partido se ha actualizado correctamente", "Actualizar entrada", INFORMATION_MESSAGE_TYPE);
 
 		        		}
 				
@@ -684,7 +683,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		
 	}
 
-	private boolean isgameExist() {
+	private boolean isGameExist() {
 
 		boolean isgameExist = false;
 		for (int i = 0; i < games.size(); i++) {
@@ -722,6 +721,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	    currentStep++;
 	}
 
+	
+	//MODIFIES: Game, Team, Standings
+	//EFFECTS: create a game and add it to games array, and then call the standings utility to update the data.
+	
 	private void addGameAndUpdateStandings() {
 	    new AddGameUtil(this.games, localClubField.getText(), visitorClubField.getText(), localClubPointsField.getText(), visitorClubPointsField.getText(), whichWeekIsSelected());
 	    for (Team team : this.teams) {
@@ -734,9 +737,14 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	    standingsPanel.renderUpdatedStandings();
 	    scoresPanel.renderWeeksScores(whichWeekIsSelected());
 	    resetFieldsAndWeek();
-	    userDialogFedback("Su partido se ha registrado correctamente", "Insertar entrada");
+	    userDialog("Su partido se ha registrado correctamente", "Insertar entrada", INFORMATION_MESSAGE_TYPE);
 	}
 
+	
+	//MODIFIES: this
+	//EFFECTS: create a comboBox and store the selectedWeekNumber
+	//		   the action listener turns the selected boxes to false when every change happens.	 
+	
 	public void createWeekComboBox() {
 	    comboWeekModel = new DefaultComboBoxModel<>();
 	    for (int i = 1; i < 11; i++) {
@@ -775,7 +783,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	}
 		
 	
-	
+
+	//EFFECTS: retrieve game data before updating it based on the selected checkBox.
 	
 	private void choseGameToUpdate(boolean firstBox, boolean secondBox, boolean thirdBox) {
 		if (firstBox) {
@@ -885,6 +894,9 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	}
 	
 	
+	//REQUIRES: argument must be between the bound of the games array.
+	//MODIFIES: this
+	//EFFECTS: retrieve game data from games array based on the game index.
 	
 	private void handleStepGameOne(int gameNumber){
 		
@@ -898,7 +910,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 
 	}
 	
-
+	//REQUIRES: argument must be between the bound of the games array.
+	//MODIFIES: this
+	//EFFECTS: retrieve game data from games array based on the game index.
+	
 	private void handleStepGameTwo(int gameNumber){
 		
 		  	localClubPointsField.setText(secondLocalTeamPointField.getText());
@@ -913,6 +928,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	}
 	
 
+	//REQUIRES: argument must be between the bound of the games array.
+	//MODIFIES: this
+	//EFFECTS: retrieve game data from games array based on the game index.
+	
 	private void handleStepGameThree(int gameNumber){
 		
 		  	localClubPointsField.setText(thirdLocalTeamPointField.getText());
@@ -925,6 +944,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 
 	}
 	
+
+	//EFFECTS: pass the arguments based on the week. 
 	
 	private void changeGames() {
 		
@@ -965,6 +986,9 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	}
 	
 	
+	//REQUIRES: argument must be between the bound of the games array.
+	//MODIFIES: this
+	//EFFECTS: set the appropriate data for a team fields and label based on the game index.
 	
 	public void showGameInfo(int gameOne, int gameTwo, int gameThree) {
         
@@ -1013,6 +1037,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
     }
 
 
+	//REQUIRES: Object mustn't be a null value.
+	//MODIFIES: this
+	//EFFECTS: set the appropriate icon for the given team
+	
 	private  void setTeamIcon(JLabel label, String teamName) {
 		if (teamLogos.containsKey(teamName)) {
     		String iconPath = teamLogos.get(teamName);
@@ -1039,6 +1067,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	
 	
 	
+	
+	
+	//MODIFIES: this
+	//EFFECTS:  put the appropriate data on labels and field based on the size of the games array.
 	
 	private void showLastGameInfo() {
 		
@@ -1197,6 +1229,9 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	}
 
 	
+	//MODIFIES: this
+	//EFFECTS:  change the visibility of the given label and field based on the mouse actions
+	
 	private void allowToModifyField(JLabel label, JTextField field) {
 		
 		label.addMouseListener(new MouseAdapter() {
@@ -1221,56 +1256,64 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			
 		}
 		
+	
+
+	//EFFECTS:  based on the validationNumber it calls the userDialog passing to it the 
+	//			appropriate arguments.
+	
 	public void handleValidationNumber(int validationNumber) {  
 		
 		switch (validationNumber) {
 		case SOME_OR_ALL_FIELDS_ARE_EMPTY:
-			userDialog("Algunos campos están vacíos, le faltan campos por rellenar", "Requisitos de campos");
+			userDialog("Algunos campos están vacíos, le faltan campos por rellenar", "Requisitos de campos", WARRNING_MESSAGE_TYPE);
 			currentStep--;
 			break;
 		case ALL_POINTS_ARE_INVALID:
-			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
+			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos", WARRNING_MESSAGE_TYPE);
 			currentStep--;
 			break;
 		case LOCAL_POINTS_ARE_INVALID:	
-			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
+			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos", WARRNING_MESSAGE_TYPE);
 			currentStep--;
 			break;
 		case VISITOR_POINTS_ARE_INVALID:
-			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos");
+			userDialog("Puntos incorrectos, los puntos deben ser dentro de este rango (0 a 99)","Requisitos de campos", WARRNING_MESSAGE_TYPE);
 			currentStep--;
 			break;	
 		case MULTIPLE_CHEC_BOXES_ARE_SELECTED_ADD_CASE:
-			userDialog("Se permite añadir solo un partido", "Requisitos de campos");
+			userDialog("Se permite añadir solo un partido", "Requisitos de campos", WARRNING_MESSAGE_TYPE);
 			break;
 		case GAME_IS_ALREADY_IN_STANDINGS:
-			userDialog("Este partido ya existe, asegurate que has introducido un nuevo partido","Requisitos de campos");
+			userDialog("Este partido ya existe, asegurate que has introducido un nuevo partido","Requisitos de campos", WARRNING_MESSAGE_TYPE);
 			break;
 		case NO_CHECK_BOX_IS_SELECTED_ADD_CASE:
-			userDialog("Tienes que selecionar un partido para guardar", "Requisitos de campos");
+			userDialog("Tienes que selecionar un partido para guardar", "Requisitos de campos",WARRNING_MESSAGE_TYPE);
 			break;
 		case NO_CHECK_BOX_IS_SELECTED_UPDATE_CASE:
-			userDialog("Tienes que selecionar un partido para actualizar", "Requisitos de campos");
+			userDialog("Tienes que selecionar un partido para actualizar", "Requisitos de campos", WARRNING_MESSAGE_TYPE);
 			break;
 		case MULTIPLE_CHEC_BOXES_ARE_SELECTED_UPDATE_CASE:
-			userDialog("Se permite actualizar solo un partido", "Requisitos de campos");
+			userDialog("Se permite actualizar solo un partido", "Requisitos de campos", WARRNING_MESSAGE_TYPE);
 			break;
 		case WEEK_NUMBER_IS_INCORRECT:
-			userDialog("La semana del partido que quieres modifcar es incorrecta", "Requisitos de campos");
+			userDialog("La semana del partido que quieres modifcar es incorrecta", "Requisitos de campos", WARRNING_MESSAGE_TYPE);
 			break;
 		case GAME_DOES_NOT_EXISTS:
-			userDialog("El partido que quieres modificar no existe", "Requisitos de campos");
+			userDialog("El partido que quieres modificar no existe", "Requisitos de campos",WARRNING_MESSAGE_TYPE);
 			break;
 		default :
 		}
 	}	
 	
+
+
+	//EFFECTS:  prompt the user with a message that has the given text and title.
 	
-	private void userDialog(String dialogText, String dialogTitle ) {
+	private void userDialog(String dialogText, String dialogTitle, int meesageType) {
 		
 		 JOptionPane fieldRequirementPane = new JOptionPane(dialogText,JOptionPane.YES_OPTION);
 
-		 fieldRequirementPane.setMessageType(JOptionPane.WARNING_MESSAGE);
+		 fieldRequirementPane.setMessageType(meesageType);
 
 	        JPanel buttonPanel = (JPanel)fieldRequirementPane.getComponent(1);
 	        
@@ -1283,22 +1326,10 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	        passwordRequirementdialog.setVisible(true);
 	}
 	
-	private void userDialogFedback(String dialogText, String dialogTitle ) {
-		
-		 JOptionPane fieldRequirementPane = new JOptionPane(dialogText,JOptionPane.YES_OPTION);
-
-		 fieldRequirementPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-
-	        JPanel buttonPanel = (JPanel)fieldRequirementPane.getComponent(1);
-	        
-	        JButton accepetButton = (JButton)buttonPanel.getComponent(0);
-	        accepetButton.setText("Aceptar");
-	        accepetButton.setFocusable(false);
-	        accepetButton.setBackground(Color.LIGHT_GRAY);
-	        
-	        JDialog passwordRequirementdialog = fieldRequirementPane.createDialog(this, dialogTitle);
-	        passwordRequirementdialog.setVisible(true);
-	}
+	
+	
+	//MODIFIES: this
+	//EFFECTS:  set the selection of boxes to false
 	
 	private void resetFieldsAndWeek() {
 		
@@ -1309,6 +1340,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		thirdGameBox.setSelected(false);
 	}
 	
+	//MODIFIES: this
+	//EFFECTS:  set the fields to empty
 	private void resetFields() {
 		localClubField.setText("");
 		visitorClubField.setText("");
