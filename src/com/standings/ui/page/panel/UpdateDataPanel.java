@@ -340,10 +340,9 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	}
 	private void initializeMainGraphics() {
 		firstGameBox = new CustomCheckBox();
-		firstGameBox.setBounds(1300, 210 ,50 , 45);
+		firstGameBox.setBounds(1300, 210 ,50 , 45);  
 		firstGameBox.addActionListener(this);
 		this.add(firstGameBox);	
-		
 		allowToModifyField(firstGameBox, firstLocalTeamPointLabel, firstLocalTeamPointField, firstVisitorTeamPointLabel, firstVisitorTeamPointField);
 
 	   
@@ -415,7 +414,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
                 "<body style='width: 500px;'>" +
                 "<ul>" +
                 "<li>Seleccione la jornada del partido desde 'Jornada 1' hasta 'Jornada 10' en el <br> desplegable.</li> <br>" +
-                "<li>Seleccione la casilla de selección, para poder insertar los puntos o actualizarlos</li> <br> " +
+                "<li>Haga click en el icono de editar, para poder insertar los puntos o actualizarlos</li> <br> " +
                 "<li>Ingrese los puntos del club local y visitante.</li> <br>" +
                 "<li> Haga click en 'Guardar' para guardar los resultados del partido o 'Actualizar' <br> para  actualizar los puntos</li> <br>"+             
                 "<li>Recuerde guardar su entrada. Gracias por ayudar a mantener los resultados <br> de los partidos</li>" +     

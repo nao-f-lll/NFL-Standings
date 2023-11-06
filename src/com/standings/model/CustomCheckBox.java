@@ -1,17 +1,22 @@
 package com.standings.model;
 
+import static com.standings.model.ParentFrame.ResizeIconStatic;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 
 public class CustomCheckBox extends JCheckBox {
 
 	private static final long serialVersionUID = -7104751621123160976L;
 	private final int border = 4;
+	private ImageIcon clickToEditIcon;
+	private ImageIcon editorIcon;
 	
 	public CustomCheckBox() {
 		
@@ -19,6 +24,9 @@ public class CustomCheckBox extends JCheckBox {
 		setOpaque(false);
 		setBackground(new Color(69, 124, 235));
 		setFocusable(false);
+
+		clickToEditIcon  = new ImageIcon(ResizeIconStatic("/images/Editando.png", 30, 30));
+		editorIcon = new ImageIcon(ResizeIconStatic("/images/Editar.png", 30, 30));
 		
 	}
 	
@@ -30,23 +38,29 @@ public class CustomCheckBox extends JCheckBox {
 		int yCordinate = (getHeight() - 16 ) / 2;
 		if (isSelected()) {
 			if (isEnabled()) {
-				graphics2d.setColor(getBackground());
+				//graphics2d.setColor(getBackground());
+				
+				this.setIcon(clickToEditIcon);		
+				setToolTipText("Haga click para dejar de editar");
 			} else {
-				graphics2d.setColor(Color.GREEN);
+				//graphics2d.setColor(Color.GREEN);
 			}
 			
-			graphics2d.fillRoundRect(1, yCordinate, 16, 16, border, border);
+			//graphics2d.fillRoundRect(1, yCordinate, 16, 16, border, border);
 			
-			int px[] = {4, 8, 14, 12, 8 ,6};
-			int py[] = {yCordinate + 8, yCordinate + 14, yCordinate + 5, yCordinate + 3, yCordinate + 10, yCordinate + 6};
-			graphics2d.setColor(Color.WHITE);
-			graphics2d.fillPolygon(px, py, px.length);
+			//int px[] = {4, 8, 14, 12, 8 ,6};
+			//int py[] = {yCordinate + 8, yCordinate + 14, yCordinate + 5, yCordinate + 3, yCordinate + 10, yCordinate + 6};
+			//graphics2d.setColor(Color.WHITE);
+			//graphics2d.fillPolygon(px, py, px.length);
 			
 		} else {
-			graphics2d.setColor(Color.GRAY);
-			graphics2d.fillRoundRect(1, yCordinate, 16, 16, border, border);
-			graphics2d.setColor(Color.WHITE);
-			graphics2d.fillRoundRect(2, yCordinate + 1, 14, 14, border, border);
+			//graphics2d.setColor(Color.GRAY);
+			//graphics2d.fillRoundRect(1, yCordinate, 16, 16, border, border);
+			//graphics2d.setColor(Color.WHITE);
+			//graphics2d.fillRoundRect(2, yCordinate + 1, 14, 14, border, border);
+			
+			this.setIcon(editorIcon);
+			setToolTipText("Haga click para editar");
 			
 		}
 	}
