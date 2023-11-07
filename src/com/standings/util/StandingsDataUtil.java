@@ -7,8 +7,6 @@ import com.standings.model.FootballTeamName;
 import com.standings.ui.page.panel.UpdateDataPanel;
 
 
-
-
 public class StandingsDataUtil {
     
 
@@ -24,7 +22,7 @@ public class StandingsDataUtil {
     public static boolean validateStandingsDataForEmpties(String localClubField, String visitorClubField, String localClubPointsField, String visitorClubPointsField) {
        
     	return  checkFordEmptyFields(localClubField, visitorClubField, localClubPointsField, visitorClubPointsField);
-
+    	
     }
     
        
@@ -101,8 +99,7 @@ public class StandingsDataUtil {
         }
 
         return 0;
-    }
-
+    }                 
     //EFFECTS : returns true if the string match the required format,
     //         (e.g has only two digits from 0 to 99); otherwise false.
     

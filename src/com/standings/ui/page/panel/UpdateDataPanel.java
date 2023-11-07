@@ -205,7 +205,6 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         firstLocalTeamPointLabel.setBounds(1250, 203, 33, 27);
         this.add(firstLocalTeamPointLabel);
         
-        //allowToModifyField(firstLocalTeamPointLabel, firstLocalTeamPointField);
         
         firstVisitorTeamName = new JLabel();
   	    firstVisitorTeamName.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -230,7 +229,6 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
   	    firstVisitorTeamPointLabel.setBounds(1250, 242, 33, 27);
   	    this.add(firstVisitorTeamPointLabel);
   	    
-  	    //allowToModifyField(firstVisitorTeamPointLabel, firstVisitorTeamPointField);
 	}
 	
 	private void initializeGameTwoGraphics() {
@@ -255,7 +253,6 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		    secondLocalTeamPointLabel.setBounds(1250, 342, 33, 27);
 		    this.add(secondLocalTeamPointLabel);
 		    
-		    //allowToModifyField(secondLocalTeamPointLabel, secondLocalTeamPointField);
 		    
 		    
 		    
@@ -283,7 +280,6 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		    secondVisitorTeamPointLabel.setBounds(1250, 382, 33, 27);
 		    this.add(secondVisitorTeamPointLabel);
 		    
-		    //allowToModifyField(secondVisitorTeamPointLabel, secondVisitorTeamPointField);
 	}
 	
 	private void initiailizeGameThreeGraphics() {
@@ -309,7 +305,6 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		    thirdLocalTeamPointLabel.setBounds(1250, 482, 33, 27);
 		    this.add(thirdLocalTeamPointLabel);
 		    
-		   // allowToModifyField(thirdLocalTeamPointLabel, thirdLocalTeamPointField);
 		    
 		    
 		    
@@ -335,7 +330,6 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		    thirdVisitorTeamPointLabel.setBounds(1250, 522, 33, 27);
 		    this.add(thirdVisitorTeamPointLabel);
 		    
-		    //allowToModifyField(thirdVisitorTeamPointLabel, thirdVisitorTeamPointField);
 		    
 	}
 	private void initializeMainGraphics() {
@@ -368,7 +362,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		
 	       initializeTeamLogos();
 	       
-	       //createWeekComboBox();
+	       
 	       
 
 
@@ -632,6 +626,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 			
 		        	if (StandingsDataUtil.validateStandingsDataForEmpties(localClubField.getText(), visitorClubField.getText(), localClubPointsField.getText(),visitorClubPointsField.getText())) {
 		        		handleValidationNumber(SOME_OR_ALL_FIELDS_ARE_EMPTY);
+		        		currentStep++;
 				
 		        	} else if (validationNumber == ALL_POINTS_ARE_INVALID || validationNumber == LOCAL_POINTS_ARE_INVALID || validationNumber == VISITOR_POINTS_ARE_INVALID)  {
 		        		handleValidationNumber(validationNumber);
