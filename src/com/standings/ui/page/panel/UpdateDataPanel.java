@@ -374,7 +374,7 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         submitButton.addActionListener(this);
         this.add(submitButton);
         
-        createWeekComboBox();
+       
         
         updateButton = new JButton("Actualizar");
         updateButton.setBounds(1130, 620, 130, 45);
@@ -383,7 +383,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
         updateButton.addActionListener(this);
         this.add(updateButton);
         
-      
+        createWeekComboBox();
+        
         instructionPanel = new JPanel();
         instructionPanel.setBackground(new Color(255, 255, 255));
         instructionPanel.setBounds(0, 60, 627, 756);
@@ -565,6 +566,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	                       
 	                        if (localClubField.getText().equals("Cardinals")) {
 	                        	isGameOneAdded = true;
+	                        	updateButton.setEnabled(true);
+	                        	
 	                        	
 	                        }else if (localClubField.getText().equals("Raiders")) {
 	                        	 isGameTwoAdded = true;	
@@ -762,8 +765,8 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	    
 	    submitButton.setEnabled(false);
 
-	    	
-	    
+	    updateButton.setEnabled(true);
+	    	   	
 	   
 
 	    weekComboBox = new JComboBox<>(comboWeekModel);
@@ -789,18 +792,21 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 	            		
 	            		if (firstLocalTeamPointField.getText().equals("?")) {
 	        	    		submitButton.setEnabled(true);
+	        	    		updateButton.setEnabled(false);
 	        	    	
-	        	    		System.out.println("1");
+	        	    		
 	        	    	} else if (secondLocalTeamPointField.getText().equals("?")) {
 	        	    		submitButton.setEnabled(true);
+	        	    		
 	        	    	
-	        	    		System.out.println("2");
+	        	    	
 	        	    	} else if (thirdLocalTeamPointField.getText().equals("?")) {
 	        	    		submitButton.setEnabled(true);
+	        	    		
 	        	    	
-	        	    		System.out.println("3");
 	        	    	} else {
 	        	    		 submitButton.setEnabled(false);
+	        	    		 updateButton.setEnabled(true);
 	        	    	}
 	                } catch (NumberFormatException ex) {
 	                    System.err.println("Error parsing week number");
@@ -1334,30 +1340,6 @@ public class UpdateDataPanel extends JPanel  implements ActionListener {
 		 
 		 
 	}
-		
-		
-		/*	
-		label.addMouseListener(new MouseAdapter() {
-	        @Override
-	        public void mouseClicked(MouseEvent e) {
-	        	label.setVisible(false);
-	        	field.setVisible(true);
-	        	
-	        }
-	    });
-		
-	
-		this.addMouseListener(new MouseAdapter() {
-			
-			  @Override
-		        public void mouseClicked(MouseEvent e) {
-			    	label.setText(field.getText());
-			    	field.setVisible(false);
-			    	label.setVisible(true);
-		        }
-		    });
-*/
-	
 		
 	
 
