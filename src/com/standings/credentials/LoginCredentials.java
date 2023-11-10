@@ -7,7 +7,6 @@ public class LoginCredentials {
     HashMap<String, String> loginInfo = new HashMap<String, String>();
 
     public LoginCredentials() {
-        loginInfo.put("naoufal", "naoufal");  
     }
       
     
