@@ -34,7 +34,7 @@ Mantén bases de datos detalladas de los equipos de la NFL, todo ello dentro de 
 ### Instalar un Archivo JAR
 
   1. Descargar el Archivo JAR:
-Puedes descargar el archivo JAR desde <a href="https://github.com/nao-f-lll/NFL-Standings/releases/download/v0.3-beta/Standings_0.3_x64.jar" target="_blank" rel="noopener noreferrer">standings.jar</a>
+Puedes descargar el archivo JAR desde <a href="https://github.com/nao-f-lll/NFL-Standings/releases/download/v0.6-alpha/Standings_0.6_x64.jar" target="_blank" rel="noopener noreferrer">standings.jar</a>
 
   2. Descargar y instalar el Java runtime enviarment: puedes descargar java desde <a href="https://javadl.oracle.com/webapps/download/AutoDL?BundleId=249185_b291ca3e0c8548b5a51d5a5f50063037" target="_blank" rel="noopener noreferrer">Java Runtime</a>
 
